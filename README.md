@@ -186,3 +186,29 @@ npm run build
 # Start the production server
 npm start
 ```
+
+## Deployment
+
+This project is ready for deployment. For detailed deployment instructions, see [DEPLOY.md](DEPLOY.md).
+
+### Quick Deployment Options
+
+#### Vercel (Recommended)
+The easiest way to deploy this Next.js app is through [Vercel](https://vercel.com), the platform built by the creators of Next.js.
+
+1. Push your code to GitHub
+2. Import your project to Vercel
+3. Vercel will detect Next.js and configure the build settings automatically
+4. Your app will be deployed and available at a Vercel URL
+
+#### Netlify
+Another great option is [Netlify](https://netlify.com):
+
+1. Push your code to GitHub
+2. Connect your repository to Netlify
+3. Configure build settings:
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+4. Deploy your site
+
+For more advanced deployment options, environment configuration, and custom domain setup, please refer to the [DEPLOY.md](DEPLOY.md) file.
