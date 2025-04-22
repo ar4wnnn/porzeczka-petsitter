@@ -3,8 +3,9 @@ import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 
 const nunitoSans = Nunito_Sans({
-  variable: "--font-nunito-sans",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["200", "300", "400", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${nunitoSans.variable} font-nunito antialiased pt-32`}
+        className={`${nunitoSans.className} antialiased pt-32`}
       >
         {children}
       </body>
