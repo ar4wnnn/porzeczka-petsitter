@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Hamster body -->
+  <ellipse cx="120" cy="150" rx="60" ry="45" fill="#E8C097" stroke="#8B6B3D" stroke-width="2"/>
+  
+  <!-- Hamster head -->
+  <circle cx="120" cy="95" r="45" fill="#E8C097" stroke="#8B6B3D" stroke-width="2"/>
+  
+  <!-- Chubby cheeks -->
+  <ellipse cx="85" cy="105" rx="22" ry="18" fill="#F3D5B5" stroke="#8B6B3D" stroke-width="1.5"/>
+  <ellipse cx="155" cy="105" rx="22" ry="18" fill="#F3D5B5" stroke="#8B6B3D" stroke-width="1.5"/>
+  
+  <!-- Ears -->
+  <circle cx="90" cy="65" r="12" fill="#E5B287" stroke="#8B6B3D" stroke-width="1.5"/>
+  <circle cx="150" cy="65" r="12" fill="#E5B287" stroke="#8B6B3D" stroke-width="1.5"/>
+  <circle cx="90" cy="65" r="7" fill="#F3D5B5" stroke-width="0"/>
+  <circle cx="150" cy="65" r="7" fill="#F3D5B5" stroke-width="0"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="100" cy="85" rx="6" ry="7" fill="#333"/>
+  <ellipse cx="140" cy="85" rx="6" ry="7" fill="#333"/>
+  <circle cx="98" cy="83" r="2" fill="#fff"/>
+  <circle cx="138" cy="83" r="2" fill="#fff"/>
+  
+  <!-- Nose -->
+  <ellipse cx="120" cy="100" rx="7" ry="5" fill="#BA7E5D"/>
+  
+  <!-- Mouth -->
+  <path d="M110 110 Q 120 120 130 110" fill="none" stroke="#8B6B3D" stroke-width="1.5"/>
+  
+  <!-- Whiskers -->
+  <line x1="95" y1="105" x2="65" y2="100" stroke="#8B6B3D" stroke-width="1"/>
+  <line x1="95" y1="110" x2="65" y2="110" stroke="#8B6B3D" stroke-width="1"/>
+  <line x1="145" y1="105" x2="175" y2="100" stroke="#8B6B3D" stroke-width="1"/>
+  <line x1="145" y1="110" x2="175" y2="110" stroke="#8B6B3D" stroke-width="1"/>
+  
+  <!-- Feet -->
+  <ellipse cx="90" cy="180" rx="15" ry="8" fill="#E5B287" stroke="#8B6B3D" stroke-width="1.5"/>
+  <ellipse cx="150" cy="180" rx="15" ry="8" fill="#E5B287" stroke="#8B6B3D" stroke-width="1.5"/>
+  
+  <!-- Food in cheek -->
+  <circle cx="85" cy="105" r="5" fill="#E5B287" fill-opacity="0.7" stroke="#8B6B3D" stroke-width="0.5"/>
+</svg> 

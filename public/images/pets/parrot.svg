@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Parrot body -->
+  <ellipse cx="120" cy="140" rx="45" ry="35" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+  
+  <!-- Wings -->
+  <path d="M120 140 Q 80 120 70 170" fill="#2196F3" stroke="#0D47A1" stroke-width="1.5"/>
+  <path d="M120 140 Q 160 120 170 170" fill="#2196F3" stroke="#0D47A1" stroke-width="1.5"/>
+  
+  <!-- Tail feathers -->
+  <path d="M120 170 L 100 200 L 120 190 L 140 200 L 120 170" fill="#673AB7" stroke="#311B92" stroke-width="1.5"/>
+  
+  <!-- Head -->
+  <circle cx="120" cy="80" r="30" fill="#F44336" stroke="#B71C1C" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <circle cx="105" cy="75" r="7" fill="white" stroke="#333" stroke-width="1"/>
+  <circle cx="105" cy="75" r="4" fill="#333"/>
+  <circle cx="103" cy="73" r="1.5" fill="white"/>
+  
+  <!-- Beak -->
+  <path d="M120 90 L 150 100 L 120 110 Z" fill="#FFC107" stroke="#FF6F00" stroke-width="1.5"/>
+  
+  <!-- Feet -->
+  <path d="M110 175 L 105 190 L 110 190 L 115 190" fill="none" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+  <path d="M130 175 L 125 190 L 130 190 L 135 190" fill="none" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Head crest -->
+  <path d="M120 50 Q 110 30 120 20 Q 130 30 120 50" fill="#FFEB3B" stroke="#F57F17" stroke-width="1.5"/>
+  <path d="M105 60 Q 95 40 90 35 Q 100 45 105 60" fill="#FFEB3B" stroke="#F57F17" stroke-width="1.5"/>
+  <path d="M135 60 Q 145 40 150 35 Q 140 45 135 60" fill="#FFEB3B" stroke="#F57F17" stroke-width="1.5"/>
+</svg> 

@@ -1,0 +1,34 @@
+<svg width="600" height="500" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dog body -->
+  <ellipse cx="300" cy="320" rx="150" ry="100" fill="#FFD28F" />
+  
+  <!-- Head -->
+  <circle cx="450" cy="250" r="70" fill="#FFD28F" />
+  
+  <!-- Ears -->
+  <path d="M420 190 L400 120 L450 180 Z" fill="#FFB347" />
+  <path d="M480 190 L510 120 L460 180 Z" fill="#FFB347" />
+  
+  <!-- Eyes -->
+  <circle cx="430" cy="240" r="8" fill="#333" />
+  <circle cx="470" cy="240" r="8" fill="#333" />
+  
+  <!-- Nose -->
+  <ellipse cx="450" cy="270" rx="15" ry="10" fill="#333" />
+  
+  <!-- Mouth -->
+  <path d="M450 280 Q 470 300 450 320 Q 430 300 450 280" fill="#FF9999" stroke="#333" stroke-width="2" />
+  
+  <!-- Tail -->
+  <path d="M150 300 Q 120 250 100 220 Q 90 200 110 190" fill="none" stroke="#FFD28F" stroke-width="20" stroke-linecap="round" />
+  
+  <!-- Legs -->
+  <rect x="230" y="400" width="30" height="80" rx="15" fill="#FFD28F" />
+  <rect x="340" y="400" width="30" height="80" rx="15" fill="#FFD28F" />
+  <rect x="195" y="410" width="30" height="70" rx="15" fill="#FFD28F" />
+  <rect x="375" y="410" width="30" height="70" rx="15" fill="#FFD28F" />
+  
+  <!-- Collar -->
+  <path d="M390 320 Q 450 340 510 320" stroke="#FF6B6B" stroke-width="10" />
+  <circle cx="450" cy="330" r="10" fill="#FFD700" />
+</svg> 
