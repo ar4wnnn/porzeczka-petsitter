@@ -7,10 +7,14 @@ import GallerySection from './components/home/GallerySection';
 import TestimonialSlider from './components/home/TestimonialSlider';
 import InstagramFeed from './components/home/InstagramFeed';
 import EnhancedServicesSection from './components/home/EnhancedServicesSection';
+import TestComponent from './components/ui/TestComponent';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
+      <div className="fixed right-4 top-4 z-50">
+        <TestComponent />
+      </div>
       <Navbar />
       <HeroSection />
       <EnhancedServicesSection />
@@ -20,6 +24,6 @@ export default function Home() {
       <TestimonialsSection />
       <CtaSection />
       <Footer />
-      </main>
+    </main>
   );
 }
