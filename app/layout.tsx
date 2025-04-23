@@ -20,44 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <style>
-          {`
-            body {
-              font-family: 'Nunito Sans', sans-serif;
-              padding-top: 80px;
-              background-color: #ffffff;
-              color: #333333;
-            }
-            
-            .navbar {
-              background-color: white;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-            
-            .card {
-              border-radius: 8px;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-              transition: transform 0.3s ease;
-            }
-            
-            .card:hover {
-              transform: translateY(-5px);
-            }
-            
-            .btn-primary {
-              background-color: #FF6B6B;
-              border-color: #FF6B6B;
-            }
-            
-            .btn-secondary {
-              background-color: #4ECDC4;
-              border-color: #4ECDC4;
-            }
-          `}
-        </style>
-      </head>
-      <body className={nunitoSans.className}>
+      <body className={`${nunitoSans.className} pt-20 bg-white text-gray-800`}>
         {children}
       </body>
     </html>
