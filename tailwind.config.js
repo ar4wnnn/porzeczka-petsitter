@@ -12,7 +12,14 @@ module.exports = {
     './public/**/*.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#E57373',
+        secondary: '#81C784',
+        background: '#FFF9F9',
+        textcolor: '#4E342E',
+      },
+    },
   },
   plugins: [],
   important: true, // This helps ensure Tailwind styles take precedence

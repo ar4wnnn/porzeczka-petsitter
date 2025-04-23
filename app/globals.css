@@ -2,23 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Basic reset and defaults */
-*, *::before, *::after {
-  box-sizing: border-box;
+@layer base {
+  :root {
+    --color-primary: #E57373; 
+    --color-secondary: #81C784;
+    --color-background: #FFF9F9;
+    --color-textcolor: #4E342E;
+  }
+
+  html, body {
+    @apply m-0 p-0 scroll-smooth;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  body {
+    @apply pt-20;
+  }
 }
 
-:root {
-  --color-primary: #E57373; 
-  --color-secondary: #81C784;
-  --color-background: #FFF9F9;
-  --color-textcolor: #4E342E;
+@layer components {
+  .btn {
+    @apply inline-block px-4 py-2 rounded-full font-semibold no-underline transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-[#E57373] text-white;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-[#E57373] border-2 border-[#E57373];
+  }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Nunito Sans', sans-serif;
-  scroll-behavior: smooth;
-  background-color: white;
-  color: #4E342E;
+/* Image utilities and other custom classes that might not be in Tailwind */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
+.h-6 {
+  height: 1.5rem;
 }

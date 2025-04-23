@@ -22,16 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preload critical stylesheets */}
-        <link rel="preload" href="/styles.css" as="style" />
-        
         {/* Add any custom fonts here */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" />
-        
-        {/* Custom styles after Tailwind (loaded in globals.css) */}
-        <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body className={`${nunitoSans.className}`}>
+      <body className={`${nunitoSans.className} bg-white text-[#4E342E]`}>
         {children}
       </body>
     </html>

@@ -12,7 +12,9 @@ const nextConfig = {
   trailingSlash: false,
   // Optional: Enable built-in React performance tracking
   reactStrictMode: true,
-  // Additional configuration options can be added here
+  // Ensure consistent style processing
+  optimizeCss: true,
+  swcMinify: true
 };
 
 module.exports = nextConfig; 
