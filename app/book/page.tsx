@@ -7,23 +7,10 @@ import Footer from '../components/layout/Footer';
 import ColorfulSection from '../components/ui/ColorfulSection';
 import AnimatedBackground from '../components/ui/AnimatedBackground';
 
-// Define type for Google API
+// Use simpler type to avoid conflicts
 declare global {
   interface Window {
-    gapi: {
-      load: (api: string, callback: () => void) => void;
-      client: {
-        init: (config: any) => Promise<any>;
-        calendar: {
-          freebusy: {
-            query: (params: any) => Promise<any>;
-          };
-          events: {
-            insert: (params: any) => Promise<any>;
-          };
-        };
-      };
-    };
+    gapi: any;
   }
 }
 
@@ -327,7 +314,8 @@ export default function BookingPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <AnimatedBackground>
+      <div className="relative">
+        <AnimatedBackground />
         <ColorfulSection 
           backgroundColor="#FFF0F8" 
           nextSectionColor="#F2EAFF"
@@ -644,7 +632,7 @@ export default function BookingPage() {
             </div>
           </div>
         </ColorfulSection>
-      </AnimatedBackground>
+      </div>
       <Footer />
     </main>
   );

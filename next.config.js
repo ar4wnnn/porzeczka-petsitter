@@ -13,7 +13,6 @@ const nextConfig = {
   // Optional: Enable built-in React performance tracking
   reactStrictMode: true,
   // Ensure consistent style processing
-  optimizeCss: true,
   swcMinify: true
 };
 
