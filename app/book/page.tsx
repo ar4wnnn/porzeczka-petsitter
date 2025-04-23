@@ -47,7 +47,6 @@ export default function BookingPage() {
   }, []);
 
   const initializeGoogleCalendar = () => {
-    // Use type assertion for gapi
     const gapi = (window as any).gapi;
     if (gapi) {
       gapi.load('client:auth2', () => {
@@ -67,7 +66,6 @@ export default function BookingPage() {
   };
 
   const fetchAvailableTimes = (date: Date) => {
-    // Use type assertion for gapi
     const gapi = (window as any).gapi;
     if (!calendarLoaded || !gapi || !gapi.client) {
       // Mock data if API not loaded
@@ -90,7 +88,7 @@ export default function BookingPage() {
       const busySlots = response.result.calendars.primary.busy;
       
       // Generate all possible time slots (9AM to 5PM)
-      const allTimeSlots = [];
+      const allTimeSlots: string[] = [];
       for (let hour = 9; hour <= 17; hour++) {
         allTimeSlots.push(`${hour.toString().padStart(2, '0')}:00`);
       }
@@ -140,7 +138,6 @@ export default function BookingPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Use type assertion for gapi
     const gapi = (window as any).gapi;
     if (!calendarLoaded || !gapi || !gapi.client) {
       alert('System rezerwacji jest chwilowo niedostępny. Spróbuj ponownie później lub skontaktuj się z nami bezpośrednio! 🐾');
@@ -216,7 +213,7 @@ export default function BookingPage() {
     setCurrentStep(prev => prev - 1);
   };
 
-  // Calendar rendering helpers
+  // Calendar rendering helper
   const renderCalendar = () => {
     const currentDate = selectedDate || new Date();
     const month = currentDate.getMonth();
@@ -230,7 +227,7 @@ export default function BookingPage() {
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"];
     
-    const days = [];
+    const days: JSX.Element[] = [];
     const today = new Date();
     
     // Add empty cells for days before the first day of the month
@@ -589,6 +586,7 @@ export default function BookingPage() {
                       <div className="flex justify-between mt-8">
                         {currentStep > 1 && (
                           <motion.button
+                            type="button"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={prevStep}
@@ -600,12 +598,10 @@ export default function BookingPage() {
                         
                         {currentStep < 3 ? (
                           <motion.button
+                            type="button"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={nextStep}
-                            disabled={
-                              (currentStep === 1 && !selectedService) || 
-                            disabled={(currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))}
                             className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
                               (currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))
                                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -616,10 +612,9 @@ export default function BookingPage() {
                           </motion.button>
                         ) : (
                           <motion.button
+                            type="submit"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            type="submit"
-                            onClick={handleSubmit}
                             className="px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full text-white font-medium hover:shadow-lg transition-all ml-auto flex items-center"
                           >
                             Zarezerwuj <span className="ml-2">✓</span>
