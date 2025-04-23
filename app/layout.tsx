@@ -28,7 +28,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Critical styles applied directly */}
-        <style jsx global>{`
+        <style dangerouslySetInnerHTML={{ __html: `
           *, *::before, *::after {
             box-sizing: border-box !important;
           }
@@ -40,7 +40,7 @@ export default function RootLayout({
             color: #4E342E !important;
             margin: 0 !important;
           }
-        `}</style>
+        `}} />
         
         {/* Fallback CSS if Tailwind doesn't load properly */}
         <link rel="stylesheet" href="/styles.css" />
