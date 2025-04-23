@@ -7,15 +7,8 @@ import Footer from '../components/layout/Footer';
 import ColorfulSection from '../components/ui/ColorfulSection';
 import AnimatedBackground from '../components/ui/AnimatedBackground';
 
-// Use simpler type to avoid conflicts
-declare global {
-  interface Window {
-    gapi: any;
-  }
-}
-
 export default function BookingPage() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -54,9 +47,11 @@ export default function BookingPage() {
   }, []);
 
   const initializeGoogleCalendar = () => {
-    if (window.gapi) {
-      window.gapi.load('client:auth2', () => {
-        window.gapi.client.init({
+    // Use type assertion for gapi
+    const gapi = (window as any).gapi;
+    if (gapi) {
+      gapi.load('client:auth2', () => {
+        gapi.client.init({
           apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '', 
           clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
           discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
@@ -64,7 +59,7 @@ export default function BookingPage() {
         }).then(() => {
           setCalendarLoaded(true);
           console.log('Google Calendar API initialized');
-        }).catch(error => {
+        }).catch((error: any) => {
           console.error('Error initializing Google Calendar API', error);
         });
       });
@@ -72,7 +67,9 @@ export default function BookingPage() {
   };
 
   const fetchAvailableTimes = (date: Date) => {
-    if (!calendarLoaded || !window.gapi.client) {
+    // Use type assertion for gapi
+    const gapi = (window as any).gapi;
+    if (!calendarLoaded || !gapi || !gapi.client) {
       // Mock data if API not loaded
       const mockTimes = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
       setAvailableTimes(mockTimes);
@@ -85,11 +82,11 @@ export default function BookingPage() {
     const timeMax = new Date(date);
     timeMax.setHours(23, 59, 59, 999);
 
-    window.gapi.client.calendar.freebusy.query({
+    gapi.client.calendar.freebusy.query({
       timeMin: timeMin.toISOString(),
       timeMax: timeMax.toISOString(),
       items: [{ id: 'primary' }]
-    }).then(response => {
+    }).then((response: any) => {
       const busySlots = response.result.calendars.primary.busy;
       
       // Generate all possible time slots (9AM to 5PM)
@@ -105,7 +102,7 @@ export default function BookingPage() {
         slotTime.setHours(hour, minute, 0, 0);
         
         // Check if this time slot overlaps with any busy period
-        return !busySlots.some(busy => {
+        return !busySlots.some((busy: any) => {
           const busyStart = new Date(busy.start);
           const busyEnd = new Date(busy.end);
           return slotTime >= busyStart && slotTime < busyEnd;
@@ -113,7 +110,7 @@ export default function BookingPage() {
       });
       
       setAvailableTimes(availableSlots);
-    }).catch(error => {
+    }).catch((error: any) => {
       console.error('Error fetching calendar data', error);
       // Fallback to mock data
       const mockTimes = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
@@ -143,7 +140,9 @@ export default function BookingPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!calendarLoaded || !window.gapi.client) {
+    // Use type assertion for gapi
+    const gapi = (window as any).gapi;
+    if (!calendarLoaded || !gapi || !gapi.client) {
       alert('System rezerwacji jest chwilowo niedostępny. Spróbuj ponownie później lub skontaktuj się z nami bezpośrednio! 🐾');
       return;
     }
@@ -173,7 +172,7 @@ export default function BookingPage() {
       }
     };
     
-    window.gapi.client.calendar.events.insert({
+    gapi.client.calendar.events.insert({
       calendarId: 'primary',
       resource: event
     }).then(() => {
@@ -193,7 +192,7 @@ export default function BookingPage() {
         petAge: '',
         notes: ''
       });
-    }).catch(error => {
+    }).catch((error: any) => {
       console.error('Error creating event', error);
       alert('Ojej! 😿 Wystąpił błąd podczas przetwarzania rezerwacji. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio!');
     });
@@ -210,11 +209,11 @@ export default function BookingPage() {
       return;
     }
     
-    setCurrentStep(currentStep + 1);
+    setCurrentStep(prev => prev + 1);
   };
 
   const prevStep = () => {
-    setCurrentStep(currentStep - 1);
+    setCurrentStep(prev => prev - 1);
   };
 
   // Calendar rendering helpers
@@ -604,6 +603,8 @@ export default function BookingPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={nextStep}
+                            disabled={
+                              (currentStep === 1 && !selectedService) || 
                             disabled={(currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))}
                             className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
                               (currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))

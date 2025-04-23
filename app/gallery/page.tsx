@@ -356,7 +356,7 @@ export default function GalleryPage() {
               </motion.button>
             ))}
         </div>
-        
+      
         {/* Gallery Grid */}
         {filteredImages.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -381,7 +381,7 @@ export default function GalleryPage() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       priority={colIndex === 0}
-                    />
+                      />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                         <h3 className="text-white text-xl font-bold">{image.title}</h3>
                       <p className="text-white/80 text-sm line-clamp-2">{image.description}</p>
@@ -420,8 +420,8 @@ export default function GalleryPage() {
               <button
                 style={buttonStyle} 
                 className="hover:shadow-lg"
-                onClick={closeLightbox}
-              >
+            onClick={closeLightbox}
+          >
                 Zamknij <span style={emojiStyle}>✖️</span>
               </button>
             </div>
@@ -430,7 +430,7 @@ export default function GalleryPage() {
             <motion.div 
                 layoutId={selectedImage.id}
                 className="absolute inset-0 flex items-center justify-center"
-              >
+            >
                 <div className="relative w-full h-full max-w-6xl max-h-[70vh] mx-auto">
                 <Image
                   src={selectedImage.src}
