@@ -325,56 +325,64 @@ export default function BookingPage() {
   };
 
   return (
-    <>
+    <main className="min-h-screen">
       <Navbar />
-      <div className="relative">
-        <AnimatedBackground className="" />
+      <AnimatedBackground>
         <ColorfulSection 
-          backgroundColor="#F0F7FF" 
-          nextSectionColor="#FFF4EC"
-          className="min-h-screen py-20"
+          backgroundColor="#FFF0F8" 
+          nextSectionColor="#F2EAFF"
+          wavePattern="wave1"
+          waveHeight={100}
+          withFloatingShapes={true}
+          className="pt-36 pb-32"
         >
-          <div className="container mx-auto px-4 pt-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden"
-            >
-              <div className="px-8 py-10">
-                <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text text-transparent mb-6">
-                  Zarezerwuj Wizytę dla Twojego Pupila! 🐶 🐱
-                </h1>
-                
-                <div className="mb-10">
-                  <div className="flex items-center justify-between">
-                    {[1, 2, 3].map(step => (
-                      <div key={step} className="flex flex-col items-center">
-                        <div 
-                          className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold 
-                            ${currentStep >= step 
-                              ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white' 
-                              : 'bg-gray-100 text-gray-400'
-                            }`}
-                        >
-                          {step}
-                        </div>
-                        <span className={`mt-2 text-sm ${currentStep >= step ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
-                          {step === 1 ? 'Wybierz Usługę 🦮' : 
-                           step === 2 ? 'Wybierz Termin 📅' : 
-                           'Dane Kontaktowe 📝'}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 h-2 bg-gray-100 rounded-full">
+          <div className="max-w-4xl mx-auto p-6">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
+              <div className="mb-8 text-center">
+                <motion.div 
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-[var(--color-primary)]">
+                    Zarezerwuj Usługę Petsittingu 🐾
+                  </h1>
+                  <p className="text-gray-600 max-w-xl mx-auto">
+                    Wypełnij poniższy formularz, aby zarezerwować wybraną usługę. 
+                    Twój pupil już nie może się doczekać nowej przygody! 🐶
+                  </p>
+                </motion.div>
+              </div>
+              
+              <div className="flex items-center justify-between mb-10">
+                {/* Progress Steps */}
+                <div className="w-full flex justify-between relative">
+                  {[1, 2, 3].map((step) => (
                     <div 
-                      className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full transition-all duration-300"
-                      style={{ width: `${(currentStep / 3) * 100}%` }}
+                      key={step} 
+                      className={`w-10 h-10 rounded-full flex items-center justify-center z-10 ${
+                        currentStep === step 
+                          ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white' 
+                          : currentStep > step 
+                            ? 'bg-[var(--color-primary)] text-white' 
+                            : 'bg-gray-200 text-gray-600'
+                      }`}
+                    >
+                      {currentStep > step ? '✓' : step}
+                    </div>
+                  ))}
+                  
+                  {/* Progress Bar */}
+                  <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 h-1 bg-gray-200">
+                    <div 
+                      className="h-full bg-[var(--color-primary)]" 
+                      style={{ width: `${(currentStep - 1) * 50}%` }}
                     ></div>
                   </div>
                 </div>
-                
+              </div>
+              
+              <div className="mt-6">
                 {currentStep === 1 && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -382,23 +390,26 @@ export default function BookingPage() {
                     exit={{ opacity: 0 }}
                     className="space-y-6"
                   >
-                    <h2 className="text-2xl font-bold text-center mb-8">Co możemy zrobić dla Twojego pupila? 🐾</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {services.map(service => (
+                    <h2 className="text-2xl font-bold text-center mb-8">Wybierz usługę dla swojego pupila 🐱</h2>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {services.map((service) => (
                         <motion.div
                           key={service.id}
-                          whileHover={{ scale: 1.05 }}
+                          whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleServiceSelect(service.id)}
-                          className={`p-6 rounded-xl cursor-pointer transition-all border-2 flex items-center gap-4 
-                            ${selectedService === service.id 
-                              ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)]/10' 
-                              : 'border-gray-200 hover:border-[var(--color-primary-light)]'
-                            }`}
+                          className={`p-6 rounded-xl cursor-pointer transition-all ${
+                            selectedService === service.id 
+                              ? 'bg-[var(--color-primary-light)] border-2 border-[var(--color-primary)] shadow-md' 
+                              : 'bg-white hover:bg-gray-50 border border-gray-200'
+                          }`}
                         >
-                          <div className="text-4xl">{service.icon}</div>
-                          <div>
-                            <h3 className="font-bold text-lg">{service.name}</h3>
+                          <div className="flex items-center space-x-4">
+                            <div className="text-4xl">{service.icon}</div>
+                            <div>
+                              <h3 className="font-bold text-lg">{service.name}</h3>
+                            </div>
                           </div>
                         </motion.div>
                       ))}
@@ -588,53 +599,53 @@ export default function BookingPage() {
                         </p>
                       </div>
                       
-                      <div className="flex justify-between pt-4">
-                        <button
-                          type="button"
-                          onClick={prevStep}
-                          className="px-6 py-2 bg-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-300 transition-colors"
-                        >
-                          ← Wróć
-                        </button>
+                      <div className="flex justify-between mt-8">
+                        {currentStep > 1 && (
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={prevStep}
+                            className="px-6 py-3 bg-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition-all flex items-center"
+                          >
+                            <span className="mr-2">←</span> Wróć
+                          </motion.button>
+                        )}
                         
-                        <button
-                          type="submit"
-                          className="px-8 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105"
-                        >
-                          Zarezerwuj Wizytę! 🐾
-                        </button>
+                        {currentStep < 3 ? (
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={nextStep}
+                            disabled={(currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))}
+                            className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
+                              (currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))
+                                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                : 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white hover:shadow-lg transition-all'
+                            }`}
+                          >
+                            Dalej <span className="ml-2">→</span>
+                          </motion.button>
+                        ) : (
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            type="submit"
+                            onClick={handleSubmit}
+                            className="px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full text-white font-medium hover:shadow-lg transition-all ml-auto flex items-center"
+                          >
+                            Zarezerwuj <span className="ml-2">✓</span>
+                          </motion.button>
+                        )}
                       </div>
                     </form>
                   </motion.div>
                 )}
-                
-                {currentStep < 3 && (
-                  <div className="flex justify-between mt-12">
-                    {currentStep > 1 ? (
-                      <button
-                        onClick={prevStep}
-                        className="px-6 py-2 bg-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-300 transition-colors"
-                      >
-                        ← Wróć
-                      </button>
-                    ) : (
-                      <div></div>
-                    )}
-                    
-                    <button
-                      onClick={nextStep}
-                      className="px-8 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105"
-                    >
-                      Dalej →
-                    </button>
-                  </div>
-                )}
               </div>
-            </motion.div>
+            </div>
           </div>
         </ColorfulSection>
-      </div>
+      </AnimatedBackground>
       <Footer />
-    </>
+    </main>
   );
 } 

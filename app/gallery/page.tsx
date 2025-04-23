@@ -340,21 +340,21 @@ export default function GalleryPage() {
         {/* Category filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {filterOptions.map(option => (
-            <motion.button
-              key={option.value}
+              <motion.button
+                key={option.value}
               style={selectedFilter === option.value ? buttonStyle : undefined}
               className={`px-4 py-2 rounded-full transition-all ${
-                selectedFilter === option.value
+                  selectedFilter === option.value
                   ? 'text-white'
                   : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedFilter(option.value)}
-            >
+              >
               {option.label}<span style={emojiStyle}>{option.emoji}</span>
-            </motion.button>
-          ))}
+              </motion.button>
+            ))}
         </div>
         
         {/* Gallery Grid */}
@@ -363,34 +363,34 @@ export default function GalleryPage() {
             {getColumns().map((column, colIndex) => (
               <div key={colIndex} className="flex flex-col gap-6">
                 {column.map(image => (
-                  <motion.div
-                    key={image.id}
+                    <motion.div
+                      key={image.id}
                     layoutId={image.id}
                     className="relative bg-white rounded-xl overflow-hidden shadow-md cursor-pointer group"
                     style={{ aspectRatio: `${image.width}/${image.height}` }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    onClick={() => openLightbox(image)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      onClick={() => openLightbox(image)}
                     whileHover={{ y: -5 }}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       priority={colIndex === 0}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                      <h3 className="text-white text-xl font-bold">{image.title}</h3>
+                        <h3 className="text-white text-xl font-bold">{image.title}</h3>
                       <p className="text-white/80 text-sm line-clamp-2">{image.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            ))}
-          </div>
+                        </div>
+                    </motion.div>
+                  ))}
+                </div>
+              ))}
+            </div>
         ) : (
           <div className="text-center py-12">
             <p className="text-xl text-gray-700 mb-2">Nie znaleziono zdjęć w tej kategorii</p>
@@ -402,7 +402,7 @@ export default function GalleryPage() {
             >
               Zobacz wszystkie <span style={emojiStyle}>🐾</span>
             </button>
-          </div>
+        </div>
         )}
       </section>
       
@@ -427,31 +427,31 @@ export default function GalleryPage() {
             </div>
             
             <div className="flex-1 relative">
-              <motion.div 
+            <motion.div 
                 layoutId={selectedImage.id}
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <div className="relative w-full h-full max-w-6xl max-h-[70vh] mx-auto">
-                  <Image
-                    src={selectedImage.src}
-                    alt={selectedImage.alt}
-                    fill
+                <Image
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  fill
                     sizes="100vw"
-                    className="object-contain"
+                  className="object-contain"
                     priority
                   />
                 </div>
               </motion.div>
-              
-              <button 
+                
+                <button
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-sm"
                 onClick={() => navigateLightbox('prev')}
                 aria-label="Previous image"
-              >
+                >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
-              </button>
+                </button>
               
               <button 
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-sm"

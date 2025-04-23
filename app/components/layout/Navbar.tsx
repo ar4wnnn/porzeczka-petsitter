@@ -151,7 +151,7 @@ export default function Navbar() {
             style={buttonStyle}
             className="ml-4 hover:shadow-lg transition-all transform hover:scale-105 focus:outline-none"
           >
-            Zarezerwuj ��
+            Zarezerwuj 📅
           </Link>
         </div>
         

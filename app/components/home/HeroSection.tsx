@@ -268,7 +268,6 @@ export default function HeroSection() {
                 <span style={styles.boldText}>Twój pupil </span>
                 <span style={styles.rainbowText}>zasługuje na wakacje</span> 
                 <span style={styles.normalText}> kiedy Ciebie nie ma! </span>
-                <span style={styles.emojiSpan}>🐶 🐱 ✨</span>
               </motion.h1>
               <motion.p 
                 style={styles.subheading}
@@ -280,7 +279,6 @@ export default function HeroSection() {
                 <span style={styles.normalText}>że Twój piesek </span>
                 <span style={styles.rainbowText}>bawi się jak szalony </span> 
                 <span style={styles.normalText}>zamiast tęsknić! </span>
-                <span style={styles.emojiSpan}>🤩</span>
                 <br />
                 <span style={styles.lightText}>Nasi </span>
                 <span style={styles.rainbowText}>super-bohaterowie petsitterzy </span>
@@ -288,7 +286,6 @@ export default function HeroSection() {
                 <span style={styles.boldText}>tonę zabawy </span>
                 <span style={styles.normalText}>i przytulasów </span>
                 <span style={styles.lightText}>dla Twojego futrzaka! </span>
-                <span style={styles.emojiSpan}>🦸‍♀️🐕‍🦺</span>
               </motion.p>
               <motion.div 
                 style={styles.buttonGroup}
@@ -301,7 +298,7 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href="/services" style={styles.primaryButton}>
-                    Nasze usługi ✨
+                    Nasze usługi
                   </Link>
                 </motion.div>
                 <motion.div
@@ -309,7 +306,7 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href="/contact" style={styles.secondaryButton}>
-                    Kontakt 📱
+                    Kontakt
                   </Link>
                 </motion.div>
               </motion.div>
