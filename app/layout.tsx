@@ -20,6 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Fallback for Tailwind CSS if it doesn't load properly in production */}
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
       <body className={`${nunitoSans.className} pt-20 bg-white text-gray-800`}>
         {children}
       </body>
