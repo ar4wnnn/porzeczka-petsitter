@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Basic reset and defaults */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 :root {
   --color-primary: #E57373; 
@@ -10,6 +11,9 @@
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito Sans', sans-serif;
   scroll-behavior: smooth;
   background-color: white;
   color: #4E342E;
