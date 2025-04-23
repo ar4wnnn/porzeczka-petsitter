@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
-// All images from klienci folder
+// All images from klienci folder - reduced to 3 for front page
 const galleryImages = [
   {
     src: "/images/klienci/Mania i Pedro.jpg",
@@ -23,36 +24,6 @@ const galleryImages = [
     alt: "Halina i Mimi - Pug ladies",
     title: "Halina i Mimi",
     breed: "Mopsy"
-  },
-  {
-    src: "/images/klienci/kreska.jpg",
-    alt: "Kreska - Sweet whippet",
-    title: "Kreska",
-    breed: "Chart whippet"
-  },
-  {
-    src: "/images/klienci/Orion.jpg",
-    alt: "Orion - Fun loving dog",
-    title: "Orion",
-    breed: "Mix"
-  },
-  {
-    src: "/images/klienci/kokos.jpg",
-    alt: "Kokos - Paranoid dog",
-    title: "Kokos",
-    breed: "Terier"
-  },
-  {
-    src: "/images/klienci/Mania.jpg",
-    alt: "Mania - Playful pet",
-    title: "Mania",
-    breed: "Chihuahua"
-  },
-  {
-    src: "/images/klienci/Molly i Badi.jpg",
-    alt: "Molly i Badi - Pet friends",
-    title: "Molly i Badi",
-    breed: "Golden Retriever & Labrador"
   }
 ];
 
@@ -131,7 +102,7 @@ export default function GallerySection() {
         </div>
 
         {/* Tile Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {galleryImages.map((image, index) => (
             <motion.div
               key={image.src}
@@ -151,7 +122,7 @@ export default function GallerySection() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 quality={90}
-                priority={index < 6}
+                priority={true}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                 <h3 className="text-white text-xl font-bold">{image.title}</h3>
@@ -163,16 +134,18 @@ export default function GallerySection() {
         
         {/* "View All Photos" Button */}
         <div className="text-center mt-12">
-          <motion.button 
-            className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Zobacz wszystkie nasze zwierzaki</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </motion.button>
+          <Link href="/gallery">
+            <motion.button 
+              className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>Zobacz wszystkie nasze zwierzaki</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </motion.button>
+          </Link>
         </div>
       </div>
 

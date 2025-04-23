@@ -126,42 +126,53 @@ const styles: Record<string, CSSProperties> = {
   catEmoji1: {
     position: 'absolute' as const,
     top: '10%',
-    left: '5%',
+    left: '-3%',
     fontSize: '80px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 182, 223, 0.7))',
+    filter: 'drop-shadow(0 0 10px rgba(255, 182, 223, 0.5))',
+    opacity: 0.6,
   },
   catEmoji2: {
     position: 'absolute' as const,
     bottom: '15%',
-    right: '10%',
+    right: '-5%',
     fontSize: '100px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(184, 110, 255, 0.7))',
+    filter: 'drop-shadow(0 0 10px rgba(184, 110, 255, 0.5))',
+    opacity: 0.6,
   },
   catEmoji3: {
     position: 'absolute' as const,
     top: '60%',
-    left: '15%',
+    left: '-8%',
     fontSize: '70px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.7))',
+    filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.5))',
+    opacity: 0.6,
   },
   catEmoji4: {
     position: 'absolute' as const,
     top: '30%',
-    right: '20%',
+    right: '-7%',
     fontSize: '90px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(200, 150, 255, 0.7))',
+    filter: 'drop-shadow(0 0 10px rgba(200, 150, 255, 0.5))',
+    opacity: 0.6,
   },
   catEmoji5: {
     position: 'absolute' as const,
     bottom: '30%',
-    left: '25%',
+    left: '-10%',
     fontSize: '75px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 150, 200, 0.7))',
+    filter: 'drop-shadow(0 0 10px rgba(255, 150, 200, 0.5))',
+    opacity: 0.6,
+  },
+  emojiSpan: {
+    display: 'inline-block',
+    color: 'inherit',
+    WebkitTextFillColor: 'initial',
+    backgroundImage: 'none',
   }
 };
 
@@ -257,7 +268,7 @@ export default function HeroSection() {
                 <span style={styles.boldText}>Twój pupil </span>
                 <span style={styles.rainbowText}>zasługuje na wakacje</span> 
                 <span style={styles.normalText}> kiedy Ciebie nie ma! </span>
-                <span style={styles.lightText}>🐶 🐱 ✨</span>
+                <span style={styles.emojiSpan}>🐶 🐱 ✨</span>
               </motion.h1>
               <motion.p 
                 style={styles.subheading}
@@ -269,7 +280,7 @@ export default function HeroSection() {
                 <span style={styles.normalText}>że Twój piesek </span>
                 <span style={styles.rainbowText}>bawi się jak szalony </span> 
                 <span style={styles.normalText}>zamiast tęsknić! </span>
-                <span style={styles.boldText}>🤩</span>
+                <span style={styles.emojiSpan}>🤩</span>
                 <br />
                 <span style={styles.lightText}>Nasi </span>
                 <span style={styles.rainbowText}>super-bohaterowie petsitterzy </span>
@@ -277,7 +288,7 @@ export default function HeroSection() {
                 <span style={styles.boldText}>tonę zabawy </span>
                 <span style={styles.normalText}>i przytulasów </span>
                 <span style={styles.lightText}>dla Twojego futrzaka! </span>
-                <span style={styles.boldText}>🦸‍♀️🐕‍🦺</span>
+                <span style={styles.emojiSpan}>🦸‍♀️🐕‍🦺</span>
               </motion.p>
               <motion.div 
                 style={styles.buttonGroup}

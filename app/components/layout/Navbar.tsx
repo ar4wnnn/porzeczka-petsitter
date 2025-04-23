@@ -61,6 +61,23 @@ export default function Navbar() {
   const navLinks = ['Home', 'Usługi', 'O nas', 'Galeria', 'Kontakt'];
   const navHrefs = ['/', '/services', '/about', '/gallery', '/contact'];
 
+  const buttonStyle = {
+    background: 'linear-gradient(45deg, #FF6B9E, #B86EFF)',
+    color: 'white',
+    padding: '0.75rem 1.5rem',
+    borderRadius: '9999px',
+    fontWeight: 700,
+    fontSize: '1rem',
+    textDecoration: 'none',
+    display: 'inline-block',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(184, 110, 255, 0.3)',
+    border: 'none',
+    backgroundSize: '200% auto',
+    animation: 'shimmerButton 3s linear infinite',
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -131,9 +148,10 @@ export default function Navbar() {
           ))}
           <Link 
             href="/book" 
-            className="ml-4 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-full font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105 focus:outline-none"
+            style={buttonStyle}
+            className="ml-4 hover:shadow-lg transition-all transform hover:scale-105 focus:outline-none"
           >
-            Zarezerwuj
+            Zarezerwuj ✨
           </Link>
         </div>
         
@@ -161,15 +179,22 @@ export default function Navbar() {
               <div className="px-4 py-3">
                 <Link 
                   href="/book" 
-                  className="block w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-md font-bold text-center hover:shadow-lg transition-all"
+                  style={{...buttonStyle, width: '100%', textAlign: 'center'}}
+                  className="block py-3 hover:shadow-lg transition-all"
                 >
-                  Zarezerwuj
+                  Zarezerwuj ✨
                 </Link>
               </div>
             </div>
           </motion.div>
         )}
       </div>
+      <style jsx global>{`
+        @keyframes shimmerButton {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
     </nav>
   );
 }

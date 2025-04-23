@@ -137,11 +137,11 @@ export default function InstagramFeed() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-textcolor)] mb-4">
-            Follow Us on <span className="text-[var(--color-primary)]">Instagram</span>
+            Śledź Nas na <span className="text-[var(--color-primary)]">Instagramie</span> 📸
           </h2>
           <p className="text-lg text-gray-600 mb-6">@porzeczka_petsitter</p>
           <div className="bg-red-50 text-red-600 p-4 rounded-md max-w-xl mx-auto">
-            {error || "Couldn't load Instagram posts. Please visit our Instagram page directly."}
+            {error || "Nie mogliśmy załadować postów z Instagrama. Odwiedź nasz profil bezpośrednio! 🐾"}
           </div>
           <div className="mt-6">
             <Link 
@@ -149,7 +149,7 @@ export default function InstagramFeed() {
               target="_blank"
               className="px-5 py-2 bg-[var(--color-primary)] text-white rounded-full hover:shadow-md transition-all"
             >
-              Visit Our Instagram
+              Zobacz Nasz Instagram 🤳
             </Link>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function InstagramFeed() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              Follow Us on <span className="text-[var(--color-primary)]">Instagram</span>
+              Śledź Nas na <span className="text-[var(--color-primary)]">Instagramie</span> 📸
             </motion.h2>
             <motion.p 
               className="mt-2 text-lg text-gray-600"
@@ -178,137 +178,55 @@ export default function InstagramFeed() {
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              @porzeczka_petsitter
+              @porzeczka_petsitter 🐶 🐱 ❤️
             </motion.p>
           </div>
           
           <div className="mt-4 md:mt-0">
-            <button 
-              onClick={toggleView}
-              className="px-5 py-2 bg-[var(--color-secondary)] text-white rounded-full hover:shadow-md transition-all"
-            >
-              {currentView === 'grid' ? 'View Slideshow' : 'View Grid'}
-            </button>
             <Link 
               href="https://www.instagram.com/porzeczka_petsitter/" 
               target="_blank"
-              className="ml-4 px-5 py-2 border border-[var(--color-primary)] text-[var(--color-primary)] rounded-full hover:bg-[var(--color-primary)] hover:text-white transition-all"
+              className="px-5 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-full hover:shadow-lg transition-all transform hover:scale-105"
             >
-              Visit Instagram
+              Odwiedź Instagram 🤳
             </Link>
           </div>
         </div>
 
         {/* Grid View */}
-        {currentView === 'grid' && (
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, staggerChildren: 0.1 }}
-          >
-            {posts.map((post, index) => (
-              <motion.div 
-                key={post.id}
-                className="relative aspect-square overflow-hidden rounded-xl group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                onClick={() => window.open(post.permalink, '_blank')}
-              >
-                <Image 
-                  src={post.imageUrl}
-                  alt={`Instagram post by ${post.username}: ${post.caption}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <p className="text-white text-sm line-clamp-2">{post.caption}</p>
-                  <div className="flex items-center mt-2">
-                    <span className="text-white text-xs ml-auto">{formatRelativeTime(post.timestamp)}</span>
-                  </div>
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, staggerChildren: 0.1 }}
+        >
+          {posts.map((post, index) => (
+            <motion.div 
+              key={post.id}
+              className="relative aspect-square overflow-hidden rounded-xl group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => window.open(post.permalink, '_blank')}
+            >
+              <Image 
+                src={post.imageUrl}
+                alt={`Post na Instagramie od ${post.username}: ${post.caption}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <p className="text-white text-sm line-clamp-2">{post.caption}</p>
+                <div className="flex items-center mt-2">
+                  <span className="text-white text-xs ml-auto">{formatRelativeTime(post.timestamp)}</span>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-
-        {/* Slideshow View */}
-        {currentView === 'slideshow' && (
-          <div className="relative" ref={sliderRef}>
-            <div className="relative aspect-[16/9] md:aspect-[3/2] overflow-hidden rounded-xl shadow-xl">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSlide}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={posts[activeSlide].imageUrl}
-                    alt={`Instagram post by ${posts[activeSlide].username}: ${posts[activeSlide].caption}`}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <Link
-                    href={posts[activeSlide].permalink}
-                    target="_blank"
-                    className="absolute inset-0 z-10"
-                    aria-label="View on Instagram"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <p className="text-white text-xl md:text-2xl font-medium">{posts[activeSlide].caption}</p>
-                    <div className="flex items-center mt-2">
-                      <span className="text-white ml-auto">{formatRelativeTime(posts[activeSlide].timestamp)}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation arrows */}
-              <button 
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[var(--color-textcolor)] rounded-full p-3 shadow-md z-20 transition-all"
-                aria-label="Previous image"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-              <button 
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[var(--color-textcolor)] rounded-full p-3 shadow-md z-20 transition-all"
-                aria-label="Next image"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Thumbnails/indicators */}
-            <div className="flex justify-center mt-6 gap-2">
-              {posts.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleDotClick(idx)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    idx === activeSlide 
-                      ? 'bg-[var(--color-primary)] scale-125' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                  aria-label={`View Instagram post ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
