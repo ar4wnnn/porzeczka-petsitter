@@ -2,214 +2,210 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import { useEffect, useState, CSSProperties } from 'react';
 
-// Define the styles with proper typing
+// Define styles with proper typing
 const styles: Record<string, CSSProperties> = {
-  heroContainer: {
+  heroSection: {
+    position: 'relative' as const,
     minHeight: '100vh',
-    padding: '2rem 1rem',
-    backgroundColor: '#FFF9F9',
-    position: 'relative',
+    width: '100%',
     overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
+    backgroundColor: '#FFF9F6',
+    paddingTop: '6rem',
+    paddingBottom: '3rem',
   },
-  contentWrapper: {
+  container: {
     maxWidth: '1200px',
     margin: '0 auto',
-    width: '100%',
-    zIndex: 2,
-    position: 'relative',
+    padding: '0 1rem',
+    position: 'relative' as const,
+    zIndex: 10,
   },
-  row: {
+  contentWrapper: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    margin: '0 -15px',
+    flexDirection: 'column' as const,
+    justifyContent: 'center',
+    minHeight: 'calc(100vh - 9rem)',
   },
-  col: {
-    flex: '1 0 50%',
-    padding: '0 15px',
-    maxWidth: '50%',
+  rowClass: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    gap: '2rem',
   },
-  colMobile: {
-    flex: '1 0 100%',
-    padding: '0 15px',
-    maxWidth: '100%',
+  leftCol: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'center',
+    gap: '1.5rem',
+  },
+  rightCol: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative' as const,
   },
   heading: {
-    fontSize: '3.5rem',
+    fontSize: '2.5rem',
     fontWeight: 800,
-    marginBottom: '1.5rem',
     color: '#4E342E',
+    marginBottom: '1rem',
+    lineHeight: 1.2,
   },
   subheading: {
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
     fontWeight: 400,
-    marginBottom: '2rem',
     color: '#795548',
+    marginBottom: '1.5rem',
+    lineHeight: 1.6,
   },
-  buttonContainer: {
+  buttonGroup: {
     display: 'flex',
     gap: '1rem',
-    marginBottom: '2rem',
+    marginTop: '1rem',
   },
   primaryButton: {
     backgroundColor: '#E57373',
     color: 'white',
     padding: '0.75rem 1.5rem',
     borderRadius: '9999px',
-    fontSize: '1rem',
     fontWeight: 600,
-    border: 'none',
-    cursor: 'pointer',
     textDecoration: 'none',
     display: 'inline-block',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     transition: 'all 0.3s ease',
   },
   secondaryButton: {
-    backgroundColor: '#81C784',
-    color: 'white',
+    backgroundColor: 'transparent',
+    color: '#E57373',
     padding: '0.75rem 1.5rem',
     borderRadius: '9999px',
-    fontSize: '1rem',
     fontWeight: 600,
-    border: 'none',
-    cursor: 'pointer',
     textDecoration: 'none',
     display: 'inline-block',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '2px solid #E57373',
     transition: 'all 0.3s ease',
   },
   imageContainer: {
-    position: 'relative',
     width: '100%',
-    height: '500px',
-    borderRadius: '1rem',
-    overflow: 'hidden',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+    maxWidth: '500px',
+    height: 'auto',
+    position: 'relative' as const,
   },
-  backgroundShape: {
-    position: 'absolute',
-    borderRadius: '50%',
-    opacity: 0.1,
+  shape1: {
+    position: 'absolute' as const,
+    top: '10%',
+    left: '5%',
+    width: '150px',
+    height: '150px',
+    borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+    backgroundColor: 'rgba(229, 115, 115, 0.2)',
     zIndex: 1,
   },
+  shape2: {
+    position: 'absolute' as const,
+    bottom: '15%',
+    right: '10%',
+    width: '180px',
+    height: '180px',
+    borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+    backgroundColor: 'rgba(121, 85, 72, 0.15)',
+    zIndex: 1,
+  },
+  shape3: {
+    position: 'absolute' as const,
+    top: '60%',
+    left: '15%',
+    width: '120px',
+    height: '120px',
+    borderRadius: '40% 60% 60% 40% / 40% 40% 60% 60%',
+    backgroundColor: 'rgba(156, 204, 101, 0.2)',
+    zIndex: 1,
+  }
 };
 
 export default function HeroSection() {
-  // Animation variants for text
-  const letterVariants = {
-    hover: {
-      y: [-1, -2, -2.5, -2, -1, 0, 1, 0],
-      transition: {
-        duration: 0.6,
-        repeat: Infinity,
-        repeatType: "loop" as const,
-      }
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
     }
   };
 
-  // Color fading animation for highlighted text
-  const colorFadeAnimation = {
-    animate: {
-      color: [
-        '#F9A8D4', // pink-300
-        '#F472B6', // pink-400
-        '#EC4899', // pink-500
-        '#DB2777', // pink-600
-        '#BE185D', // pink-700
-        '#9D174D', // pink-800
-        '#BE185D', // pink-700
-        '#DB2777', // pink-600
-        '#EC4899', // pink-500
-        '#F472B6', // pink-400
-        '#F9A8D4', // pink-300
-      ],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "linear"
-      }
-    }
+  const floatAnimation = {
+    up: { y: -10, transition: { yoyo: Infinity, duration: 3 } },
+    down: { y: 10, transition: { yoyo: Infinity, duration: 2.5 } },
+    left: { x: -10, transition: { yoyo: Infinity, duration: 3.5 } },
   };
-
-  // Words to animate
-  const animatedWords = ['Najlepsza', 'opieka', 'dla', 'Twoich', 'pupili'];
-  
-  // Floating shapes for background
-  const [isMounted, setIsMounted] = useState(false);
-  
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   return (
-    <section style={styles.heroContainer}>
+    <section style={styles.heroSection}>
       {/* Background shapes */}
-      <div 
-        style={{
-          ...styles.backgroundShape,
-          width: '300px',
-          height: '300px',
-          backgroundColor: '#E57373',
-          top: '10%',
-          left: '5%',
-        }}
+      <motion.div 
+        style={styles.shape1} 
+        initial={{ scale: 0.8 }}
+        animate={{ ...floatAnimation.up, scale: 1 }}
       />
-      <div 
-        style={{
-          ...styles.backgroundShape,
-          width: '200px',
-          height: '200px',
-          backgroundColor: '#81C784',
-          bottom: '10%',
-          right: '5%',
-        }}
+      <motion.div 
+        style={styles.shape2} 
+        initial={{ scale: 0.8 }}
+        animate={{ ...floatAnimation.down, scale: 1 }}
       />
-      <div 
-        style={{
-          ...styles.backgroundShape,
-          width: '150px',
-          height: '150px',
-          backgroundColor: '#FFD180',
-          top: '40%',
-          right: '20%',
-        }}
+      <motion.div 
+        style={styles.shape3} 
+        initial={{ scale: 0.8 }}
+        animate={{ ...floatAnimation.left, scale: 1 }}
       />
-      
-      <div style={styles.contentWrapper}>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 mb-5 mb-md-0">
+
+      <div style={styles.container}>
+        <div style={styles.contentWrapper}>
+          <div style={styles.rowClass} className="md:flex-row md:items-start">
+            <motion.div 
+              style={styles.leftCol} 
+              className="md:w-1/2"
+              initial="hidden"
+              animate="visible"
+              variants={fadeIn}
+            >
               <h1 style={styles.heading}>
-                Kochająca <span style={{color: '#E57373'}}>opieka</span> dla Twoich pupili
+                Profesjonalna opieka dla Twojego pupila
               </h1>
               <p style={styles.subheading}>
-                Profesjonalne usługi opieki nad zwierzętami z miłością i troską dla Twoich futrzastych przyjaciół.
+                Zapewniamy kompleksową opiekę nad zwierzętami domowymi w Poznaniu i okolicach. 
+                Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
               </p>
-              <div style={styles.buttonContainer}>
+              <div style={styles.buttonGroup}>
                 <Link href="/services" style={styles.primaryButton}>
-                  Nasze Usługi
+                  Nasze usługi
                 </Link>
                 <Link href="/contact" style={styles.secondaryButton}>
                   Kontakt
                 </Link>
               </div>
-            </div>
-            <div className="col-md-6">
+            </motion.div>
+
+            <motion.div 
+              style={styles.rightCol} 
+              className="md:w-1/2"
+              initial="hidden"
+              animate="visible"
+              variants={fadeIn}
+            >
               <div style={styles.imageContainer}>
                 <Image
-                  src="/images/pets/happy-dog.svg"
-                  alt="Happy dog being pet sit"
-                  fill
-                  style={{objectFit: 'contain'}}
+                  src="/images/happy-dog.jpg"
+                  alt="Happy Dog"
+                  width={500}
+                  height={375}
+                  className="rounded-lg"
+                  style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
