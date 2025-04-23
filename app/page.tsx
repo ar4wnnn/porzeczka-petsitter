@@ -31,6 +31,6 @@ export default function Home() {
       <TestimonialsSection />
       <CtaSection />
       <Footer />
-    </main>
+      </main>
   );
 }

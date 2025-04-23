@@ -12,7 +12,7 @@ const styles: Record<string, CSSProperties> = {
     minHeight: '100vh',
     width: '100%',
     overflow: 'hidden',
-    backgroundColor: '#FFF9F6',
+    background: 'linear-gradient(135deg, #FFE0F0 0%, #F0E6FF 50%, #FFE0ED 100%)',
     paddingTop: '6rem',
     paddingBottom: '3rem',
   },
@@ -42,49 +42,62 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative' as const,
   },
   heading: {
-    fontSize: '2.5rem',
+    fontSize: '3rem',
     fontWeight: 800,
-    color: '#4E342E',
+    backgroundImage: 'linear-gradient(45deg, #993366, #9966CC, #CC6699)',
+    backgroundSize: '200% auto',
+    animation: 'gradientText 3s linear infinite',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    color: 'rgba(0,0,0,0.5)', // Fallback color
     marginBottom: '1rem',
     lineHeight: 1.2,
+    textShadow: '0 2px 10px rgba(153, 102, 153, 0.3)',
   },
   subheading: {
-    fontSize: '1.25rem',
+    fontSize: '1.5rem',
     fontWeight: 400,
-    color: '#795548',
+    color: '#6A3066',
     marginBottom: '1.5rem',
     lineHeight: 1.6,
+    textShadow: '0 1px 3px rgba(153, 102, 153, 0.2)',
   },
   buttonGroup: {
     display: 'flex',
-    gap: '1rem',
-    marginTop: '1rem',
+    gap: '1.5rem',
+    marginTop: '1.5rem',
   },
   primaryButton: {
-    backgroundColor: '#E57373',
+    background: 'linear-gradient(45deg, #FF6B9E, #B86EFF)',
     color: 'white',
-    padding: '0.75rem 1.5rem',
+    padding: '1rem 2rem',
     borderRadius: '9999px',
-    fontWeight: 600,
+    fontWeight: 700,
+    fontSize: '1.2rem',
     textDecoration: 'none',
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 2px 8px rgba(229, 115, 115, 0.3)',
+    boxShadow: '0 4px 15px rgba(184, 110, 255, 0.4)',
     border: 'none',
+    backgroundSize: '200% auto',
+    animation: 'shimmerButton 3s linear infinite',
   },
   secondaryButton: {
-    backgroundColor: 'transparent',
-    color: '#E57373',
-    padding: '0.75rem 1.5rem',
+    background: 'rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(10px)',
+    color: '#B86EFF',
+    padding: '1rem 2rem',
     borderRadius: '9999px',
-    fontWeight: 600,
+    fontWeight: 700,
+    fontSize: '1.2rem',
     textDecoration: 'none',
     display: 'inline-block',
-    border: '2px solid #E57373',
+    border: '2px solid #B86EFF',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 2px 8px rgba(229, 115, 115, 0.1)',
+    boxShadow: '0 4px 15px rgba(184, 110, 255, 0.2)',
   },
   imageContainer: {
     width: '100%',
@@ -92,35 +105,29 @@ const styles: Record<string, CSSProperties> = {
     height: 'auto',
     position: 'relative' as const,
   },
-  shape1: {
+  catEmoji1: {
     position: 'absolute' as const,
     top: '10%',
     left: '5%',
-    width: '150px',
-    height: '150px',
-    borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-    backgroundColor: 'rgba(229, 115, 115, 0.2)',
+    fontSize: '80px',
     zIndex: 1,
+    filter: 'drop-shadow(0 0 10px rgba(255, 182, 223, 0.7))',
   },
-  shape2: {
+  catEmoji2: {
     position: 'absolute' as const,
     bottom: '15%',
     right: '10%',
-    width: '180px',
-    height: '180px',
-    borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
-    backgroundColor: 'rgba(121, 85, 72, 0.15)',
+    fontSize: '100px',
     zIndex: 1,
+    filter: 'drop-shadow(0 0 10px rgba(184, 110, 255, 0.7))',
   },
-  shape3: {
+  catEmoji3: {
     position: 'absolute' as const,
     top: '60%',
     left: '15%',
-    width: '120px',
-    height: '120px',
-    borderRadius: '40% 60% 60% 40% / 40% 40% 60% 60%',
-    backgroundColor: 'rgba(156, 204, 101, 0.2)',
+    fontSize: '70px',
     zIndex: 1,
+    filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.7))',
   }
 };
 
@@ -136,46 +143,52 @@ export default function HeroSection() {
   };
 
   const floatAnimation = {
-    up: { y: [-10, 10, -10], transition: { repeat: Infinity, duration: 3, ease: "easeInOut" } },
-    down: { y: [10, -10, 10], transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" } },
-    left: { x: [-10, 10, -10], transition: { repeat: Infinity, duration: 3.5, ease: "easeInOut" } },
+    up: { y: [-15, 15, -15], rotate: [-5, 5, -5], transition: { repeat: Infinity, duration: 3, ease: "easeInOut" } },
+    down: { y: [15, -15, 15], rotate: [5, -5, 5], transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" } },
+    left: { x: [-15, 15, -15], rotate: [-5, 5, -5], transition: { repeat: Infinity, duration: 3.5, ease: "easeInOut" } },
   };
 
   const buttonHoverAnimation = {
     primary: {
-      scale: 1.05,
-      boxShadow: '0 4px 12px rgba(229, 115, 115, 0.5)',
+      scale: 1.1,
+      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.6)',
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     },
     secondary: {
-      scale: 1.05, 
-      boxShadow: '0 4px 12px rgba(229, 115, 115, 0.2)',
+      scale: 1.1, 
+      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.4)',
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     }
   };
 
   return (
     <section style={styles.heroSection}>
-      {/* Background shapes */}
+      {/* Background cat emoticons */}
       <motion.div 
-        style={styles.shape1} 
+        style={styles.catEmoji1} 
         initial={{ scale: 0.8, opacity: 0.8 }}
         animate={{ ...floatAnimation.up, scale: 1, opacity: 1 }}
-      />
+      >
+        😺
+      </motion.div>
       <motion.div 
-        style={styles.shape2} 
+        style={styles.catEmoji2} 
         initial={{ scale: 0.8, opacity: 0.8 }}
         animate={{ ...floatAnimation.down, scale: 1, opacity: 1 }}
-      />
+      >
+        😻
+      </motion.div>
       <motion.div 
-        style={styles.shape3} 
+        style={styles.catEmoji3} 
         initial={{ scale: 0.8, opacity: 0.8 }}
         animate={{ ...floatAnimation.left, scale: 1, opacity: 1 }}
-      />
+      >
+        🐱
+      </motion.div>
 
       <div style={styles.container}>
         <div style={styles.contentWrapper}>
@@ -215,7 +228,7 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href="/services" style={styles.primaryButton}>
-                    Nasze usługi
+                    Nasze usługi ✨
                   </Link>
                 </motion.div>
                 <motion.div
@@ -223,7 +236,7 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href="/contact" style={styles.secondaryButton}>
-                    Kontakt
+                    Kontakt 📱
                   </Link>
                 </motion.div>
               </motion.div>
@@ -238,7 +251,7 @@ export default function HeroSection() {
             >
               <motion.div 
                 style={styles.imageContainer}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, rotate: 2 }}
                 transition={{ duration: 0.3 }}
               >
                 <Image
@@ -247,7 +260,12 @@ export default function HeroSection() {
                   width={500}
                   height={375}
                   className="rounded-lg"
-                  style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+                  style={{ 
+                    objectFit: 'cover', 
+                    width: '100%', 
+                    height: 'auto',
+                    filter: 'drop-shadow(0 10px 15px rgba(153, 102, 153, 0.3))'
+                  }}
                   priority
                 />
               </motion.div>
@@ -255,6 +273,17 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes gradientText {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+        @keyframes shimmerButton {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
     </section>
   );
 } 

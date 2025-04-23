@@ -5,25 +5,50 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  isMobile?: boolean;
+  index?: number;
+  totalLinks?: number;
+}
+
 const NavLink = ({ 
   href, 
   children,
-  isMobile = false
-}: { 
-  href: string; 
-  children: React.ReactNode;
-  isMobile?: boolean;
-}) => {
-  const baseClasses = "transition-all duration-300 font-medium";
-  const desktopClasses = "px-3 py-2 rounded-md hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)]/10";
-  const mobileClasses = "block w-full py-3 px-4 text-center hover:bg-gray-50 hover:text-[var(--color-primary)]";
+  isMobile = false,
+  index = 0,
+  totalLinks = 5,
+}: NavLinkProps) => {
+  const baseClasses = "transition-all duration-300 font-black relative overflow-hidden";
+  const desktopClasses = "px-3 py-2 rounded-md hover:bg-[var(--color-primary-light)]/10";
+  const mobileClasses = "block w-full py-3 px-4 text-center hover:bg-gray-50";
+  
+  const gradientStyle = {
+    background: `linear-gradient(90deg, 
+      rgb(var(--color-primary-rgb)) ${index * (100/totalLinks)}%, 
+      rgb(var(--color-secondary-rgb)) ${(index + 1) * (100/totalLinks)}%)`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    color: 'rgba(0,0,0,0.5)', // Fallback color
+    backgroundSize: '200% auto',
+    animation: 'shimmer 2s linear infinite',
+  };
   
   return (
     <Link 
       href={href}
       className={`${baseClasses} ${isMobile ? mobileClasses : desktopClasses}`}
+      style={gradientStyle}
     >
       {children}
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
     </Link>
   );
 };
@@ -31,6 +56,8 @@ const NavLink = ({
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navLinks = ['Home', 'Usługi', 'O nas', 'Galeria', 'Kontakt'];
+  const navHrefs = ['/', '/services', '/about', '/gallery', '/contact'];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,21 +82,21 @@ export default function Navbar() {
       scrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-3'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="relative w-10 h-10">
+        <Link href="/" className="flex items-center">
+          <div className="relative w-45 h-45">
             <Image
               src="/images/logo.png"
               alt="Porzeczka Petsitter Logo"
-              fill
+              width={180}
+              height={180}
               className="object-contain"
               priority
             />
           </div>
-          <span className="text-xl font-bold text-[var(--color-primary)]">Porzeczka</span>
         </Link>
 
         <button 
-          className="block sm:hidden p-2 focus:outline-none"
+          className="block md:hidden p-2 focus:outline-none"
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
@@ -89,31 +116,24 @@ export default function Navbar() {
           </svg>
         </button>
 
-        <ul className="hidden sm:flex items-center space-x-1">
-          <li>
-            <NavLink href="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink href="/services">Usługi</NavLink>
-          </li>
-          <li>
-            <NavLink href="/about">O nas</NavLink>
-          </li>
-          <li>
-            <NavLink href="/gallery">Galeria</NavLink>
-          </li>
-          <li>
-            <NavLink href="/contact">Kontakt</NavLink>
-          </li>
-          <li className="ml-2">
-            <Link 
-              href="/book" 
-              className="px-5 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium hover:bg-[var(--color-primary-dark)] transition-all transform hover:scale-105 focus:outline-none shadow-sm"
+        <div className="hidden md:flex items-center space-x-2">
+          {navLinks.map((link, index) => (
+            <NavLink 
+              key={link} 
+              href={navHrefs[index]}
+              index={index}
+              totalLinks={navLinks.length}
             >
-              Zarezerwuj
-            </Link>
-          </li>
-        </ul>
+              {link}
+            </NavLink>
+          ))}
+          <Link 
+            href="/book" 
+            className="ml-4 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-full font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105 focus:outline-none"
+          >
+            Zarezerwuj
+          </Link>
+        </div>
         
         {/* Mobile menu */}
         {mobileMenuOpen && (
@@ -122,18 +142,24 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-lg sm:hidden overflow-hidden"
+            className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden"
           >
             <div className="py-2">
-              <NavLink href="/" isMobile>Home</NavLink>
-              <NavLink href="/services" isMobile>Usługi</NavLink>
-              <NavLink href="/about" isMobile>O nas</NavLink>
-              <NavLink href="/gallery" isMobile>Galeria</NavLink>
-              <NavLink href="/contact" isMobile>Kontakt</NavLink>
+              {navLinks.map((link, index) => (
+                <NavLink 
+                  key={link} 
+                  href={navHrefs[index]} 
+                  isMobile
+                  index={index}
+                  totalLinks={navLinks.length}
+                >
+                  {link}
+                </NavLink>
+              ))}
               <div className="px-4 py-3">
                 <Link 
                   href="/book" 
-                  className="block w-full py-3 bg-[var(--color-primary)] text-white rounded-md font-medium text-center hover:bg-[var(--color-primary-dark)] transition-all"
+                  className="block w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-md font-bold text-center hover:shadow-lg transition-all"
                 >
                   Zarezerwuj
                 </Link>
