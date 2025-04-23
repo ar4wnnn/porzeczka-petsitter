@@ -40,6 +40,25 @@ export default function GallerySection() {
     document.body.style.overflow = 'auto';
   };
 
+  const buttonStyle = {
+    background: 'linear-gradient(45deg, #FF6B9E, #FF4D8D)',
+    color: 'white',
+    padding: '1rem 2rem',
+    borderRadius: '9999px',
+    fontWeight: 700,
+    fontSize: '1.1rem',
+    textDecoration: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 4px 15px rgba(255, 107, 158, 0.4)',
+    border: 'none',
+    backgroundSize: '200% auto',
+    animation: 'shimmerButton 3s linear infinite',
+  };
+
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Floating decorations */}
@@ -136,7 +155,8 @@ export default function GallerySection() {
         <div className="text-center mt-12">
           <Link href="/gallery">
             <motion.button 
-              className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
+              style={buttonStyle}
+              className="px-8 py-4 shadow-lg hover:shadow-xl transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

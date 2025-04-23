@@ -7,6 +7,26 @@ import Footer from '../components/layout/Footer';
 import ColorfulSection from '../components/ui/ColorfulSection';
 import AnimatedBackground from '../components/ui/AnimatedBackground';
 
+// Define type for Google API
+declare global {
+  interface Window {
+    gapi: {
+      load: (api: string, callback: () => void) => void;
+      client: {
+        init: (config: any) => Promise<any>;
+        calendar: {
+          freebusy: {
+            query: (params: any) => Promise<any>;
+          };
+          events: {
+            insert: (params: any) => Promise<any>;
+          };
+        };
+      };
+    };
+  }
+}
+
 export default function BookingPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -307,8 +327,13 @@ export default function BookingPage() {
   return (
     <>
       <Navbar />
-      <AnimatedBackground>
-        <ColorfulSection className="min-h-screen py-20">
+      <div className="relative">
+        <AnimatedBackground className="" />
+        <ColorfulSection 
+          backgroundColor="#F0F7FF" 
+          nextSectionColor="#FFF4EC"
+          className="min-h-screen py-20"
+        >
           <div className="container mx-auto px-4 pt-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -608,7 +633,7 @@ export default function BookingPage() {
             </motion.div>
           </div>
         </ColorfulSection>
-      </AnimatedBackground>
+      </div>
       <Footer />
     </>
   );

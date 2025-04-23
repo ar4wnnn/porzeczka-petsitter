@@ -114,6 +114,23 @@ export default function InstagramFeed() {
     }
   };
 
+  const buttonStyle = {
+    background: 'linear-gradient(45deg, #B366FF, #8A33FF)',
+    color: 'white',
+    padding: '0.75rem 1.5rem',
+    borderRadius: '9999px',
+    fontWeight: 700,
+    fontSize: '1rem',
+    textDecoration: 'none',
+    display: 'inline-block',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(179, 102, 255, 0.4)',
+    border: 'none',
+    backgroundSize: '200% auto',
+    animation: 'shimmerButton 3s linear infinite',
+  };
+
   if (loading) {
     return (
       <section className="py-24 bg-white">
@@ -147,7 +164,8 @@ export default function InstagramFeed() {
             <Link 
               href="https://www.instagram.com/porzeczka_petsitter/" 
               target="_blank"
-              className="px-5 py-2 bg-[var(--color-primary)] text-white rounded-full hover:shadow-md transition-all"
+              style={buttonStyle}
+              className="hover:shadow-lg transition-all transform hover:scale-105"
             >
               Zobacz Nasz Instagram 🤳
             </Link>
@@ -186,7 +204,8 @@ export default function InstagramFeed() {
             <Link 
               href="https://www.instagram.com/porzeczka_petsitter/" 
               target="_blank"
-              className="px-5 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-full hover:shadow-lg transition-all transform hover:scale-105"
+              style={buttonStyle}
+              className="hover:shadow-lg transition-all transform hover:scale-105"
             >
               Odwiedź Instagram 🤳
             </Link>
@@ -228,6 +247,12 @@ export default function InstagramFeed() {
           ))}
         </motion.div>
       </div>
+      <style jsx global>{`
+        @keyframes shimmerButton {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
     </section>
   );
 } 

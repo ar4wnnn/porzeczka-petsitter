@@ -126,7 +126,7 @@ const styles: Record<string, CSSProperties> = {
   catEmoji1: {
     position: 'absolute' as const,
     top: '10%',
-    left: '-3%',
+    left: '2%',
     fontSize: '80px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(255, 182, 223, 0.5))',
@@ -135,7 +135,7 @@ const styles: Record<string, CSSProperties> = {
   catEmoji2: {
     position: 'absolute' as const,
     bottom: '15%',
-    right: '-5%',
+    right: '2%',
     fontSize: '100px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(184, 110, 255, 0.5))',
@@ -144,7 +144,7 @@ const styles: Record<string, CSSProperties> = {
   catEmoji3: {
     position: 'absolute' as const,
     top: '60%',
-    left: '-8%',
+    left: '0%',
     fontSize: '70px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.5))',
@@ -153,7 +153,7 @@ const styles: Record<string, CSSProperties> = {
   catEmoji4: {
     position: 'absolute' as const,
     top: '30%',
-    right: '-7%',
+    right: '0%',
     fontSize: '90px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(200, 150, 255, 0.5))',
@@ -162,7 +162,7 @@ const styles: Record<string, CSSProperties> = {
   catEmoji5: {
     position: 'absolute' as const,
     bottom: '30%',
-    left: '-10%',
+    left: '5%',
     fontSize: '75px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(255, 150, 200, 0.5))',
