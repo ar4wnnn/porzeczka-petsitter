@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import "./tailwind.css";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -24,9 +23,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body
-        className={`${nunitoSans.className} antialiased pt-32`}
-      >
+      <body className={`${nunitoSans.className} antialiased pt-32`}>
         {children}
       </body>
     </html>
