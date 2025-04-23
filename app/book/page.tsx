@@ -7,8 +7,12 @@ import Footer from '../components/layout/Footer';
 import ColorfulSection from '../components/ui/ColorfulSection';
 import AnimatedBackground from '../components/ui/AnimatedBackground';
 
+// Define a type for the steps to improve type safety
+type BookingStep = 1 | 2 | 3;
+
 export default function BookingPage() {
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  // Use the specific union type for currentStep
+  const [currentStep, setCurrentStep] = useState<BookingStep>(1);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -206,11 +210,15 @@ export default function BookingPage() {
       return;
     }
     
-    setCurrentStep(prev => prev + 1);
+    // Update step with type safety
+    if (currentStep === 1) setCurrentStep(2);
+    else if (currentStep === 2) setCurrentStep(3);
   };
 
   const prevStep = () => {
-    setCurrentStep(prev => prev - 1);
+    // Update step with type safety
+    if (currentStep === 2) setCurrentStep(1);
+    else if (currentStep === 3) setCurrentStep(2);
   };
 
   // Calendar rendering helper
@@ -596,12 +604,13 @@ export default function BookingPage() {
                           </motion.button>
                         )}
                         
-                        {currentStep < 3 ? (
+                        {currentStep !== 3 ? (
                           <motion.button
                             type="button"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={nextStep}
+                            disabled={(currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))}
                             className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
                               (currentStep === 1 && !selectedService) || (currentStep === 2 && (!selectedDate || !selectedTime))
                                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
