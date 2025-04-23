@@ -8,16 +8,17 @@ import TestimonialSlider from './components/home/TestimonialSlider';
 import InstagramFeed from './components/home/InstagramFeed';
 import EnhancedServicesSection from './components/home/EnhancedServicesSection';
 import TestComponent from './components/ui/TestComponent';
+import { CSSProperties } from 'react';
 
-// Add direct style object
-const styles = {
+// Add direct style object with proper typing
+const styles: Record<string, CSSProperties> = {
   main: {
     minHeight: '100vh',
     backgroundColor: 'white',
     fontFamily: 'Nunito Sans, sans-serif',
   },
   fixedTest: {
-    position: 'fixed',
+    position: 'fixed' as const,
     top: '1rem',
     right: '1rem',
     zIndex: 50,
