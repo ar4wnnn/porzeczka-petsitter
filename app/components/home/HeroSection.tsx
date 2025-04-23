@@ -69,6 +69,9 @@ const styles: Record<string, CSSProperties> = {
     textDecoration: 'none',
     display: 'inline-block',
     transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(229, 115, 115, 0.3)',
+    border: 'none',
   },
   secondaryButton: {
     backgroundColor: 'transparent',
@@ -80,6 +83,8 @@ const styles: Record<string, CSSProperties> = {
     display: 'inline-block',
     border: '2px solid #E57373',
     transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(229, 115, 115, 0.1)',
   },
   imageContainer: {
     width: '100%',
@@ -131,9 +136,26 @@ export default function HeroSection() {
   };
 
   const floatAnimation = {
-    up: { y: -10, transition: { yoyo: Infinity, duration: 3 } },
-    down: { y: 10, transition: { yoyo: Infinity, duration: 2.5 } },
-    left: { x: -10, transition: { yoyo: Infinity, duration: 3.5 } },
+    up: { y: [-10, 10, -10], transition: { repeat: Infinity, duration: 3, ease: "easeInOut" } },
+    down: { y: [10, -10, 10], transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" } },
+    left: { x: [-10, 10, -10], transition: { repeat: Infinity, duration: 3.5, ease: "easeInOut" } },
+  };
+
+  const buttonHoverAnimation = {
+    primary: {
+      scale: 1.05,
+      boxShadow: '0 4px 12px rgba(229, 115, 115, 0.5)',
+      transition: {
+        duration: 0.2
+      }
+    },
+    secondary: {
+      scale: 1.05, 
+      boxShadow: '0 4px 12px rgba(229, 115, 115, 0.2)',
+      transition: {
+        duration: 0.2
+      }
+    }
   };
 
   return (
@@ -141,18 +163,18 @@ export default function HeroSection() {
       {/* Background shapes */}
       <motion.div 
         style={styles.shape1} 
-        initial={{ scale: 0.8 }}
-        animate={{ ...floatAnimation.up, scale: 1 }}
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ ...floatAnimation.up, scale: 1, opacity: 1 }}
       />
       <motion.div 
         style={styles.shape2} 
-        initial={{ scale: 0.8 }}
-        animate={{ ...floatAnimation.down, scale: 1 }}
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ ...floatAnimation.down, scale: 1, opacity: 1 }}
       />
       <motion.div 
         style={styles.shape3} 
-        initial={{ scale: 0.8 }}
-        animate={{ ...floatAnimation.left, scale: 1 }}
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ ...floatAnimation.left, scale: 1, opacity: 1 }}
       />
 
       <div style={styles.container}>
@@ -165,31 +187,60 @@ export default function HeroSection() {
               animate="visible"
               variants={fadeIn}
             >
-              <h1 style={styles.heading}>
+              <motion.h1 
+                style={styles.heading}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
                 Profesjonalna opieka dla Twojego pupila
-              </h1>
-              <p style={styles.subheading}>
+              </motion.h1>
+              <motion.p 
+                style={styles.subheading}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 Zapewniamy kompleksową opiekę nad zwierzętami domowymi w Poznaniu i okolicach. 
                 Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
-              </p>
-              <div style={styles.buttonGroup}>
-                <Link href="/services" style={styles.primaryButton}>
-                  Nasze usługi
-                </Link>
-                <Link href="/contact" style={styles.secondaryButton}>
-                  Kontakt
-                </Link>
-              </div>
+              </motion.p>
+              <motion.div 
+                style={styles.buttonGroup}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <motion.div
+                  whileHover={buttonHoverAnimation.primary}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/services" style={styles.primaryButton}>
+                    Nasze usługi
+                  </Link>
+                </motion.div>
+                <motion.div
+                  whileHover={buttonHoverAnimation.secondary}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/contact" style={styles.secondaryButton}>
+                    Kontakt
+                  </Link>
+                </motion.div>
+              </motion.div>
             </motion.div>
 
             <motion.div 
               className="w-full md:w-1/2"
               style={styles.rightCol} 
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div style={styles.imageContainer}>
+              <motion.div 
+                style={styles.imageContainer}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src="/images/pets/happy-dog.svg"
                   alt="Happy Dog"
@@ -199,7 +250,7 @@ export default function HeroSection() {
                   style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
                   priority
                 />
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
