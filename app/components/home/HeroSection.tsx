@@ -3,7 +3,102 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, CSSProperties } from 'react';
+
+// Define the styles with proper typing
+const styles: Record<string, CSSProperties> = {
+  heroContainer: {
+    minHeight: '100vh',
+    padding: '2rem 1rem',
+    backgroundColor: '#FFF9F9',
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  contentWrapper: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    width: '100%',
+    zIndex: 2,
+    position: 'relative',
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    margin: '0 -15px',
+  },
+  col: {
+    flex: '1 0 50%',
+    padding: '0 15px',
+    maxWidth: '50%',
+  },
+  colMobile: {
+    flex: '1 0 100%',
+    padding: '0 15px',
+    maxWidth: '100%',
+  },
+  heading: {
+    fontSize: '3.5rem',
+    fontWeight: 800,
+    marginBottom: '1.5rem',
+    color: '#4E342E',
+  },
+  subheading: {
+    fontSize: '1.5rem',
+    fontWeight: 400,
+    marginBottom: '2rem',
+    color: '#795548',
+  },
+  buttonContainer: {
+    display: 'flex',
+    gap: '1rem',
+    marginBottom: '2rem',
+  },
+  primaryButton: {
+    backgroundColor: '#E57373',
+    color: 'white',
+    padding: '0.75rem 1.5rem',
+    borderRadius: '9999px',
+    fontSize: '1rem',
+    fontWeight: 600,
+    border: 'none',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    display: 'inline-block',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s ease',
+  },
+  secondaryButton: {
+    backgroundColor: '#81C784',
+    color: 'white',
+    padding: '0.75rem 1.5rem',
+    borderRadius: '9999px',
+    fontSize: '1rem',
+    fontWeight: 600,
+    border: 'none',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    display: 'inline-block',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s ease',
+  },
+  imageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '500px',
+    borderRadius: '1rem',
+    overflow: 'hidden',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+  },
+  backgroundShape: {
+    position: 'absolute',
+    borderRadius: '50%',
+    opacity: 0.1,
+    zIndex: 1,
+  },
+};
 
 export default function HeroSection() {
   // Animation variants for text
@@ -53,214 +148,71 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 bg-gradient-to-br from-red-50 to-rose-100">
-      {/* Animated background shapes */}
-      {isMounted && (
-        <>
-          <motion.div 
-            className="absolute top-36 left-10 w-48 h-48 rounded-full bg-pink-100/40 blur-2xl"
-            animate={{
-              x: [0, 30, 0],
-              y: [0, -20, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-red-100/30 blur-3xl"
-            animate={{
-              x: [0, -40, 0],
-              y: [0, 30, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute top-1/3 right-1/4 w-32 h-32 rounded-full bg-rose-200/20 blur-xl"
-            animate={{
-              x: [0, 20, 0],
-              y: [0, 20, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </>
-      )}
-
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          
-          {/* Text Content */}
-          <div className="lg:w-1/2">
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold mb-6 text-gray-800"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Animated title with color fading */}
-              <motion.span 
-                className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-pink-600" 
-                variants={colorFadeAnimation}
-                animate="animate"
-              >
-                Najlepsza opieka 😻
-              </motion.span>{' '}
-              dla Twoich{' '}
-              {animatedWords.includes('pupili') ? (
-                <motion.span className="text-rose-400" whileHover="hover">
-                  {'pupili'.split('').map((letter, i) => (
-                    <motion.span key={i} variants={letterVariants}>
-                      {letter}
-                    </motion.span>
-                  ))}
-                </motion.span>
-              ) : 'pupili'}{' '}
-              gdy Cię nie ma w pobliżu! 🐾
-            </motion.h1>
-            
-            <motion.p 
-              className="text-lg mb-8 text-gray-600"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <motion.span 
-                className="font-medium"
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.2 } 
-                }}
-                variants={colorFadeAnimation}
-                animate="animate"
-              >
-                Profesjonalne usługi petsitterskie 😺
-              </motion.span>{' '}
-              dostosowane do potrzeb Twojego futrzastego przyjaciela. 
-              Traktujemy Twoje zwierzaki jak rodzinę 😽, zapewniając im miłość i uwagę, 
-              na którą zasługują, gdy Ciebie nie ma w domu.
-            </motion.p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <Link href="/services">
-                  <motion.button 
-                    className="relative overflow-hidden bg-rose-400 text-white px-6 py-3 rounded-lg font-medium hover:bg-rose-500 transition duration-300 group"
-                    whileHover={{ 
-                      scale: 1.05,
-                      boxShadow: "0px 4px 10px rgba(249, 168, 212, 0.4)"
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <motion.span 
-                      className="absolute inset-0 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                      animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                      }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                    <span className="relative z-10">Nasze Usługi - Psyknij Tu! 🐶</span>
-                  </motion.button>
+    <section style={styles.heroContainer}>
+      {/* Background shapes */}
+      <div 
+        style={{
+          ...styles.backgroundShape,
+          width: '300px',
+          height: '300px',
+          backgroundColor: '#E57373',
+          top: '10%',
+          left: '5%',
+        }}
+      />
+      <div 
+        style={{
+          ...styles.backgroundShape,
+          width: '200px',
+          height: '200px',
+          backgroundColor: '#81C784',
+          bottom: '10%',
+          right: '5%',
+        }}
+      />
+      <div 
+        style={{
+          ...styles.backgroundShape,
+          width: '150px',
+          height: '150px',
+          backgroundColor: '#FFD180',
+          top: '40%',
+          right: '20%',
+        }}
+      />
+      
+      <div style={styles.contentWrapper}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 mb-5 mb-md-0">
+              <h1 style={styles.heading}>
+                Kochająca <span style={{color: '#E57373'}}>opieka</span> dla Twoich pupili
+              </h1>
+              <p style={styles.subheading}>
+                Profesjonalne usługi opieki nad zwierzętami z miłością i troską dla Twoich futrzastych przyjaciół.
+              </p>
+              <div style={styles.buttonContainer}>
+                <Link href="/services" style={styles.primaryButton}>
+                  Nasze Usługi
                 </Link>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <Link href="/contact">
-                  <motion.button 
-                    className="border-2 border-rose-400 text-rose-400 px-6 py-3 rounded-lg font-medium hover:bg-rose-50 transition duration-300 relative overflow-hidden group"
-                    whileHover={{ 
-                      scale: 1.05,
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <motion.span 
-                      className="absolute inset-0 border-2 border-transparent bg-clip-border bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 opacity-0 group-hover:opacity-100"
-                      animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                      }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                    <motion.span 
-                      className="relative z-10"
-                      variants={colorFadeAnimation}
-                      animate="animate"
-                    >
-                      Miauknij do Nas 📞
-                    </motion.span>
-                  </motion.button>
+                <Link href="/contact" style={styles.secondaryButton}>
+                  Kontakt
                 </Link>
-              </motion.div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div style={styles.imageContainer}>
+                <Image
+                  src="/images/pets/happy-dog.svg"
+                  alt="Happy dog being pet sit"
+                  fill
+                  style={{objectFit: 'contain'}}
+                />
+              </div>
             </div>
           </div>
-          
-          {/* Image */}
-          <motion.div 
-            className="lg:w-1/2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            <motion.div 
-              className="bg-white/40 backdrop-blur-sm p-6 rounded-2xl shadow-lg"
-              whileHover={{
-                boxShadow: [
-                  "0 10px 15px -3px rgba(249, 168, 212, 0.2)",
-                  "0 10px 15px -3px rgba(236, 72, 153, 0.3)",
-                  "0 10px 15px -3px rgba(219, 39, 119, 0.4)",
-                  "0 10px 15px -3px rgba(190, 24, 93, 0.3)",
-                  "0 10px 15px -3px rgba(249, 168, 212, 0.2)",
-                ],
-                transition: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                }
-              }}
-            >
-              <Image
-                className="rounded-xl shadow-sm object-contain mx-auto"
-                src="/images/pets/happy-dog.svg"
-                alt="Szczęśliwy piesek"
-                width={500}
-                height={400}
-              />
-            </motion.div>
-          </motion.div>
-          
         </div>
       </div>
-      
-      {/* Subtle divider at the bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-b from-transparent to-white"></div>
     </section>
   );
 } 
