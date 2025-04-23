@@ -26,14 +26,16 @@ const NavLink = ({
   
   const gradientStyle = {
     background: `linear-gradient(90deg, 
-      rgb(var(--color-primary-rgb)) ${index * (100/totalLinks)}%, 
-      rgb(var(--color-secondary-rgb)) ${(index + 1) * (100/totalLinks)}%)`,
+      rgba(30, 10, 60, 0.9) ${index * (100/totalLinks)}%, 
+      rgba(50, 20, 80, 0.9) ${(index + 1) * (100/totalLinks)}%)`,
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    color: 'rgba(0,0,0,0.5)', // Fallback color
+    color: '#333', // Fallback dark color
     backgroundSize: '200% auto',
     animation: 'shimmer 2s linear infinite',
+    textShadow: '0px 0px 1px rgba(0,0,0,0.1)',
+    fontWeight: 900,
   };
   
   return (

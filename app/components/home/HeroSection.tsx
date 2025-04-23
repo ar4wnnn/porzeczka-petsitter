@@ -44,9 +44,9 @@ const styles: Record<string, CSSProperties> = {
   heading: {
     fontSize: '3rem',
     fontWeight: 800,
-    backgroundImage: 'linear-gradient(45deg, #993366, #9966CC, #CC6699)',
-    backgroundSize: '200% auto',
-    animation: 'gradientText 3s linear infinite',
+    backgroundImage: 'linear-gradient(45deg, #993366, #9966CC, #CC6699, #FF6699, #FF99CC)',
+    backgroundSize: '300% auto',
+    animation: 'gradientText 4s linear infinite',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -105,6 +105,24 @@ const styles: Record<string, CSSProperties> = {
     height: 'auto',
     position: 'relative' as const,
   },
+  rainbowText: {
+    backgroundImage: 'linear-gradient(45deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)',
+    backgroundSize: '300% auto',
+    animation: 'rainbowText 3s linear infinite',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    fontWeight: 900,
+  },
+  boldText: {
+    fontWeight: 900,
+  },
+  normalText: {
+    fontWeight: 400,
+  },
+  lightText: {
+    fontWeight: 300,
+  },
   catEmoji1: {
     position: 'absolute' as const,
     top: '10%',
@@ -128,6 +146,22 @@ const styles: Record<string, CSSProperties> = {
     fontSize: '70px',
     zIndex: 1,
     filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.7))',
+  },
+  catEmoji4: {
+    position: 'absolute' as const,
+    top: '30%',
+    right: '20%',
+    fontSize: '90px',
+    zIndex: 1,
+    filter: 'drop-shadow(0 0 10px rgba(200, 150, 255, 0.7))',
+  },
+  catEmoji5: {
+    position: 'absolute' as const,
+    bottom: '30%',
+    left: '25%',
+    fontSize: '75px',
+    zIndex: 1,
+    filter: 'drop-shadow(0 0 10px rgba(255, 150, 200, 0.7))',
   }
 };
 
@@ -189,6 +223,20 @@ export default function HeroSection() {
       >
         🐱
       </motion.div>
+      <motion.div 
+        style={styles.catEmoji4} 
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ ...floatAnimation.up, scale: 1, opacity: 1 }}
+      >
+        🐈
+      </motion.div>
+      <motion.div 
+        style={styles.catEmoji5} 
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ ...floatAnimation.down, scale: 1, opacity: 1 }}
+      >
+        🐾
+      </motion.div>
 
       <div style={styles.container}>
         <div style={styles.contentWrapper}>
@@ -206,7 +254,10 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Profesjonalna opieka dla Twojego pupila
+                <span style={styles.boldText}>Twój pupil </span>
+                <span style={styles.rainbowText}>zasługuje na wakacje</span> 
+                <span style={styles.normalText}> kiedy Ciebie nie ma! </span>
+                <span style={styles.lightText}>🐶 🐱 ✨</span>
               </motion.h1>
               <motion.p 
                 style={styles.subheading}
@@ -214,8 +265,19 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Zapewniamy kompleksową opiekę nad zwierzętami domowymi w Poznaniu i okolicach. 
-                Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
+                <span style={styles.boldText}>Wyobraź sobie, </span>
+                <span style={styles.normalText}>że Twój piesek </span>
+                <span style={styles.rainbowText}>bawi się jak szalony </span> 
+                <span style={styles.normalText}>zamiast tęsknić! </span>
+                <span style={styles.boldText}>🤩</span>
+                <br />
+                <span style={styles.lightText}>Nasi </span>
+                <span style={styles.rainbowText}>super-bohaterowie petsitterzy </span>
+                <span style={styles.normalText}>w Poznaniu dostarczą </span>
+                <span style={styles.boldText}>tonę zabawy </span>
+                <span style={styles.normalText}>i przytulasów </span>
+                <span style={styles.lightText}>dla Twojego futrzaka! </span>
+                <span style={styles.boldText}>🦸‍♀️🐕‍🦺</span>
               </motion.p>
               <motion.div 
                 style={styles.buttonGroup}

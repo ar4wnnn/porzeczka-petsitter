@@ -26,12 +26,12 @@ export default function BookingPage() {
   const [calendarLoaded, setCalendarLoaded] = useState(false);
 
   const services = [
-    { id: 'dog-walking', name: 'Dog Walking', icon: '🐕' },
-    { id: 'home-visits', name: 'Home Visits', icon: '🏠' },
-    { id: 'overnight-care', name: 'Overnight Care', icon: '🌙' },
-    { id: 'pet-taxi', name: 'Pet Taxi', icon: '🚗' },
-    { id: 'grooming', name: 'Grooming', icon: '✂️' },
-    { id: 'pet-medication', name: 'Pet Medication', icon: '💊' }
+    { id: 'dog-walking', name: 'Spacer z Pieskiem 🐕', icon: '🦮' },
+    { id: 'home-visits', name: 'Wizyta w Domu 🏠', icon: '🐾' },
+    { id: 'overnight-care', name: 'Nocny Dyżur 🌙', icon: '😴' },
+    { id: 'pet-taxi', name: 'Zwierzakowa Taksówka 🚗', icon: '🐶' },
+    { id: 'grooming', name: 'Kąpiel i Strzyżenie ✂️', icon: '🧼' },
+    { id: 'pet-medication', name: 'Podanie Lekarstw 💊', icon: '🏥' }
   ];
 
   useEffect(() => {
@@ -137,12 +137,12 @@ export default function BookingPage() {
     e.preventDefault();
     
     if (!calendarLoaded || !window.gapi.client) {
-      alert('Booking system is currently unavailable. Please try again later or contact us directly.');
+      alert('System rezerwacji jest chwilowo niedostępny. Spróbuj ponownie później lub skontaktuj się z nami bezpośrednio! 🐾');
       return;
     }
     
     if (!selectedDate || !selectedTime || !selectedService) {
-      alert('Please complete all booking details');
+      alert('Wypełnij wszystkie dane rezerwacji, proszę! 🐱');
       return;
     }
     
@@ -154,8 +154,8 @@ export default function BookingPage() {
     endTime.setHours(endTime.getHours() + 1); // Assuming 1-hour appointments
     
     const event = {
-      summary: `Pet Service: ${services.find(s => s.id === selectedService)?.name}`,
-      description: `Pet: ${formData.petName} (${formData.petType})\nNotes: ${formData.notes}\nContact: ${formData.name}, ${formData.phone}, ${formData.email}`,
+      summary: `Usługa: ${services.find(s => s.id === selectedService)?.name}`,
+      description: `Zwierzak: ${formData.petName} (${formData.petType})\nUwagi: ${formData.notes}\nKontakt: ${formData.name}, ${formData.phone}, ${formData.email}`,
       start: {
         dateTime: bookingDate.toISOString(),
         timeZone: 'Europe/Warsaw'
@@ -170,7 +170,7 @@ export default function BookingPage() {
       calendarId: 'primary',
       resource: event
     }).then(() => {
-      alert('Booking confirmed! We will contact you shortly to confirm the details.');
+      alert('Rezerwacja potwierdzona! 🎉 Wkrótce skontaktujemy się z Tobą, żeby potwierdzić szczegóły. Twój pupil już nie może się doczekać! 🐶❤️');
       // Reset form
       setCurrentStep(1);
       setSelectedService(null);
@@ -188,18 +188,18 @@ export default function BookingPage() {
       });
     }).catch(error => {
       console.error('Error creating event', error);
-      alert('There was an error processing your booking. Please try again or contact us directly.');
+      alert('Ojej! 😿 Wystąpił błąd podczas przetwarzania rezerwacji. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio!');
     });
   };
 
   const nextStep = () => {
     if (currentStep === 1 && !selectedService) {
-      alert('Please select a service');
+      alert('Wybierz usługę, prosimy! 🐾');
       return;
     }
     
     if (currentStep === 2 && (!selectedDate || !selectedTime)) {
-      alert('Please select both date and time');
+      alert('Wybierz datę i godzinę Twojej wizyty! 📅');
       return;
     }
     
@@ -305,323 +305,311 @@ export default function BookingPage() {
   };
 
   return (
-    <main className="min-h-screen">
-      <AnimatedBackground />
+    <>
       <Navbar />
-      
-      <ColorfulSection 
-        backgroundColor="#F0F7FF" 
-        nextSectionColor="#FFF4EC"
-        wavePattern="wave1"
-        waveHeight={120}
-        withFloatingShapes
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-12">
-            <motion.h1 
-              className="text-4xl font-bold mb-4"
+      <AnimatedBackground>
+        <ColorfulSection className="min-h-screen py-20">
+          <div className="container mx-auto px-4 pt-16">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden"
             >
-              Book Your <span className="text-[var(--color-primary)]">Pet Care</span> Service
-            </motion.h1>
-            <motion.p 
-              className="text-lg text-gray-600 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Schedule a time for your pet's care with our simple booking system
-            </motion.p>
-          </div>
-          
-          {/* Progress Steps */}
-          <div className="flex justify-between items-center mb-8">
-            {[1, 2, 3].map((step) => (
-              <div key={step} className="flex flex-col items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  currentStep >= step 
-                    ? 'bg-[var(--color-primary)] text-white' 
-                    : 'bg-gray-200 text-gray-500'
-                }`}>
-                  {step}
-                </div>
-                <span className="text-sm mt-2">{
-                  step === 1 ? 'Service' : 
-                  step === 2 ? 'Schedule' : 
-                  'Details'
-                }</span>
-              </div>
-            ))}
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-md p-6 md:p-8">
-            {/* Step 1: Choose Service */}
-            {currentStep === 1 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h2 className="text-2xl font-bold mb-6">Choose a Service</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {services.map((service) => (
-                    <div 
-                      key={service.id}
-                      className={`border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${
-                        selectedService === service.id 
-                          ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)]/10' 
-                          : 'border-gray-200'
-                      }`}
-                      onClick={() => handleServiceSelect(service.id)}
-                    >
-                      <div className="text-3xl mb-2">{service.icon}</div>
-                      <h3 className="font-medium">{service.name}</h3>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-            
-            {/* Step 2: Choose Date & Time */}
-            {currentStep === 2 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h2 className="text-2xl font-bold mb-6">Choose Date & Time</h2>
+              <div className="px-8 py-10">
+                <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text text-transparent mb-6">
+                  Zarezerwuj Wizytę dla Twojego Pupila! 🐶 🐱
+                </h1>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-medium mb-4">Select Date</h3>
-                    {renderCalendar()}
+                <div className="mb-10">
+                  <div className="flex items-center justify-between">
+                    {[1, 2, 3].map(step => (
+                      <div key={step} className="flex flex-col items-center">
+                        <div 
+                          className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold 
+                            ${currentStep >= step 
+                              ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white' 
+                              : 'bg-gray-100 text-gray-400'
+                            }`}
+                        >
+                          {step}
+                        </div>
+                        <span className={`mt-2 text-sm ${currentStep >= step ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
+                          {step === 1 ? 'Wybierz Usługę 🦮' : 
+                           step === 2 ? 'Wybierz Termin 📅' : 
+                           'Dane Kontaktowe 📝'}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                  
-                  <div>
-                    <h3 className="text-lg font-medium mb-4">Select Time</h3>
-                    {selectedDate ? (
-                      <div className="grid grid-cols-3 gap-2">
-                        {availableTimes.length > 0 ? (
-                          availableTimes.map(time => (
-                            <button
-                              key={time}
-                              onClick={() => handleTimeSelect(time)}
-                              className={`py-2 px-3 border rounded-md text-sm ${
-                                selectedTime === time 
-                                  ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' 
-                                  : 'border-gray-200 hover:border-gray-300'
-                              }`}
-                            >
-                              {time}
-                            </button>
-                          ))
+                  <div className="mt-4 h-2 bg-gray-100 rounded-full">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full transition-all duration-300"
+                      style={{ width: `${(currentStep / 3) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+                
+                {currentStep === 1 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-6"
+                  >
+                    <h2 className="text-2xl font-bold text-center mb-8">Co możemy zrobić dla Twojego pupila? 🐾</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {services.map(service => (
+                        <motion.div
+                          key={service.id}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleServiceSelect(service.id)}
+                          className={`p-6 rounded-xl cursor-pointer transition-all border-2 flex items-center gap-4 
+                            ${selectedService === service.id 
+                              ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)]/10' 
+                              : 'border-gray-200 hover:border-[var(--color-primary-light)]'
+                            }`}
+                        >
+                          <div className="text-4xl">{service.icon}</div>
+                          <div>
+                            <h3 className="font-bold text-lg">{service.name}</h3>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+                
+                {currentStep === 2 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-6"
+                  >
+                    <h2 className="text-2xl font-bold text-center mb-8">Kiedy zaplanować radosny dzień? 📅 🐶</h2>
+                    
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg mb-4">Wybierz datę:</h3>
+                        {renderCalendar()}
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg mb-4">Wybierz godzinę:</h3>
+                        {selectedDate ? (
+                          <div className="grid grid-cols-2 gap-3">
+                            {availableTimes.length > 0 ? (
+                              availableTimes.map(time => (
+                                <motion.button
+                                  key={time}
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={() => handleTimeSelect(time)}
+                                  className={`py-2 px-4 rounded-lg text-center
+                                    ${selectedTime === time 
+                                      ? 'bg-[var(--color-primary)] text-white' 
+                                      : 'bg-gray-100 hover:bg-[var(--color-primary-light)]/20'
+                                    }`}
+                                >
+                                  {time} {time < '12:00' ? '🌅' : '☀️'}
+                                </motion.button>
+                              ))
+                            ) : (
+                              <p className="col-span-2 text-center text-gray-500 py-4">
+                                Brak dostępnych terminów w tym dniu 😿 <br/>
+                                Wybierz inny dzień, proszę!
+                              </p>
+                            )}
+                          </div>
                         ) : (
-                          <p className="text-gray-500 col-span-3">No available times for this date</p>
+                          <p className="text-center text-gray-500 py-4">
+                            Najpierw wybierz datę z kalendarza 🗓️
+                          </p>
                         )}
                       </div>
-                    ) : (
-                      <p className="text-gray-500">Please select a date first</p>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            
-            {/* Step 3: Enter Details */}
-            {currentStep === 3 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h2 className="text-2xl font-bold mb-6">Your Details</h2>
+                    </div>
+                  </motion.div>
+                )}
                 
-                <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
+                {currentStep === 3 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-6"
+                  >
+                    <h2 className="text-2xl font-bold text-center mb-8">Powiedz nam więcej o sobie i Twoim pupilu! 📝 🐾</h2>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Pet's Name</label>
-                      <input
-                        type="text"
-                        name="petName"
-                        value={formData.petName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Pet Type</label>
-                      <select
-                        name="petType"
-                        value={formData.petType}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Twoje imię i nazwisko 👤</label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="Jan Kowalski"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Email 📧</label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="jan@example.com"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Telefon 📱</label>
+                          <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="123-456-789"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Imię pupila 🐶</label>
+                          <input
+                            type="text"
+                            name="petName"
+                            value={formData.petName}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="Reksio"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Rodzaj zwierzaka 🐾</label>
+                          <select
+                            name="petType"
+                            value={formData.petType}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                          >
+                            <option value="">Wybierz...</option>
+                            <option value="Pies">Pies 🐕</option>
+                            <option value="Kot">Kot 🐱</option>
+                            <option value="Królik">Królik 🐰</option>
+                            <option value="Świnka morska">Świnka morska 🐹</option>
+                            <option value="Inne">Inne zwierzątko 🦜</option>
+                          </select>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Rasa pupila 🧬</label>
+                          <input
+                            type="text"
+                            name="petBreed"
+                            value={formData.petBreed}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="Labrador / Dachowiec / Perski"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Wiek pupila 🎂</label>
+                          <input
+                            type="text"
+                            name="petAge"
+                            value={formData.petAge}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                            placeholder="2 lata"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Specjalne instrukcje lub uwagi 📝</label>
+                        <textarea
+                          name="notes"
+                          value={formData.notes}
+                          onChange={handleInputChange}
+                          rows={4}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                          placeholder="Powiedz nam co lubi Twój pupil, o czym powinniśmy pamiętać, czy ma jakieś szczególne potrzeby... 🐾"
+                        ></textarea>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <h3 className="font-bold mb-2">Podsumowanie Twojej rezerwacji:</h3>
+                        <p><span className="font-semibold">Usługa:</span> {services.find(s => s.id === selectedService)?.name || '(nie wybrano)'}</p>
+                        <p>
+                          <span className="font-semibold">Termin:</span> {selectedDate ? (
+                            <>
+                              {selectedDate.toLocaleDateString('pl-PL')} o {selectedTime || '(nie wybrano godziny)'}
+                            </>
+                          ) : '(nie wybrano)'}
+                        </p>
+                      </div>
+                      
+                      <div className="flex justify-between pt-4">
+                        <button
+                          type="button"
+                          onClick={prevStep}
+                          className="px-6 py-2 bg-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-300 transition-colors"
+                        >
+                          ← Wróć
+                        </button>
+                        
+                        <button
+                          type="submit"
+                          className="px-8 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105"
+                        >
+                          Zarezerwuj Wizytę! 🐾
+                        </button>
+                      </div>
+                    </form>
+                  </motion.div>
+                )}
+                
+                {currentStep < 3 && (
+                  <div className="flex justify-between mt-12">
+                    {currentStep > 1 ? (
+                      <button
+                        onClick={prevStep}
+                        className="px-6 py-2 bg-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-300 transition-colors"
                       >
-                        <option value="">Select pet type</option>
-                        <option value="Dog">Dog</option>
-                        <option value="Cat">Cat</option>
-                        <option value="Bird">Bird</option>
-                        <option value="Small Animal">Small Animal</option>
-                        <option value="Reptile">Reptile</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
+                        ← Wróć
+                      </button>
+                    ) : (
+                      <div></div>
+                    )}
                     
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Breed (if applicable)</label>
-                      <input
-                        type="text"
-                        name="petBreed"
-                        value={formData.petBreed}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Pet's Age</label>
-                      <input
-                        type="text"
-                        name="petAge"
-                        value={formData.petAge}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                      />
-                    </div>
+                    <button
+                      onClick={nextStep}
+                      className="px-8 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105"
+                    >
+                      Dalej →
+                    </button>
                   </div>
-                  
-                  <div className="mt-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Special Instructions or Notes</label>
-                    <textarea
-                      name="notes"
-                      value={formData.notes}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-                    ></textarea>
-                  </div>
-                  
-                  <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-semibold mb-2">Booking Summary</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>Service:</div>
-                      <div className="font-medium">{services.find(s => s.id === selectedService)?.name}</div>
-                      
-                      <div>Date:</div>
-                      <div className="font-medium">{selectedDate?.toLocaleDateString()}</div>
-                      
-                      <div>Time:</div>
-                      <div className="font-medium">{selectedTime}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 text-sm text-gray-500">
-                    <p>
-                      By completing this booking, you agree to our terms of service and cancellation policy.
-                      We will contact you to confirm the booking details.
-                    </p>
-                  </div>
-                </form>
-              </motion.div>
-            )}
-            
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
-              <button
-                onClick={prevStep}
-                disabled={currentStep === 1}
-                className={`px-5 py-2 rounded-md ${
-                  currentStep === 1 
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Back
-              </button>
-              
-              {currentStep < 3 ? (
-                <button
-                  onClick={nextStep}
-                  className="px-5 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)]"
-                >
-                  Continue
-                </button>
-              ) : (
-                <button
-                  onClick={handleSubmit}
-                  className="px-5 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)]"
-                >
-                  Book Appointment
-                </button>
-              )}
-            </div>
+                )}
+              </div>
+            </motion.div>
           </div>
-          
-          <div className="mt-12 bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Potrzebujesz Pomocy? 🆘</h2>
-            <p className="text-gray-600 mb-3">
-              Masz pytania lub potrzebujesz pomocy z rezerwacją? Nie wahaj się - daj nam znać, a przybędziemy z odsieczą szybciej niż kot na dźwięk otwieranej puszki! 🐈
-            </p>
-            <div className="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span className="text-gray-700">+48 123 456 789</span>
-            </div>
-            <div className="flex items-center gap-2 mt-1">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span className="text-gray-700">rezerwacje@porzeczka-petsitter.pl</span>
-            </div>
-          </div>
-        </div>
-      </ColorfulSection>
-      
+        </ColorfulSection>
+      </AnimatedBackground>
       <Footer />
-    </main>
+    </>
   );
 } 
