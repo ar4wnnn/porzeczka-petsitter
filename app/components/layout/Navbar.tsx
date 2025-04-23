@@ -131,7 +131,7 @@ export default function Navbar() {
   return (
     <nav className="navbar" style={styles.navbar}>
       <div className="container" style={styles.container}>
-        <Link href="/" style={styles.logoContainer}>
+        <Link href="/" className="logo-container" style={styles.logoContainer}>
           <div style={{ width: '40px', height: '40px', position: 'relative' }}>
             <Image
               src="/images/logo.png"
@@ -153,24 +153,24 @@ export default function Navbar() {
           </svg>
         </button>
 
-        <div className={`hidden sm:block ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-          <ul style={styles.navList}>
-            <li style={styles.navItem}>
+        <div className={`nav-links hidden sm:block ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <ul className="nav-list" style={styles.navList}>
+            <li className="nav-item" style={styles.navItem}>
               <NavLink href="/">Home</NavLink>
             </li>
-            <li style={styles.navItem}>
+            <li className="nav-item" style={styles.navItem}>
               <NavLink href="/services">Usługi</NavLink>
             </li>
-            <li style={styles.navItem}>
+            <li className="nav-item" style={styles.navItem}>
               <NavLink href="/about">O nas</NavLink>
             </li>
-            <li style={styles.navItem}>
+            <li className="nav-item" style={styles.navItem}>
               <NavLink href="/gallery">Galeria</NavLink>
             </li>
-            <li style={styles.navItem}>
+            <li className="nav-item" style={styles.navItem}>
               <NavLink href="/contact">Kontakt</NavLink>
             </li>
-            <li style={styles.navItem}>
+            <li className="nav-item" style={styles.navItem}>
               <Link 
                 href="/book" 
                 className="btn btn-primary"
@@ -184,7 +184,7 @@ export default function Navbar() {
         
         {/* Mobile menu, shown when toggled */}
         {mobileMenuOpen && (
-          <div style={styles.mobileMenu} className="sm:hidden">
+          <div className="mobile-menu sm:hidden" style={styles.mobileMenu}>
             <NavLink href="/">Home</NavLink>
             <NavLink href="/services">Usługi</NavLink>
             <NavLink href="/about">O nas</NavLink>

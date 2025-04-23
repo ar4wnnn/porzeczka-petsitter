@@ -162,11 +162,11 @@ export default function HeroSection() {
       />
 
       <div className="container" style={styles.container}>
-        <div style={styles.contentWrapper}>
-          <div style={styles.rowClass} className="md:flex-row md:items-start">
+        <div className="content-wrapper" style={styles.contentWrapper}>
+          <div className="row md:flex-row md:items-start" style={styles.rowClass}>
             <motion.div 
+              className="left-col col md:w-1/2"
               style={styles.leftCol} 
-              className="md:w-1/2"
               initial="hidden"
               animate="visible"
               variants={fadeIn}
@@ -178,7 +178,7 @@ export default function HeroSection() {
                 Zapewniamy kompleksową opiekę nad zwierzętami domowymi w Poznaniu i okolicach. 
                 Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
               </p>
-              <div style={styles.buttonGroup}>
+              <div className="button-group" style={styles.buttonGroup}>
                 <Link href="/services" className="btn btn-primary" style={styles.primaryButton}>
                   Nasze usługi
                 </Link>
@@ -189,8 +189,8 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.div 
+              className="right-col col md:w-1/2"
               style={styles.rightCol} 
-              className="md:w-1/2"
               initial="hidden"
               animate="visible"
               variants={fadeIn}

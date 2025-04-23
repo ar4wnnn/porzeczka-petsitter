@@ -27,27 +27,25 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* Fallback for Tailwind CSS */}
-        <link rel="stylesheet" href="/styles.css" />
+        {/* Critical styles applied directly */}
+        <style jsx global>{`
+          *, *::before, *::after {
+            box-sizing: border-box !important;
+          }
+          
+          body {
+            font-family: 'Nunito Sans', sans-serif !important;
+            padding-top: 5rem !important;
+            background-color: white !important;
+            color: #4E342E !important;
+            margin: 0 !important;
+          }
+        `}</style>
         
-        {/* Additional styles for better compatibility */}
-        <style>
-          {`
-            body {
-              font-family: 'Nunito Sans', sans-serif;
-              padding-top: 5rem;
-              background-color: white;
-              color: #4E342E;
-              margin: 0;
-            }
-            
-            *, *::before, *::after {
-              box-sizing: border-box;
-            }
-          `}
-        </style>
+        {/* Fallback CSS if Tailwind doesn't load properly */}
+        <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body className={nunitoSans.className}>
+      <body className={`${nunitoSans.className}`}>
         {children}
       </body>
     </html>
