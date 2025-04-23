@@ -61,7 +61,6 @@ const styles: Record<string, CSSProperties> = {
     border: 'none',
     fontSize: '1.5rem',
     cursor: 'pointer',
-    display: 'none',
   },
   mobileMenu: {
     position: 'fixed' as const,
@@ -76,6 +75,28 @@ const styles: Record<string, CSSProperties> = {
     gap: '1rem',
     zIndex: 999,
   },
+  navList: {
+    display: 'flex',
+    listStyle: 'none',
+    gap: '1.5rem',
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+  },
+  navItem: {
+    margin: 0,
+    padding: 0,
+  },
+  bookButton: {
+    backgroundColor: '#E57373',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    borderRadius: '9999px',
+    fontWeight: 600,
+    textDecoration: 'none',
+    display: 'inline-block',
+    transition: 'all 0.3s ease',
+  }
 };
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -108,9 +129,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.navbar} className="navbar navbar-expand-lg navbar-light">
-      <div className="container">
-        <Link href="/" className="navbar-brand d-flex align-items-center">
+    <nav style={styles.navbar}>
+      <div style={styles.container}>
+        <Link href="/" style={styles.logoContainer}>
           <div style={{ width: '40px', height: '40px', position: 'relative' }}>
             <Image
               src="/images/logo.png"
@@ -119,51 +140,63 @@ export default function Navbar() {
               style={{objectFit: 'contain'}}
             />
           </div>
-          <span className="ms-2 fw-bold" style={{color: '#E57373'}}>Porzeczka</span>
+          <span style={styles.logoText}>Porzeczka</span>
         </Link>
 
         <button 
-          className="navbar-toggler" 
-          type="button" 
+          style={styles.mobileMenuButton} 
           onClick={toggleMobileMenu}
+          className="sm:hidden"
         >
-          <span className="navbar-toggler-icon"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
         </button>
 
-        <div className={`collapse navbar-collapse ${mobileMenuOpen ? 'show' : ''}`}>
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+        <div className={`hidden sm:block ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <ul style={styles.navList}>
+            <li style={styles.navItem}>
               <NavLink href="/">Home</NavLink>
             </li>
-            <li className="nav-item">
+            <li style={styles.navItem}>
               <NavLink href="/services">Usługi</NavLink>
             </li>
-            <li className="nav-item">
+            <li style={styles.navItem}>
               <NavLink href="/about">O nas</NavLink>
             </li>
-            <li className="nav-item">
+            <li style={styles.navItem}>
               <NavLink href="/gallery">Galeria</NavLink>
             </li>
-            <li className="nav-item">
+            <li style={styles.navItem}>
               <NavLink href="/contact">Kontakt</NavLink>
             </li>
-            <li className="nav-item">
+            <li style={styles.navItem}>
               <Link 
                 href="/book" 
-                className="btn" 
-                style={{
-                  backgroundColor: '#E57373',
-                  color: 'white',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '9999px',
-                  fontWeight: 600,
-                }}
+                style={styles.bookButton}
               >
                 Zarezerwuj
               </Link>
             </li>
           </ul>
         </div>
+        
+        {/* Mobile menu, shown when toggled */}
+        {mobileMenuOpen && (
+          <div style={styles.mobileMenu} className="sm:hidden">
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/services">Usługi</NavLink>
+            <NavLink href="/about">O nas</NavLink>
+            <NavLink href="/gallery">Galeria</NavLink>
+            <NavLink href="/contact">Kontakt</NavLink>
+            <Link 
+              href="/book" 
+              style={styles.bookButton}
+            >
+              Zarezerwuj
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );
