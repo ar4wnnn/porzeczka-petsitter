@@ -143,7 +143,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section style={styles.heroSection}>
+    <section className="hero-section" style={styles.heroSection}>
       {/* Background shapes */}
       <motion.div 
         style={styles.shape1} 
@@ -161,7 +161,7 @@ export default function HeroSection() {
         animate={{ ...floatAnimation.left, scale: 1 }}
       />
 
-      <div style={styles.container}>
+      <div className="container" style={styles.container}>
         <div style={styles.contentWrapper}>
           <div style={styles.rowClass} className="md:flex-row md:items-start">
             <motion.div 
@@ -179,10 +179,10 @@ export default function HeroSection() {
                 Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
               </p>
               <div style={styles.buttonGroup}>
-                <Link href="/services" style={styles.primaryButton}>
+                <Link href="/services" className="btn btn-primary" style={styles.primaryButton}>
                   Nasze usługi
                 </Link>
-                <Link href="/contact" style={styles.secondaryButton}>
+                <Link href="/contact" className="btn btn-secondary" style={styles.secondaryButton}>
                   Kontakt
                 </Link>
               </div>
@@ -197,7 +197,7 @@ export default function HeroSection() {
             >
               <div style={styles.imageContainer}>
                 <Image
-                  src="/images/happy-dog.jpg"
+                  src="/images/pets/happy-dog.svg"
                   alt="Happy Dog"
                   width={500}
                   height={375}

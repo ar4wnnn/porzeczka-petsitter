@@ -129,8 +129,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.container}>
+    <nav className="navbar" style={styles.navbar}>
+      <div className="container" style={styles.container}>
         <Link href="/" style={styles.logoContainer}>
           <div style={{ width: '40px', height: '40px', position: 'relative' }}>
             <Image
@@ -173,6 +173,7 @@ export default function Navbar() {
             <li style={styles.navItem}>
               <Link 
                 href="/book" 
+                className="btn btn-primary"
                 style={styles.bookButton}
               >
                 Zarezerwuj
@@ -191,6 +192,7 @@ export default function Navbar() {
             <NavLink href="/contact">Kontakt</NavLink>
             <Link 
               href="/book" 
+              className="btn btn-primary"
               style={styles.bookButton}
             >
               Zarezerwuj
