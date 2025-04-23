@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['placedog.net', 'scontent-iad3-1.cdninstagram.com', 'scontent-iad3-2.cdninstagram.com', 'cdninstagram.com'],
-    unoptimized: process.env.NODE_ENV === 'production' ? false : true,
+    unoptimized: false, // Always optimize images for consistency
   },
   // Set reasonable production defaults
   poweredByHeader: false,

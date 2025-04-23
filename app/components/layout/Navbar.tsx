@@ -61,6 +61,7 @@ const styles: Record<string, CSSProperties> = {
     border: 'none',
     fontSize: '1.5rem',
     cursor: 'pointer',
+    padding: '0.5rem',
   },
   mobileMenu: {
     position: 'fixed' as const,
@@ -129,15 +130,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar" style={styles.navbar}>
-      <div className="container" style={styles.container}>
-        <Link href="/" className="logo-container" style={styles.logoContainer}>
+    <nav style={styles.navbar}>
+      <div style={styles.container}>
+        <Link href="/" style={styles.logoContainer}>
           <div style={{ width: '40px', height: '40px', position: 'relative' }}>
             <Image
               src="/images/logo.png"
               alt="Porzeczka Petsitter Logo"
               fill
               style={{objectFit: 'contain'}}
+              priority
             />
           </div>
           <span style={styles.logoText}>Porzeczka</span>
@@ -146,45 +148,43 @@ export default function Navbar() {
         <button 
           style={styles.mobileMenuButton} 
           onClick={toggleMobileMenu}
-          className="sm:hidden"
+          className="block sm:hidden"
+          aria-label="Toggle menu"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
         </button>
 
-        <div className={`nav-links hidden sm:block ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-          <ul className="nav-list" style={styles.navList}>
-            <li className="nav-item" style={styles.navItem}>
-              <NavLink href="/">Home</NavLink>
-            </li>
-            <li className="nav-item" style={styles.navItem}>
-              <NavLink href="/services">Usługi</NavLink>
-            </li>
-            <li className="nav-item" style={styles.navItem}>
-              <NavLink href="/about">O nas</NavLink>
-            </li>
-            <li className="nav-item" style={styles.navItem}>
-              <NavLink href="/gallery">Galeria</NavLink>
-            </li>
-            <li className="nav-item" style={styles.navItem}>
-              <NavLink href="/contact">Kontakt</NavLink>
-            </li>
-            <li className="nav-item" style={styles.navItem}>
-              <Link 
-                href="/book" 
-                className="btn btn-primary"
-                style={styles.bookButton}
-              >
-                Zarezerwuj
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul style={styles.navList} className="hidden sm:flex">
+          <li style={styles.navItem}>
+            <NavLink href="/">Home</NavLink>
+          </li>
+          <li style={styles.navItem}>
+            <NavLink href="/services">Usługi</NavLink>
+          </li>
+          <li style={styles.navItem}>
+            <NavLink href="/about">O nas</NavLink>
+          </li>
+          <li style={styles.navItem}>
+            <NavLink href="/gallery">Galeria</NavLink>
+          </li>
+          <li style={styles.navItem}>
+            <NavLink href="/contact">Kontakt</NavLink>
+          </li>
+          <li style={styles.navItem}>
+            <Link 
+              href="/book" 
+              style={styles.bookButton}
+            >
+              Zarezerwuj
+            </Link>
+          </li>
+        </ul>
         
         {/* Mobile menu, shown when toggled */}
         {mobileMenuOpen && (
-          <div className="mobile-menu sm:hidden" style={styles.mobileMenu}>
+          <div style={styles.mobileMenu} className="sm:hidden">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/services">Usługi</NavLink>
             <NavLink href="/about">O nas</NavLink>
@@ -192,7 +192,6 @@ export default function Navbar() {
             <NavLink href="/contact">Kontakt</NavLink>
             <Link 
               href="/book" 
-              className="btn btn-primary"
               style={styles.bookButton}
             >
               Zarezerwuj

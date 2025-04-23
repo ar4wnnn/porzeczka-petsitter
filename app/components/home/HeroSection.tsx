@@ -29,12 +29,6 @@ const styles: Record<string, CSSProperties> = {
     justifyContent: 'center',
     minHeight: 'calc(100vh - 9rem)',
   },
-  rowClass: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center',
-    gap: '2rem',
-  },
   leftCol: {
     display: 'flex',
     flexDirection: 'column' as const,
@@ -143,7 +137,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="hero-section" style={styles.heroSection}>
+    <section style={styles.heroSection}>
       {/* Background shapes */}
       <motion.div 
         style={styles.shape1} 
@@ -161,11 +155,11 @@ export default function HeroSection() {
         animate={{ ...floatAnimation.left, scale: 1 }}
       />
 
-      <div className="container" style={styles.container}>
-        <div className="content-wrapper" style={styles.contentWrapper}>
-          <div className="row md:flex-row md:items-start" style={styles.rowClass}>
+      <div style={styles.container}>
+        <div style={styles.contentWrapper}>
+          <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
             <motion.div 
-              className="left-col col md:w-1/2"
+              className="w-full md:w-1/2"
               style={styles.leftCol} 
               initial="hidden"
               animate="visible"
@@ -178,18 +172,18 @@ export default function HeroSection() {
                 Zapewniamy kompleksową opiekę nad zwierzętami domowymi w Poznaniu i okolicach. 
                 Nasi doświadczeni opiekunowie zapewnią Twojemu pupilowi bezpieczeństwo i komfort.
               </p>
-              <div className="button-group" style={styles.buttonGroup}>
-                <Link href="/services" className="btn btn-primary" style={styles.primaryButton}>
+              <div style={styles.buttonGroup}>
+                <Link href="/services" style={styles.primaryButton}>
                   Nasze usługi
                 </Link>
-                <Link href="/contact" className="btn btn-secondary" style={styles.secondaryButton}>
+                <Link href="/contact" style={styles.secondaryButton}>
                   Kontakt
                 </Link>
               </div>
             </motion.div>
 
             <motion.div 
-              className="right-col col md:w-1/2"
+              className="w-full md:w-1/2"
               style={styles.rightCol} 
               initial="hidden"
               animate="visible"
@@ -203,6 +197,7 @@ export default function HeroSection() {
                   height={375}
                   className="rounded-lg"
                   style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+                  priority
                 />
               </div>
             </motion.div>
