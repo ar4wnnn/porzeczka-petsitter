@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import ColorfulSection from '../components/ui/ColorfulSection';
@@ -16,7 +15,7 @@ const services = [
   { id: 'pet-medication', name: 'Podanie Lekarstw 💊', icon: '🏥' }
 ];
 
-// Mock available times for simplicity
+// Mock available times
 const mockTimes = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
 
 interface FormData {
@@ -30,10 +29,12 @@ interface FormData {
   notes: string;
 }
 
-// Simplify using plain HTML/CSS approach to avoid React state management issues
 export default function BookingPage() {
-  // Use step as a number for simplicity
-  const [step, setStep] = useState(1);
+  // Instead of using a step state, we'll just directly control visibility of each section
+  const [showServiceSelection, setShowServiceSelection] = useState(true);
+  const [showDateTimeSelection, setShowDateTimeSelection] = useState(false);
+  const [showPersonalInfo, setShowPersonalInfo] = useState(false);
+  
   const [selectedService, setSelectedService] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState('');
@@ -48,9 +49,47 @@ export default function BookingPage() {
     notes: ''
   });
 
-  // Simple direct handler functions
+  // Handle service selection and advance to next step
   function handleServiceSelect(serviceId: string) {
     setSelectedService(serviceId);
+    console.log("Selected service:", serviceId);
+  }
+
+  // Go to step 2 - Date & Time Selection
+  function goToStep2() {
+    if (!selectedService) {
+      alert('Wybierz usługę, prosimy! 🐾');
+      return;
+    }
+    console.log("Going to step 2");
+    setShowServiceSelection(false);
+    setShowDateTimeSelection(true);
+    setShowPersonalInfo(false);
+  }
+
+  // Go to step 3 - Personal Information
+  function goToStep3() {
+    if (!selectedDate || !selectedTime) {
+      alert('Wybierz datę i godzinę Twojej wizyty! 📅');
+      return;
+    }
+    setShowServiceSelection(false);
+    setShowDateTimeSelection(false);
+    setShowPersonalInfo(true);
+  }
+
+  // Go back to service selection
+  function backToStep1() {
+    setShowServiceSelection(true);
+    setShowDateTimeSelection(false);
+    setShowPersonalInfo(false);
+  }
+
+  // Go back to date & time selection
+  function backToStep2() {
+    setShowServiceSelection(false);
+    setShowDateTimeSelection(true);
+    setShowPersonalInfo(false);
   }
 
   function handleDateSelect(date: Date) {
@@ -67,38 +106,11 @@ export default function BookingPage() {
     setFormData({ ...formData, [name]: value });
   }
 
-  // Directly navigate to next step
-  function goToStep1() {
-    setStep(1);
-  }
-
-  function goToStep2() {
-    if (!selectedService) {
-      alert('Wybierz usługę, prosimy! 🐾');
-      return;
-    }
-    setStep(2);
-  }
-
-  function goToStep3() {
-    if (!selectedDate || !selectedTime) {
-      alert('Wybierz datę i godzinę Twojej wizyty! 📅');
-      return;
-    }
-    setStep(3);
-  }
-
-  function goBack() {
-    if (step === 2) setStep(1);
-    else if (step === 3) setStep(2);
-  }
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     alert('Rezerwacja potwierdzona! 🎉 Wkrótce skontaktujemy się z Tobą, żeby potwierdzić szczegóły. Twój pupil już nie może się doczekać! 🐶❤️');
     
-    // Reset form
-    setStep(1);
+    // Reset form and go back to step 1
     setSelectedService('');
     setSelectedDate(null);
     setSelectedTime('');
@@ -112,10 +124,20 @@ export default function BookingPage() {
       petAge: '',
       notes: ''
     });
+    setShowServiceSelection(true);
+    setShowDateTimeSelection(false);
+    setShowPersonalInfo(false);
+  }
+
+  // Get current step for progress indicator
+  function getCurrentStep() {
+    if (showPersonalInfo) return 3;
+    if (showDateTimeSelection) return 2;
+    return 1;
   }
 
   // Simple calendar component
-  const renderCalendar = () => {
+  function renderCalendar() {
     const today = new Date();
     const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     const days: JSX.Element[] = [];
@@ -139,6 +161,7 @@ export default function BookingPage() {
             ${isToday ? 'border border-purple-500' : ''}
             ${isSelected ? 'bg-purple-500 text-white' : ''}
           `}
+          type="button"
         >
           {day}
         </button>
@@ -174,7 +197,7 @@ export default function BookingPage() {
         </div>
       </div>
     );
-  };
+  }
 
   return (
     <main className="min-h-screen">
@@ -203,21 +226,21 @@ export default function BookingPage() {
                 </div>
               </div>
           
-              {/* Progress Steps - Simple non-animated version */}
+              {/* Progress Steps - Simplified version */}
               <div className="flex items-center justify-between mb-10">
                 <div className="w-full flex justify-between relative">
                   {[1, 2, 3].map((s) => (
                     <div 
                       key={s} 
                       className={`w-10 h-10 rounded-full flex items-center justify-center z-10 ${
-                        step === s 
+                        getCurrentStep() === s 
                           ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white' 
-                          : step > s 
+                          : getCurrentStep() > s 
                             ? 'bg-purple-500 text-white' 
                             : 'bg-gray-200 text-gray-600'
                       }`}
                     >
-                      {step > s ? '✓' : s}
+                      {getCurrentStep() > s ? '✓' : s}
                     </div>
                   ))}
                   
@@ -225,7 +248,7 @@ export default function BookingPage() {
                   <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 h-1 bg-gray-200">
                     <div 
                       className="h-full bg-purple-500" 
-                      style={{ width: `${(step - 1) * 50}%` }}
+                      style={{ width: `${(getCurrentStep() - 1) * 50}%` }}
                     ></div>
                   </div>
                 </div>
@@ -233,227 +256,254 @@ export default function BookingPage() {
               
               <div className="mt-6">
                 {/* Step 1: Service Selection */}
-                <div style={{ display: step === 1 ? 'block' : 'none' }}>
-                  <h2 className="text-2xl font-bold text-center mb-8">Wybierz usługę dla swojego pupila 🐱</h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {services.map((service) => (
-                      <div
-                        key={service.id}
-                        onClick={() => handleServiceSelect(service.id)}
-                        className={`p-6 rounded-xl cursor-pointer transition-all ${
-                          selectedService === service.id 
-                            ? 'bg-purple-100 border-2 border-purple-500 shadow-md' 
-                            : 'bg-white hover:bg-gray-50 border border-gray-200'
-                        }`}
-                      >
-                        <div className="flex items-center space-x-4">
-                          <div className="text-4xl">{service.icon}</div>
-                          <div>
-                            <h3 className="font-bold text-lg">{service.name}</h3>
+                {showServiceSelection && (
+                  <div>
+                    <h2 className="text-2xl font-bold text-center mb-8">Wybierz usługę dla swojego pupila 🐱</h2>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {services.map((service) => (
+                        <div
+                          key={service.id}
+                          onClick={() => handleServiceSelect(service.id)}
+                          className={`p-6 rounded-xl cursor-pointer transition-all ${
+                            selectedService === service.id 
+                              ? 'bg-purple-100 border-2 border-purple-500 shadow-md' 
+                              : 'bg-white hover:bg-gray-50 border border-gray-200'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <div className="text-4xl">{service.icon}</div>
+                            <div>
+                              <h3 className="font-bold text-lg">{service.name}</h3>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    
+                    <div className="flex justify-end mt-8">
+                      <button 
+                        onClick={goToStep2}
+                        className={`px-6 py-3 rounded-full font-medium flex items-center ${
+                          !selectedService
+                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg transition-all'
+                        }`}
+                        type="button"
+                      >
+                        Dalej <span className="ml-2">→</span>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
                 
                 {/* Step 2: Date & Time Selection */}
-                <div style={{ display: step === 2 ? 'block' : 'none' }}>
-                  <h2 className="text-2xl font-bold text-center mb-8">Kiedy zaplanować radosny dzień? 📅 🐶</h2>
-                  
-                  <div className="flex flex-col md:flex-row gap-8">
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg mb-4">Wybierz datę:</h3>
-                      {renderCalendar()}
+                {showDateTimeSelection && (
+                  <div>
+                    <h2 className="text-2xl font-bold text-center mb-8">Kiedy zaplanować radosny dzień? 📅 🐶</h2>
+                    
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg mb-4">Wybierz datę:</h3>
+                        {renderCalendar()}
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg mb-4">Wybierz godzinę:</h3>
+                        {selectedDate ? (
+                          <div className="grid grid-cols-2 gap-3">
+                            {mockTimes.map(time => (
+                              <button
+                                key={time}
+                                onClick={() => handleTimeSelect(time)}
+                                className={`py-2 px-4 rounded-lg text-center
+                                  ${selectedTime === time 
+                                    ? 'bg-purple-500 text-white' 
+                                    : 'bg-gray-100 hover:bg-purple-100'
+                                  }`}
+                                type="button"
+                              >
+                                {time} {time < '12:00' ? '🌅' : '☀️'}
+                              </button>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-center text-gray-500 py-4">
+                            Najpierw wybierz datę z kalendarza 🗓️
+                          </p>
+                        )}
+                      </div>
                     </div>
                     
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg mb-4">Wybierz godzinę:</h3>
-                      {selectedDate ? (
-                        <div className="grid grid-cols-2 gap-3">
-                          {mockTimes.map(time => (
-                            <button
-                              key={time}
-                              onClick={() => handleTimeSelect(time)}
-                              className={`py-2 px-4 rounded-lg text-center
-                                ${selectedTime === time 
-                                  ? 'bg-purple-500 text-white' 
-                                  : 'bg-gray-100 hover:bg-purple-100'
-                                }`}
-                            >
-                              {time} {time < '12:00' ? '🌅' : '☀️'}
-                            </button>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-center text-gray-500 py-4">
-                          Najpierw wybierz datę z kalendarza 🗓️
-                        </p>
-                      )}
+                    <div className="flex justify-between mt-8">
+                      <button
+                        onClick={backToStep1}
+                        className="px-6 py-3 bg-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition-all flex items-center"
+                        type="button"
+                      >
+                        <span className="mr-2">←</span> Wróć
+                      </button>
+                      
+                      <button
+                        onClick={goToStep3}
+                        className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
+                          !selectedDate || !selectedTime
+                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg transition-all'
+                        }`}
+                        type="button"
+                      >
+                        Dalej <span className="ml-2">→</span>
+                      </button>
                     </div>
                   </div>
-                </div>
+                )}
                 
                 {/* Step 3: Personal Information */}
-                <div style={{ display: step === 3 ? 'block' : 'none' }}>
-                  <h2 className="text-2xl font-bold text-center mb-8">Powiedz nam więcej o sobie i Twoim pupilu! 📝 🐾</h2>
-                  
-                  <form onSubmit={handleSubmit} className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Twoje imię i nazwisko 👤</label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="Jan Kowalski"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email 📧</label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="jan@example.com"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Telefon 📱</label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="123-456-789"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Imię pupila 🐶</label>
-                        <input
-                          type="text"
-                          name="petName"
-                          value={formData.petName}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="Reksio"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Rodzaj zwierzaka 🐾</label>
-                        <select
-                          name="petType"
-                          value={formData.petType}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        >
-                          <option value="">Wybierz...</option>
-                          <option value="Pies">Pies 🐕</option>
-                          <option value="Kot">Kot 🐱</option>
-                          <option value="Królik">Królik 🐰</option>
-                          <option value="Świnka morska">Świnka morska 🐹</option>
-                          <option value="Inne">Inne zwierzątko 🦜</option>
-                        </select>
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Rasa pupila 🧬</label>
-                        <input
-                          type="text"
-                          name="petBreed"
-                          value={formData.petBreed}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="Labrador / Dachowiec / Perski"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Wiek pupila 🎂</label>
-                        <input
-                          type="text"
-                          name="petAge"
-                          value={formData.petAge}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          placeholder="2 lata"
-                        />
-                      </div>
-                    </div>
+                {showPersonalInfo && (
+                  <div>
+                    <h2 className="text-2xl font-bold text-center mb-8">Powiedz nam więcej o sobie i Twoim pupilu! 📝 🐾</h2>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Specjalne instrukcje lub uwagi 📝</label>
-                      <textarea
-                        name="notes"
-                        value={formData.notes}
-                        onChange={handleInputChange}
-                        rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        placeholder="Powiedz nam co lubi Twój pupil, o czym powinniśmy pamiętać, czy ma jakieś szczególne potrzeby... 🐾"
-                      ></textarea>
-                    </div>
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Twoje imię i nazwisko 👤</label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="Jan Kowalski"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Email 📧</label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="jan@example.com"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Telefon 📱</label>
+                          <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="123-456-789"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Imię pupila 🐶</label>
+                          <input
+                            type="text"
+                            name="petName"
+                            value={formData.petName}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="Reksio"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Rodzaj zwierzaka 🐾</label>
+                          <select
+                            name="petType"
+                            value={formData.petType}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          >
+                            <option value="">Wybierz...</option>
+                            <option value="Pies">Pies 🐕</option>
+                            <option value="Kot">Kot 🐱</option>
+                            <option value="Królik">Królik 🐰</option>
+                            <option value="Świnka morska">Świnka morska 🐹</option>
+                            <option value="Inne">Inne zwierzątko 🦜</option>
+                          </select>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Rasa pupila 🧬</label>
+                          <input
+                            type="text"
+                            name="petBreed"
+                            value={formData.petBreed}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="Labrador / Dachowiec / Perski"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Wiek pupila 🎂</label>
+                          <input
+                            type="text"
+                            name="petAge"
+                            value={formData.petAge}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            placeholder="2 lata"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Specjalne instrukcje lub uwagi 📝</label>
+                        <textarea
+                          name="notes"
+                          value={formData.notes}
+                          onChange={handleInputChange}
+                          rows={4}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          placeholder="Powiedz nam co lubi Twój pupil, o czym powinniśmy pamiętać, czy ma jakieś szczególne potrzeby... 🐾"
+                        ></textarea>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <h3 className="font-bold mb-2">Podsumowanie Twojej rezerwacji:</h3>
+                        <p><span className="font-semibold">Usługa:</span> {services.find(s => s.id === selectedService)?.name || '(nie wybrano)'}</p>
+                        <p>
+                          <span className="font-semibold">Termin:</span> {selectedDate ? (
+                            <>
+                              {selectedDate.toLocaleDateString('pl-PL')} o {selectedTime || '(nie wybrano godziny)'}
+                            </>
+                          ) : '(nie wybrano)'}
+                        </p>
+                      </div>
                     
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="font-bold mb-2">Podsumowanie Twojej rezerwacji:</h3>
-                      <p><span className="font-semibold">Usługa:</span> {services.find(s => s.id === selectedService)?.name || '(nie wybrano)'}</p>
-                      <p>
-                        <span className="font-semibold">Termin:</span> {selectedDate ? (
-                          <>
-                            {selectedDate.toLocaleDateString('pl-PL')} o {selectedTime || '(nie wybrano godziny)'}
-                          </>
-                        ) : '(nie wybrano)'}
-                      </p>
-                    </div>
-                  
-                    <div className="flex justify-between mt-8">
-                      {step > 1 && (
+                      <div className="flex justify-between mt-8">
                         <button
                           type="button"
-                          onClick={goBack}
+                          onClick={backToStep2}
                           className="px-6 py-3 bg-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition-all flex items-center"
                         >
                           <span className="mr-2">←</span> Wróć
                         </button>
-                      )}
-                      
-                      {step !== 3 ? (
-                        <button
-                          type="button"
-                          onClick={step === 1 ? goToStep2 : goToStep3}
-                          className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
-                            (step === 1 && !selectedService) || (step === 2 && (!selectedDate || !selectedTime))
-                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                              : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg transition-all'
-                          }`}
-                        >
-                          Dalej <span className="ml-2">→</span>
-                        </button>
-                      ) : (
+                        
                         <button
                           type="submit"
                           className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full text-white font-medium hover:shadow-lg transition-all ml-auto flex items-center"
                         >
                           Zarezerwuj <span className="ml-2">✓</span>
                         </button>
-                      )}
-                    </div>
-                  </form>
-                </div>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
             </div>
           </div>
