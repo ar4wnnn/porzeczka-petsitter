@@ -61,7 +61,7 @@ export default function ColorfulSection({
               style={{
                 width: (index + 2) * 60,
                 height: (index + 2) * 60,
-                border: `2px solid rgba(255, 255, 255, 0.15)`,
+                border: `2px solid rgba(120, 169, 255, 0.15)`,
                 left: circlePositions[index].left,
                 top: circlePositions[index].top,
               }}
@@ -81,7 +81,7 @@ export default function ColorfulSection({
 
           {/* Blobs */}
           <motion.div
-            className="absolute bg-white/5 rounded-[40%_60%_70%_30%/40%_50%_60%_50%]"
+            className="absolute bg-[#98BDFF]/5 rounded-[40%_60%_70%_30%/40%_50%_60%_50%]"
             style={{
               width: 300,
               height: 300,

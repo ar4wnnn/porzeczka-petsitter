@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="px-4 py-2 rounded-full bg-red-100 text-red-600 font-medium text-sm inline-block mb-4"
+            className="px-4 py-2 rounded-full bg-blue-100 text-blue-600 font-medium text-sm inline-block mb-4"
           >
             Co mruczą, szczekają i piszczą nasi klienci 🐾
           </motion.span>
@@ -73,7 +73,7 @@ export default function TestimonialsSection() {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
           >
-            Opinie od <span className="text-red-500">futrzastych rodzin</span> 😺
+            Opinie od <span className="text-gradient-blue">futrzastych rodzin</span> 😺
           </motion.h2>
           
           <motion.p
@@ -81,7 +81,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-600"
+            className="text-[var(--blue-medium)]"
           >
             Sprawdź, co nasze futrzaste (i niefutrzaste) rodziny mówią o naszych usługach. 
             Każda merdająca łapa i mruczący pyszczek to dla nas najlepsza rekomendacja!
@@ -105,15 +105,15 @@ export default function TestimonialsSection() {
                     alt={`Zdjęcie ${testimonial.name}`}
                     width={60}
                     height={60}
-                    className="rounded-full border-2 border-red-100"
+                    className="rounded-full border-2 border-[var(--blue-pale)]"
                   />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg">{testimonial.name}</h4>
-                  <p className="text-red-500 text-sm">{testimonial.role}</p>
+                  <h4 className="font-semibold text-lg text-[var(--blue-dark)]">{testimonial.name}</h4>
+                  <p className="text-[var(--primary-color)] text-sm">{testimonial.role}</p>
                 </div>
               </div>
-              <p className="text-gray-600 italic">"{testimonial.content}"</p>
+              <p className="text-[var(--text-color)] italic">"{testimonial.content}"</p>
             </motion.div>
           ))}
         </div>

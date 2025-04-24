@@ -21,19 +21,21 @@ const NavLink = ({
   totalLinks = 5,
 }: NavLinkProps) => {
   const baseClasses = "transition-all duration-300 font-black relative overflow-hidden";
-  const desktopClasses = "px-3 py-2 rounded-md hover:bg-[var(--color-primary-light)]/10";
+  const desktopClasses = "px-3 py-2 rounded-md hover:bg-[var(--primary-color)]/10";
   const mobileClasses = "block w-full py-3 px-4 text-center hover:bg-gray-50";
   
   const gradientStyle = {
     background: `linear-gradient(90deg, 
-      rgba(30, 10, 60, 0.9) ${index * (100/totalLinks)}%, 
-      rgba(50, 20, 80, 0.9) ${(index + 1) * (100/totalLinks)}%)`,
+      var(--blue-dark) ${index * (100/totalLinks)}%, 
+      var(--blue-medium) ${(index * (100/totalLinks) + 15)}%,
+      var(--primary-color) ${(index + 0.5) * (100/totalLinks)}%,
+      var(--secondary-color) ${(index + 1) * (100/totalLinks)}%)`,
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
     color: '#333', // Fallback dark color
     backgroundSize: '200% auto',
-    animation: 'shimmer 2s linear infinite',
+    animation: 'shimmer 3s linear infinite',
     textShadow: '0px 0px 1px rgba(0,0,0,0.1)',
     fontWeight: 900,
   };
@@ -62,7 +64,7 @@ export default function Navbar() {
   const navHrefs = ['/', '/services', '/about', '/gallery', '/contact'];
 
   const buttonStyle = {
-    background: 'linear-gradient(45deg, #FF6B9E, #B86EFF)',
+    background: 'linear-gradient(45deg, var(--blue-medium), var(--primary-color), var(--secondary-color))',
     color: 'white',
     padding: '0.75rem 1.5rem',
     borderRadius: '9999px',
@@ -72,7 +74,7 @@ export default function Navbar() {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(184, 110, 255, 0.3)',
+    boxShadow: '0 4px 12px rgba(59, 106, 160, 0.3)',
     border: 'none',
     backgroundSize: '200% auto',
     animation: 'shimmerButton 3s linear infinite',

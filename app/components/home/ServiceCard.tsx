@@ -20,9 +20,9 @@ export default function ServiceCard({
   color = 'primary'
 }: ServiceCardProps) {
   const colorClasses = {
-    primary: 'from-[var(--primary)] to-[var(--primary)]/80',
-    secondary: 'from-[var(--secondary)] to-[var(--secondary)]/80',
-    tertiary: 'from-[var(--tertiary)] to-[var(--tertiary)]/80',
+    primary: 'from-[var(--primary-color)] to-[var(--primary-color)]/80',
+    secondary: 'from-[var(--secondary-color)] to-[var(--secondary-color)]/80',
+    tertiary: 'from-blue-500 to-blue-400/80',
     accent: 'from-[var(--accent)] to-[var(--accent)]/80'
   };
 
@@ -44,11 +44,11 @@ export default function ServiceCard({
         
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold mb-2 text-[var(--text)]">{title}</h3>
+          <h3 className="text-xl font-bold mb-2 text-[var(--text-color)]">{title}</h3>
           <p className="text-gray-600">{description}</p>
           
           <motion.div 
-            className="mt-4 inline-flex items-center font-medium text-[var(--primary)]"
+            className="mt-4 inline-flex items-center font-medium text-[var(--primary-color)]"
             whileHover={{ x: 4 }}
             transition={{ type: 'spring', stiffness: 400 }}
           >

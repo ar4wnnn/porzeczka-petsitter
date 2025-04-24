@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-type HomeHeroButtonVariant = 'primary' | 'secondary';
+type HomeHeroButtonVariant = 'primary' | 'secondary' | 'ocean' | 'dark';
 
 type HomeHeroButtonProps = {
   children: ReactNode;
@@ -28,14 +28,28 @@ const HomeHeroButton = ({
   const buttonHoverAnimation = {
     primary: {
       scale: 1.1,
-      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.6)',
+      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.6)',
       transition: {
         duration: 0.3
       }
     },
     secondary: {
       scale: 1.1, 
-      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.4)',
+      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.4)',
+      transition: {
+        duration: 0.3
+      }
+    },
+    ocean: {
+      scale: 1.1,
+      boxShadow: '0 8px 25px rgba(59, 106, 160, 0.6)',
+      transition: {
+        duration: 0.3
+      }
+    },
+    dark: {
+      scale: 1.1,
+      boxShadow: '0 8px 25px rgba(30, 58, 95, 0.6)',
       transition: {
         duration: 0.3
       }
@@ -52,21 +66,35 @@ const HomeHeroButton = ({
     transition: 'all 0.3s ease',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.7 : 1,
+    backgroundSize: '200% auto',
   };
 
   const variantStyles = {
     primary: {
-      background: 'linear-gradient(to right, #FF6B9E, #B86EFF)',
+      background: 'linear-gradient(to right, var(--primary-color), var(--secondary-color))',
       color: 'white',
-      boxShadow: '0 4px 15px rgba(184, 110, 255, 0.4)',
+      boxShadow: '0 4px 15px rgba(152, 189, 255, 0.4)',
       border: 'none',
     },
     secondary: {
       background: 'rgba(255, 255, 255, 0.2)',
       backdropFilter: 'blur(10px)',
-      color: '#B86EFF',
-      border: '2px solid #B86EFF',
-      boxShadow: '0 4px 15px rgba(184, 110, 255, 0.2)',
+      color: 'var(--blue-medium)',
+      border: '2px solid var(--secondary-color)',
+      boxShadow: '0 4px 15px rgba(152, 189, 255, 0.2)',
+    },
+    ocean: {
+      background: 'linear-gradient(to right, var(--blue-medium), var(--primary-color), var(--blue-light))',
+      color: 'white',
+      boxShadow: '0 4px 15px rgba(59, 106, 160, 0.4)',
+      border: 'none',
+      animation: 'shimmerButton 3s linear infinite',
+    },
+    dark: {
+      background: 'linear-gradient(to right, var(--blue-dark), var(--blue-medium))',
+      color: 'white',
+      boxShadow: '0 4px 15px rgba(30, 58, 95, 0.4)',
+      border: 'none',
     },
   };
 

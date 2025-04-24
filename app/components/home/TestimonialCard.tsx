@@ -48,10 +48,11 @@ export default function TestimonialCard({
 
   return (
     <motion.div
-      className="bg-white rounded-2xl shadow-md p-6 h-full"
+      className="bg-white rounded-2xl shadow-md p-6 h-full border border-[var(--blue-pale)]/30"
       whileHover={{
         y: -5,
-        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 10px 25px rgba(152, 189, 255, 0.15)',
+        borderColor: 'rgba(178, 218, 255, 0.5)'
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -68,14 +69,14 @@ export default function TestimonialCard({
               className="object-cover w-full h-full"
             />
           ) : (
-            <div className="h-full w-full flex items-center justify-center bg-[var(--primary)] text-white text-lg font-bold">
+            <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-[var(--blue-medium)] to-[var(--primary-color)] text-white text-lg font-bold">
               {name.charAt(0)}
             </div>
           )}
         </div>
         <div className="ml-3">
-          <h3 className="font-semibold text-[var(--text)]">{name}</h3>
-          <p className="text-gray-500 text-sm">{location}</p>
+          <h3 className="font-semibold text-[var(--blue-dark)]">{name}</h3>
+          <p className="text-[var(--blue-medium)] text-sm">{location}</p>
         </div>
       </div>
 
@@ -83,9 +84,9 @@ export default function TestimonialCard({
         {renderStars()}
       </div>
 
-      <p className="text-gray-600 mb-3">"{testimonial}"</p>
+      <p className="text-[var(--text-color)] mb-3 italic">"{testimonial}"</p>
 
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-[var(--blue-accent)]">
         <span>{timeAgo} ago</span>
       </div>
     </motion.div>

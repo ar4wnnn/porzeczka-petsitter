@@ -90,7 +90,7 @@ export default function InteractiveServiceCard({
           <div 
             className="absolute inset-0" 
             style={{ 
-              background: `linear-gradient(135deg, ${color}99 0%, ${color}33 100%)`,
+              background: color ? `linear-gradient(135deg, ${color}99 0%, ${color}33 100%)` : 'linear-gradient(135deg, #78A9FF99 0%, #98BDFF33 100%)',
               backdropFilter: 'blur(2px)',
             }}
           />
@@ -121,7 +121,7 @@ export default function InteractiveServiceCard({
             <p className="text-sm text-white/90 mb-4">{description}</p>
             
             <motion.button
-              className="px-4 py-2 bg-white text-black rounded-full text-sm font-medium"
+              className="px-4 py-2 bg-white text-[#2C3E50] rounded-full text-sm font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

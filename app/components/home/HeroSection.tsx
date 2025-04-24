@@ -12,7 +12,7 @@ const styles: Record<string, CSSProperties> = {
     minHeight: '100vh',
     width: '100%',
     overflow: 'hidden',
-    background: 'linear-gradient(135deg, #FFE0F0 0%, #F0E6FF 50%, #FFE0ED 100%)',
+    background: 'linear-gradient(135deg, #DCEBFF 0%, #F0F8FF 50%, #D6E4FF 100%)',
     paddingTop: '6rem',
     paddingBottom: '3rem',
   },
@@ -44,7 +44,7 @@ const styles: Record<string, CSSProperties> = {
   heading: {
     fontSize: '3rem',
     fontWeight: 800,
-    backgroundImage: 'linear-gradient(45deg, #993366, #9966CC, #CC6699, #FF6699, #FF99CC)',
+    backgroundImage: 'linear-gradient(45deg, var(--blue-dark), var(--blue-accent), var(--primary-color), var(--secondary-color), var(--blue-light))',
     backgroundSize: '300% auto',
     animation: 'gradientText 4s linear infinite',
     WebkitBackgroundClip: 'text',
@@ -53,15 +53,15 @@ const styles: Record<string, CSSProperties> = {
     color: 'rgba(0,0,0,0.5)', // Fallback color
     marginBottom: '1rem',
     lineHeight: 1.2,
-    textShadow: '0 2px 10px rgba(153, 102, 153, 0.3)',
+    textShadow: '0 2px 10px rgba(120, 169, 255, 0.3)',
   },
   subheading: {
     fontSize: '1.5rem',
     fontWeight: 400,
-    color: '#6A3066',
+    color: 'var(--blue-medium)',
     marginBottom: '1.5rem',
     lineHeight: 1.6,
-    textShadow: '0 1px 3px rgba(153, 102, 153, 0.2)',
+    textShadow: '0 1px 3px rgba(120, 169, 255, 0.2)',
   },
   buttonGroup: {
     display: 'flex',
@@ -69,7 +69,7 @@ const styles: Record<string, CSSProperties> = {
     marginTop: '1.5rem',
   },
   primaryButton: {
-    background: 'linear-gradient(to right, #FF6B9E, #B86EFF)',
+    background: 'linear-gradient(to right, var(--primary-color), var(--secondary-color))',
     color: 'white',
     padding: '1rem 2rem',
     borderRadius: '9999px',
@@ -79,23 +79,23 @@ const styles: Record<string, CSSProperties> = {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(184, 110, 255, 0.4)',
+    boxShadow: '0 4px 15px rgba(152, 189, 255, 0.4)',
     border: 'none',
   },
   secondaryButton: {
     background: 'rgba(255, 255, 255, 0.2)',
     backdropFilter: 'blur(10px)',
-    color: '#B86EFF',
+    color: 'var(--blue-medium)',
     padding: '1rem 2rem',
     borderRadius: '9999px',
     fontWeight: 700,
     fontSize: '1.2rem',
     textDecoration: 'none',
     display: 'inline-block',
-    border: '2px solid #B86EFF',
+    border: '2px solid var(--secondary-color)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(184, 110, 255, 0.2)',
+    boxShadow: '0 4px 15px rgba(152, 189, 255, 0.2)',
   },
   imageContainer: {
     width: '100%',
@@ -104,7 +104,7 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative' as const,
   },
   rainbowText: {
-    backgroundImage: 'linear-gradient(45deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)',
+    backgroundImage: 'linear-gradient(45deg, var(--blue-dark), var(--blue-medium), var(--primary-color), var(--secondary-color), var(--blue-light))',
     backgroundSize: '300% auto',
     animation: 'rainbowText 3s linear infinite',
     WebkitBackgroundClip: 'text',
@@ -127,7 +127,7 @@ const styles: Record<string, CSSProperties> = {
     left: '2%',
     fontSize: '80px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 182, 223, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(178, 218, 255, 0.5))',
     opacity: 0.6,
   },
   catEmoji2: {
@@ -136,7 +136,7 @@ const styles: Record<string, CSSProperties> = {
     right: '2%',
     fontSize: '100px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(184, 110, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(152, 189, 255, 0.5))',
     opacity: 0.6,
   },
   catEmoji3: {
@@ -145,7 +145,7 @@ const styles: Record<string, CSSProperties> = {
     left: '0%',
     fontSize: '70px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 107, 158, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(120, 169, 255, 0.5))',
     opacity: 0.6,
   },
   catEmoji4: {
@@ -154,7 +154,7 @@ const styles: Record<string, CSSProperties> = {
     right: '0%',
     fontSize: '90px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(200, 150, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(91, 135, 199, 0.5))',
     opacity: 0.6,
   },
   catEmoji5: {
@@ -163,7 +163,7 @@ const styles: Record<string, CSSProperties> = {
     left: '5%',
     fontSize: '75px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(255, 150, 200, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(220, 235, 255, 0.5))',
     opacity: 0.6,
   },
   emojiSpan: {
@@ -171,6 +171,18 @@ const styles: Record<string, CSSProperties> = {
     color: 'inherit',
     WebkitTextFillColor: 'initial',
     backgroundImage: 'none',
+  },
+  darkBlueText: {
+    color: 'var(--blue-dark)',
+    fontWeight: 700,
+  },
+  mediumBlueText: {
+    color: 'var(--blue-medium)',
+    fontWeight: 600,
+  },
+  accentBlueText: {
+    color: 'var(--blue-accent)',
+    fontWeight: 600,
   }
 };
 
@@ -194,14 +206,14 @@ export default function HeroSection() {
   const buttonHoverAnimation = {
     primary: {
       scale: 1.1,
-      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.6)',
+      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.6)',
       transition: {
         duration: 0.3
       }
     },
     secondary: {
       scale: 1.1, 
-      boxShadow: '0 8px 25px rgba(184, 110, 255, 0.4)',
+      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.4)',
       transition: {
         duration: 0.3
       }
