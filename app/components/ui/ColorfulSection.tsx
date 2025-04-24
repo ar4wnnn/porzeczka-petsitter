@@ -46,7 +46,9 @@ export default function ColorfulSection({
   return (
     <section
       className={`relative pt-32 pb-24 z-10 ${className}`}
-      style={{ backgroundColor }}
+      style={{ 
+        background: `linear-gradient(to bottom, ${backgroundColor} 0%, ${backgroundColor} 40%, ${nextSectionColor} 100%)`,
+      }}
     >
       {/* Optional floating shapes */}
       {withFloatingShapes && isMounted && (

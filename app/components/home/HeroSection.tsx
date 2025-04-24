@@ -69,7 +69,7 @@ const styles: Record<string, CSSProperties> = {
     marginTop: '1.5rem',
   },
   primaryButton: {
-    background: 'linear-gradient(45deg, #FF6B9E, #B86EFF)',
+    background: 'linear-gradient(to right, #FF6B9E, #B86EFF)',
     color: 'white',
     padding: '1rem 2rem',
     borderRadius: '9999px',
@@ -81,8 +81,6 @@ const styles: Record<string, CSSProperties> = {
     cursor: 'pointer',
     boxShadow: '0 4px 15px rgba(184, 110, 255, 0.4)',
     border: 'none',
-    backgroundSize: '200% auto',
-    animation: 'shimmerButton 3s linear infinite',
   },
   secondaryButton: {
     background: 'rgba(255, 255, 255, 0.2)',
@@ -346,10 +344,6 @@ export default function HeroSection() {
 
       <style jsx global>{`
         @keyframes gradientText {
-          0% { background-position: 0% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes shimmerButton {
           0% { background-position: 0% center; }
           100% { background-position: 200% center; }
         }

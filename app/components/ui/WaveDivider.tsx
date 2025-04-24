@@ -78,7 +78,13 @@ export default function WaveDivider({
             className="absolute w-full h-full"
             style={{ transform: direction === 'reverse' ? 'rotate(180deg)' : 'none' }}
           >
-            <g fill={actualTopColor}>
+            <defs>
+              <linearGradient id="gradientFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor={actualTopColor} />
+                <stop offset="100%" stopColor={actualBottomColor} />
+              </linearGradient>
+            </defs>
+            <g fill="url(#gradientFill)">
               <motion.path
                 key="layer1"
                 d="M0,0 L0,20 C250,40 350,0 500,20 C650,40 750,20 1000,30 L1000,0 Z"
@@ -92,21 +98,7 @@ export default function WaveDivider({
                 } : undefined}
               />
             </g>
-            <g fill={actualTopColor}>
-              <motion.path
-                key="layer2"
-                d="M0,20 L0,60 C250,80 350,50 500,70 C650,90 750,60 1000,70 L1000,30 Z"
-                animate={isMounted && animate ? { 
-                  x: [0, -800, 0],
-                  transition: { 
-                    repeat: Infinity, 
-                    duration: 25, 
-                    ease: "linear" 
-                  }
-                } : undefined}
-              />
-            </g>
-            <g fill={actualBottomColor}>
+            <g fill="url(#gradientFill)">
               <motion.path
                 key="layer3"
                 d="M0,60 L0,100 L1000,100 L1000,70 C750,50 650,80 500,60 C350,40 250,70 0,60 Z"
@@ -142,10 +134,16 @@ export default function WaveDivider({
           className="absolute w-full h-full"
           style={{ transform: direction === 'reverse' ? 'rotate(180deg)' : 'none' }}
         >
+          <defs>
+            <linearGradient id="gradientFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor={actualTopColor} />
+              <stop offset="100%" stopColor={actualBottomColor} />
+            </linearGradient>
+          </defs>
           <motion.path
             key="standard-wave"
             d={selectedPattern}
-            fill={actualTopColor}
+            fill="url(#gradientFill)"
             animate={isMounted && animate ? { 
               x: [0, -1000, 0],
               transition: { 
@@ -156,13 +154,6 @@ export default function WaveDivider({
             } : undefined}
           />
         </svg>
-        <div
-          className="absolute bottom-0 w-full"
-          style={{ 
-            height: '50%', 
-            backgroundColor: actualBottomColor
-          }}
-        />
       </div>
     </div>
   );

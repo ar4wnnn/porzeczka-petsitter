@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { ReactNode } from 'react';
 
 interface TestimonialCardProps {
   name: string;
@@ -22,7 +23,9 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   // Generate stars based on rating
   const renderStars = () => {
-    const stars = [];
+    // Explicitly type the array as JSX.Element[] to prevent the 'never' type error
+    const stars = [] as JSX.Element[];
+    
     for (let i = 0; i < 5; i++) {
       stars.push(
         <svg
@@ -39,6 +42,7 @@ export default function TestimonialCard({
         </svg>
       );
     }
+    
     return stars;
   };
 

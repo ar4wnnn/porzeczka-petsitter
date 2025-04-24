@@ -92,7 +92,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="bg-white rounded-xl shadow-md overflow-hidden"
             >
-              <div className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] px-6 py-4">
+              <div className="bg-gradient-to-r from-[#FF6B9E] to-[#B86EFF] px-6 py-4">
                 <h2 className="text-2xl font-bold text-white">Skontaktuj się z nami 📬 😺</h2>
               </div>
               
@@ -182,7 +182,7 @@ export default function ContactPage() {
                       <div>
                         <button 
                           type="submit" 
-                          className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-medium py-3 px-6 rounded-lg hover:from-pink-600 hover:to-rose-600 transition-all shadow-md hover:shadow-lg"
+                          className="w-full bg-gradient-to-r from-[#FF6B9E] to-[#B86EFF] text-white font-medium py-3 px-6 rounded-lg hover:shadow-lg transition-all shadow-md"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'} 😸
