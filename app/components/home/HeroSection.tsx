@@ -323,7 +323,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/pets/happy-dog.svg"
+                  src="/images/herobanner.png"
                   alt="Happy Dog"
                   width={500}
                   height={375}
