@@ -115,8 +115,8 @@ export default function InstagramFeed() {
   };
 
   const buttonStyle = {
-    background: 'linear-gradient(45deg, #B366FF, #8A33FF)',
-    color: 'white',
+    background: 'linear-gradient(45deg, var(--sky-medium), var(--sky-dark))',
+    color: 'var(--frost)',
     padding: '0.75rem 1.5rem',
     borderRadius: '9999px',
     fontWeight: 700,
@@ -125,7 +125,7 @@ export default function InstagramFeed() {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(179, 102, 255, 0.4)',
+    boxShadow: '0 4px 12px rgba(56, 189, 248, 0.3)',
     border: 'none',
     backgroundSize: '200% auto',
     animation: 'shimmerButton 3s linear infinite',
@@ -133,14 +133,14 @@ export default function InstagramFeed() {
 
   if (loading) {
     return (
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-frost">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-pulse">
-            <div className="h-10 bg-gray-200 rounded-md w-64 mx-auto mb-4"></div>
-            <div className="h-6 bg-gray-200 rounded-md w-48 mx-auto mb-12"></div>
+            <div className="h-10 bg-stone-light rounded-md w-64 mx-auto mb-4"></div>
+            <div className="h-6 bg-stone-light rounded-md w-48 mx-auto mb-12"></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[...Array(6)].map((_, index) => (
-                <div key={index} className="aspect-square bg-gray-200 rounded-xl"></div>
+                <div key={index} className="aspect-square bg-stone-light rounded-xl"></div>
               ))}
             </div>
           </div>
@@ -151,12 +151,12 @@ export default function InstagramFeed() {
 
   if (error || posts.length === 0) {
     return (
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-frost">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-textcolor)] mb-4">
-            Śledź Nas na <span className="text-[var(--color-primary)]">Instagramie</span> 📸
+          <h2 className="text-3xl md:text-4xl font-bold text-stone-dark mb-4">
+            Śledź Nas na <span className="text-sky-dark">Instagramie</span> 📸
           </h2>
-          <p className="text-lg text-gray-600 mb-6">@porzeczka_petsitter</p>
+          <p className="text-lg text-stone-medium mb-6">@porzeczka_petsitter</p>
           <div className="bg-red-50 text-red-600 p-4 rounded-md max-w-xl mx-auto">
             {error || "Nie mogliśmy załadować postów z Instagrama. Odwiedź nasz profil bezpośrednio! 🐾"}
           </div>
@@ -176,21 +176,21 @@ export default function InstagramFeed() {
   }
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-frost">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div>
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-[var(--color-textcolor)]"
+              className="text-3xl md:text-4xl font-bold text-stone-dark"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              Śledź Nas na <span className="text-[var(--color-primary)]">Instagramie</span> 📸
+              Śledź Nas na <span className="text-sky-dark">Instagramie</span> 📸
             </motion.h2>
             <motion.p 
-              className="mt-2 text-lg text-gray-600"
+              className="mt-2 text-lg text-stone-medium"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -237,10 +237,10 @@ export default function InstagramFeed() {
                 className="object-cover"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <p className="text-white text-sm line-clamp-2">{post.caption}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-dark/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <p className="text-frost text-sm line-clamp-2">{post.caption}</p>
                 <div className="flex items-center mt-2">
-                  <span className="text-white text-xs ml-auto">{formatRelativeTime(post.timestamp)}</span>
+                  <span className="text-frost text-xs ml-auto">{formatRelativeTime(post.timestamp)}</span>
                 </div>
               </div>
             </motion.div>

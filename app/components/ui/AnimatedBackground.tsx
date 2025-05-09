@@ -30,10 +30,10 @@ export default function AnimatedBackground({ className = '' }: AnimatedBackgroun
     
     // Define colors from our design
     const colors = [
-      'rgba(255, 140, 105, 0.5)', // primary
-      'rgba(138, 210, 255, 0.5)', // secondary
-      'rgba(255, 213, 106, 0.5)', // tertiary
-      'rgba(186, 229, 107, 0.5)'  // accent
+      'rgba(186, 230, 253, 0.3)', // Sky Light at 30%
+      'rgba(56, 189, 248, 0.2)',  // Sky Medium at 20%
+      'rgba(209, 213, 219, 0.3)', // Stone Light at 30%
+      'rgba(156, 163, 175, 0.2)'  // Stone Medium at 20%
     ];
     
     // Create bubbles

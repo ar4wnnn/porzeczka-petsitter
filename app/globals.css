@@ -4,17 +4,19 @@
 
 @layer base {
   :root {
-    --primary-color: #78A9FF;
-    --secondary-color: #98BDFF;
-    --background-color: #F0F8FF;
-    --text-color: #2C3E50;
-    
-    /* Additional blue shades */
-    --blue-dark: #1E3A5F;
-    --blue-medium: #3B6AA0;
-    --blue-light: #B2DAFF;
-    --blue-pale: #D6E8FF;
-    --blue-accent: #5B87C7;
+    --frost: #F0F4F8;
+    --stone-light: #D1D5DB;
+    --stone-medium: #9CA3AF;
+    --stone-dark: #4B5563;
+    --sky-light: #BAE6FD;
+    --sky-medium: #38BDF8;
+    --sky-dark: #0EA5E9;
+
+    --primary-color: var(--sky-dark);
+    --secondary-color: var(--stone-medium);
+    --background-color: var(--frost);
+    --text-color: var(--stone-dark);
+    --accent-color: var(--sky-light);
   }
 
   html, body {
@@ -36,16 +38,16 @@
 
   .btn-primary {
     @apply hover:bg-opacity-90;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    color: white;
+    background: linear-gradient(to right, var(--primary-color), var(--sky-medium));
+    color: var(--frost);
   }
 
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    backdrop-filter: none;
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
-    @apply hover:bg-opacity-90;
+    @apply hover:bg-stone-light hover:text-stone-dark;
   }
 }
 
@@ -105,17 +107,8 @@
 }
 
 /* Text gradient effects */
-.text-gradient-blue {
-  background: linear-gradient(90deg, var(--blue-dark), var(--primary-color), var(--blue-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% auto;
-  animation: textShimmer 3s linear infinite;
-}
-
-.text-gradient-ocean {
-  background: linear-gradient(90deg, var(--blue-medium), var(--secondary-color), var(--blue-pale));
+.text-gradient-sky {
+  background: linear-gradient(90deg, var(--sky-dark), var(--sky-medium), var(--sky-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

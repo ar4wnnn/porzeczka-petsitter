@@ -12,7 +12,7 @@ const styles: Record<string, CSSProperties> = {
     minHeight: '100vh',
     width: '100%',
     overflow: 'hidden',
-    background: 'linear-gradient(135deg, #DCEBFF 0%, #F0F8FF 50%, #D6E4FF 100%)',
+    background: 'linear-gradient(135deg, var(--sky-light) 0%, var(--frost) 50%, var(--sky-light) 100%)',
     paddingTop: '6rem',
     paddingBottom: '3rem',
   },
@@ -44,24 +44,24 @@ const styles: Record<string, CSSProperties> = {
   heading: {
     fontSize: '3rem',
     fontWeight: 800,
-    backgroundImage: 'linear-gradient(45deg, var(--blue-dark), var(--blue-accent), var(--primary-color), var(--secondary-color), var(--blue-light))',
+    backgroundImage: 'linear-gradient(45deg, var(--sky-dark), var(--sky-medium), var(--sky-light), var(--stone-medium), var(--sky-light))',
     backgroundSize: '300% auto',
     animation: 'gradientText 4s linear infinite',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    color: 'rgba(0,0,0,0.5)', // Fallback color
+    color: 'var(--stone-dark)', // Fallback color
     marginBottom: '1rem',
     lineHeight: 1.2,
-    textShadow: '0 2px 10px rgba(120, 169, 255, 0.3)',
+    textShadow: '0 2px 10px rgba(56, 189, 248, 0.2)', // sky-medium shadow
   },
   subheading: {
     fontSize: '1.5rem',
     fontWeight: 400,
-    color: 'var(--blue-medium)',
+    color: 'var(--stone-dark)',
     marginBottom: '1.5rem',
     lineHeight: 1.6,
-    textShadow: '0 1px 3px rgba(120, 169, 255, 0.2)',
+    textShadow: '0 1px 3px rgba(156, 163, 175, 0.2)', // stone-medium shadow
   },
   buttonGroup: {
     display: 'flex',
@@ -69,8 +69,8 @@ const styles: Record<string, CSSProperties> = {
     marginTop: '1.5rem',
   },
   primaryButton: {
-    background: 'linear-gradient(to right, var(--primary-color), var(--secondary-color))',
-    color: 'white',
+    background: 'linear-gradient(to right, var(--sky-dark), var(--sky-medium))',
+    color: 'var(--frost)',
     padding: '1rem 2rem',
     borderRadius: '9999px',
     fontWeight: 700,
@@ -79,23 +79,22 @@ const styles: Record<string, CSSProperties> = {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(152, 189, 255, 0.4)',
+    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.3)', // sky-medium shadow
     border: 'none',
   },
   secondaryButton: {
-    background: 'rgba(255, 255, 255, 0.2)',
-    backdropFilter: 'blur(10px)',
-    color: 'var(--blue-medium)',
+    background: 'transparent',
+    color: 'var(--sky-dark)',
     padding: '1rem 2rem',
     borderRadius: '9999px',
     fontWeight: 700,
     fontSize: '1.2rem',
     textDecoration: 'none',
     display: 'inline-block',
-    border: '2px solid var(--secondary-color)',
+    border: '2px solid var(--sky-dark)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(152, 189, 255, 0.2)',
+    boxShadow: '0 4px 15px rgba(186, 230, 253, 0.2)', // sky-light shadow
   },
   imageContainer: {
     width: '100%',
@@ -104,7 +103,7 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative' as const,
   },
   rainbowText: {
-    backgroundImage: 'linear-gradient(45deg, var(--blue-dark), var(--blue-medium), var(--primary-color), var(--secondary-color), var(--blue-light))',
+    backgroundImage: 'linear-gradient(45deg, var(--sky-dark), var(--sky-medium), var(--sky-light), var(--stone-light), var(--sky-medium))',
     backgroundSize: '300% auto',
     animation: 'rainbowText 3s linear infinite',
     WebkitBackgroundClip: 'text',
@@ -127,7 +126,7 @@ const styles: Record<string, CSSProperties> = {
     left: '2%',
     fontSize: '80px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(178, 218, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
     opacity: 0.6,
   },
   catEmoji2: {
@@ -136,7 +135,7 @@ const styles: Record<string, CSSProperties> = {
     right: '2%',
     fontSize: '100px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(152, 189, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
     opacity: 0.6,
   },
   catEmoji3: {
@@ -145,7 +144,7 @@ const styles: Record<string, CSSProperties> = {
     left: '0%',
     fontSize: '70px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(120, 169, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
     opacity: 0.6,
   },
   catEmoji4: {
@@ -154,7 +153,7 @@ const styles: Record<string, CSSProperties> = {
     right: '0%',
     fontSize: '90px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(91, 135, 199, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.3))', // sky-medium shadow
     opacity: 0.6,
   },
   catEmoji5: {
@@ -163,7 +162,7 @@ const styles: Record<string, CSSProperties> = {
     left: '5%',
     fontSize: '75px',
     zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(220, 235, 255, 0.5))',
+    filter: 'drop-shadow(0 0 10px rgba(209, 213, 219, 0.4))', // stone-light shadow
     opacity: 0.6,
   },
   emojiSpan: {
@@ -173,15 +172,15 @@ const styles: Record<string, CSSProperties> = {
     backgroundImage: 'none',
   },
   darkBlueText: {
-    color: 'var(--blue-dark)',
+    color: 'var(--stone-dark)',
     fontWeight: 700,
   },
   mediumBlueText: {
-    color: 'var(--blue-medium)',
+    color: 'var(--stone-medium)',
     fontWeight: 600,
   },
   accentBlueText: {
-    color: 'var(--blue-accent)',
+    color: 'var(--sky-medium)',
     fontWeight: 600,
   }
 };
@@ -206,14 +205,16 @@ export default function HeroSection() {
   const buttonHoverAnimation = {
     primary: {
       scale: 1.1,
-      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.6)',
+      boxShadow: '0 8px 25px rgba(56, 189, 248, 0.5)', // sky-medium shadow
       transition: {
         duration: 0.3
       }
     },
     secondary: {
       scale: 1.1, 
-      boxShadow: '0 8px 25px rgba(152, 189, 255, 0.4)',
+      backgroundColor: 'var(--sky-light)', // Added background on hover
+      color: 'var(--sky-dark)',
+      boxShadow: '0 8px 25px rgba(186, 230, 253, 0.3)', // sky-light shadow
       transition: {
         duration: 0.3
       }

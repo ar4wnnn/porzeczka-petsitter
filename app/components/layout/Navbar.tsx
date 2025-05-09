@@ -21,22 +21,21 @@ const NavLink = ({
   totalLinks = 5,
 }: NavLinkProps) => {
   const baseClasses = "transition-all duration-300 font-black relative overflow-hidden";
-  const desktopClasses = "px-3 py-2 rounded-md hover:bg-[var(--primary-color)]/10";
-  const mobileClasses = "block w-full py-3 px-4 text-center hover:bg-gray-50";
+  const desktopClasses = "px-3 py-2 rounded-md hover:bg-sky-dark/10";
+  const mobileClasses = "block w-full py-3 px-4 text-center hover:bg-stone-light";
   
   const gradientStyle = {
     background: `linear-gradient(90deg, 
-      var(--blue-dark) ${index * (100/totalLinks)}%, 
-      var(--blue-medium) ${(index * (100/totalLinks) + 15)}%,
-      var(--primary-color) ${(index + 0.5) * (100/totalLinks)}%,
-      var(--secondary-color) ${(index + 1) * (100/totalLinks)}%)`,
+      var(--sky-dark) ${index * (100/totalLinks)}%, 
+      var(--sky-medium) ${(index * (100/totalLinks) + 25)}%,
+      var(--sky-light) ${(index + 0.75) * (100/totalLinks)}%,
+      var(--sky-medium) ${(index + 1) * (100/totalLinks)}%)`,
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    color: '#333', // Fallback dark color
+    color: 'var(--stone-dark)',
     backgroundSize: '200% auto',
     animation: 'shimmer 3s linear infinite',
-    textShadow: '0px 0px 1px rgba(0,0,0,0.1)',
     fontWeight: 900,
   };
   
@@ -64,8 +63,8 @@ export default function Navbar() {
   const navHrefs = ['/', '/services', '/about', '/gallery', '/contact'];
 
   const buttonStyle = {
-    background: 'linear-gradient(45deg, var(--blue-medium), var(--primary-color), var(--secondary-color))',
-    color: 'white',
+    background: 'linear-gradient(45deg, var(--sky-medium), var(--sky-dark))',
+    color: 'var(--frost)',
     padding: '0.75rem 1.5rem',
     borderRadius: '9999px',
     fontWeight: 700,
@@ -74,7 +73,7 @@ export default function Navbar() {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(59, 106, 160, 0.3)',
+    boxShadow: '0 4px 12px rgba(56, 189, 248, 0.3)',
     border: 'none',
     backgroundSize: '200% auto',
     animation: 'shimmerButton 3s linear infinite',
@@ -100,7 +99,7 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-3'
+      scrolled ? 'bg-frost shadow-md py-2' : 'bg-frost/90 backdrop-blur-sm py-3'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <Link href="/" className="flex items-center">
@@ -126,7 +125,7 @@ export default function Navbar() {
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor" 
-            className="w-6 h-6 text-gray-700"
+            className="w-6 h-6 text-stone-dark"
           >
             <path 
               strokeLinecap="round" 
@@ -164,7 +163,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden"
+            className="absolute top-full left-0 right-0 bg-frost shadow-lg md:hidden overflow-hidden"
           >
             <div className="py-2">
               {navLinks.map((link, index) => (

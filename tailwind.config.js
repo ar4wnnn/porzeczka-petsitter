@@ -14,18 +14,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#78A9FF',
-        secondary: '#98BDFF',
-        background: '#F0F8FF',
-        textcolor: '#2C3E50',
-        accent: '#B2DAFF',
-        'cat-light': '#DCEBFF',
-        'cat-dark': '#5B87C7',
-        'blue-dark': '#1E3A5F',
-        'blue-medium': '#3B6AA0',
-        'blue-light': '#B2DAFF',
-        'blue-pale': '#D6E8FF',
-        'blue-accent': '#5B87C7'
+        frost: '#F0F4F8',
+        stone: {
+          light: '#D1D5DB',
+          medium: '#9CA3AF',
+          DEFAULT: '#8A8A8A',
+          dark: '#4B5563',
+        },
+        sky: {
+          light: '#BAE6FD',
+          medium: '#38BDF8',
+          DEFAULT: '#38BDF8',
+          dark: '#0EA5E9',
+        },
+        primary: 'var(--sky-dark)',
+        secondary: 'var(--stone-medium)',
+        background: 'var(--frost)',
+        textcolor: 'var(--stone-dark)',
+        accent: 'var(--sky-light)',
       },
       fontFamily: {
         'nunito': ['Nunito Sans', 'sans-serif'],
@@ -50,8 +56,8 @@ module.exports = {
         }
       },
       backgroundImage: {
-        'gradient-blue': 'linear-gradient(90deg, #1E3A5F, #78A9FF, #B2DAFF)',
-        'gradient-ocean': 'linear-gradient(90deg, #3B6AA0, #98BDFF, #D6E8FF)'
+        'gradient-sky': 'linear-gradient(90deg, var(--sky-dark), var(--sky-medium), var(--sky-light))',
+        'gradient-stone': 'linear-gradient(90deg, var(--stone-dark), var(--stone-medium), var(--stone-light))',
       }
     },
   },

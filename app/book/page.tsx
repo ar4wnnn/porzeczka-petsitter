@@ -156,10 +156,10 @@ export default function BookingPage() {
           key={`day-${day}`}
           onClick={() => !isPast && handleDateSelect(date)}
           disabled={isPast}
-          className={`h-10 w-10 rounded-full flex items-center justify-center text-sm
-            ${isPast ? 'text-gray-300 cursor-not-allowed' : 'cursor-pointer hover:bg-purple-100'}
-            ${isToday ? 'border border-purple-500' : ''}
-            ${isSelected ? 'bg-purple-500 text-white' : ''}
+          className={`h-10 w-10 rounded-full flex items-center justify-center text-sm transition-colors duration-150
+            ${isPast ? 'text-stone-light cursor-not-allowed' : 'cursor-pointer hover:bg-sky-light/50'}
+            ${isToday ? 'border border-sky-medium' : ''}
+            ${isSelected ? 'bg-sky-dark text-frost' : isToday ? 'text-sky-dark' : 'text-stone-dark'}
           `}
           type="button"
         >
@@ -169,7 +169,7 @@ export default function BookingPage() {
     }
     
     const weekdayHeaders: JSX.Element[] = ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'].map(day => (
-      <div key={day} className="h-8 flex items-center justify-center text-xs text-gray-500">
+      <div key={day} className="h-8 flex items-center justify-center text-xs text-stone-medium">
         {day}
       </div>
     ));
@@ -205,8 +205,8 @@ export default function BookingPage() {
       <div className="relative">
         <AnimatedBackground />
         <ColorfulSection 
-          backgroundColor="#FFF0F8" 
-          nextSectionColor="#F2EAFF"
+          backgroundColor="var(--frost)" 
+          nextSectionColor="var(--sky-light)"
           wavePattern="wave1"
           waveHeight={100}
           withFloatingShapes={true}
@@ -216,10 +216,10 @@ export default function BookingPage() {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
               <div className="mb-8 text-center">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-purple-500">
+                  <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-sky-dark">
                     Zarezerwuj Usługę Petsittingu 🐾
                   </h1>
-                  <p className="text-gray-600 max-w-xl mx-auto">
+                  <p className="text-stone-medium max-w-xl mx-auto">
                     Wypełnij poniższy formularz, aby zarezerwować wybraną usługę. 
                     Twój pupil już nie może się doczekać nowej przygody! 🐶
                   </p>
@@ -232,12 +232,12 @@ export default function BookingPage() {
                   {[1, 2, 3].map((s) => (
                     <div 
                       key={s} 
-                      className={`w-10 h-10 rounded-full flex items-center justify-center z-10 ${
+                      className={`w-10 h-10 rounded-full flex items-center justify-center z-10 transition-colors duration-300 ${
                         getCurrentStep() === s 
-                          ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white' 
+                          ? 'bg-gradient-to-r from-sky-medium to-sky-dark text-frost' 
                           : getCurrentStep() > s 
-                            ? 'bg-purple-500 text-white' 
-                            : 'bg-gray-200 text-gray-600'
+                            ? 'bg-sky-dark text-frost' 
+                            : 'bg-stone-light text-stone-medium'
                       }`}
                     >
                       {getCurrentStep() > s ? '✓' : s}
@@ -245,10 +245,10 @@ export default function BookingPage() {
                   ))}
                   
                   {/* Progress Bar */}
-                  <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 h-1 bg-gray-200">
+                  <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 h-1 bg-stone-light">
                     <div 
-                      className="h-full bg-purple-500" 
-                      style={{ width: `${(getCurrentStep() - 1) * 50}%` }}
+                      className="h-full bg-sky-dark transition-all duration-500 ease-out"
+                      style={{ width: `${((getCurrentStep() - 1) / 2) * 100}%` }}
                     ></div>
                   </div>
                 </div>
@@ -265,18 +265,16 @@ export default function BookingPage() {
                         <div
                           key={service.id}
                           onClick={() => handleServiceSelect(service.id)}
-                          className={`p-6 rounded-xl cursor-pointer transition-all ${
-                            selectedService === service.id 
-                              ? 'bg-purple-100 border-2 border-purple-500 shadow-md' 
-                              : 'bg-white hover:bg-gray-50 border border-gray-200'
-                          }`}
+                          className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 group 
+                            ${selectedService === service.id 
+                              ? 'border-sky-dark bg-sky-light/30 shadow-lg' 
+                              : 'border-stone-light hover:border-sky-medium hover:shadow-md'}
+                          `}
                         >
-                          <div className="flex items-center space-x-4">
-                            <div className="text-4xl">{service.icon}</div>
-                            <div>
-                              <h3 className="font-bold text-lg">{service.name}</h3>
-                            </div>
+                          <div className={`text-3xl mb-2 ${selectedService === service.id ? 'text-sky-dark' : 'text-stone-medium group-hover:text-sky-dark'}`}>
+                            {service.icon}
                           </div>
+                          <h3 className={`font-semibold ${selectedService === service.id ? 'text-sky-dark' : 'text-stone-dark'}`}>{service.name}</h3>
                         </div>
                       ))}
                     </div>
@@ -284,12 +282,8 @@ export default function BookingPage() {
                     <div className="flex justify-end mt-8">
                       <button 
                         onClick={goToStep2}
-                        className={`px-6 py-3 rounded-full font-medium flex items-center ${
-                          !selectedService
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg transition-all'
-                        }`}
-                        type="button"
+                        className="w-full mt-6 bg-gradient-to-r from-sky-medium to-sky-dark text-frost font-medium py-3 px-6 rounded-lg hover:shadow-lg transition-all shadow-md disabled:opacity-50"
+                        disabled={!selectedService}
                       >
                         Dalej <span className="ml-2">→</span>
                       </button>
@@ -316,11 +310,11 @@ export default function BookingPage() {
                               <button
                                 key={time}
                                 onClick={() => handleTimeSelect(time)}
-                                className={`py-2 px-4 rounded-lg text-center
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-150 
                                   ${selectedTime === time 
-                                    ? 'bg-purple-500 text-white' 
-                                    : 'bg-gray-100 hover:bg-purple-100'
-                                  }`}
+                                    ? 'bg-sky-dark text-frost' 
+                                    : 'bg-stone-light text-stone-dark hover:bg-sky-light/50'}
+                                `}
                                 type="button"
                               >
                                 {time} {time < '12:00' ? '🌅' : '☀️'}
@@ -328,7 +322,7 @@ export default function BookingPage() {
                             ))}
                           </div>
                         ) : (
-                          <p className="text-center text-gray-500 py-4">
+                          <p className="text-center text-stone-medium py-4">
                             Najpierw wybierz datę z kalendarza 🗓️
                           </p>
                         )}
@@ -338,19 +332,16 @@ export default function BookingPage() {
                     <div className="flex justify-between mt-8">
                       <button
                         onClick={backToStep1}
-                        className="px-6 py-3 bg-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition-all flex items-center"
+                        className="px-6 py-2 border border-stone-medium text-stone-dark rounded-lg hover:bg-stone-light transition-colors"
                         type="button"
                       >
-                        <span className="mr-2">←</span> Wróć
+                        Wstecz
                       </button>
                       
                       <button
                         onClick={goToStep3}
-                        className={`px-6 py-3 rounded-full font-medium ml-auto flex items-center ${
-                          !selectedDate || !selectedTime
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg transition-all'
-                        }`}
+                        className="bg-gradient-to-r from-sky-medium to-sky-dark text-frost font-medium py-2 px-6 rounded-lg hover:shadow-lg transition-all shadow-md disabled:opacity-50"
+                        disabled={!selectedDate || !selectedTime}
                         type="button"
                       >
                         Dalej <span className="ml-2">→</span>
@@ -367,65 +358,70 @@ export default function BookingPage() {
                     <form onSubmit={handleSubmit} className="space-y-8">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Twoje imię i nazwisko 👤</label>
+                          <label htmlFor="name" className="block text-sm font-medium text-stone-dark mb-1">Twoje imię i nazwisko 👤</label>
                           <input
                             type="text"
+                            id="name"
                             name="name"
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="Jan Kowalski"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Email 📧</label>
+                          <label htmlFor="email" className="block text-sm font-medium text-stone-dark mb-1">Email 📧</label>
                           <input
                             type="email"
+                            id="email"
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="jan@example.com"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Telefon 📱</label>
+                          <label htmlFor="phone" className="block text-sm font-medium text-stone-dark mb-1">Telefon 📱</label>
                           <input
                             type="tel"
+                            id="phone"
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="123-456-789"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Imię pupila 🐶</label>
+                          <label htmlFor="petName" className="block text-sm font-medium text-stone-dark mb-1">Imię pupila 🐶</label>
                           <input
                             type="text"
+                            id="petName"
                             name="petName"
                             value={formData.petName}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="Reksio"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Rodzaj zwierzaka 🐾</label>
+                          <label htmlFor="petType" className="block text-sm font-medium text-stone-dark mb-1">Rodzaj zwierzaka 🐾</label>
                           <select
+                            id="petType"
                             name="petType"
                             value={formData.petType}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                           >
                             <option value="">Wybierz...</option>
                             <option value="Pies">Pies 🐕</option>
@@ -437,43 +433,46 @@ export default function BookingPage() {
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Rasa pupila 🧬</label>
+                          <label htmlFor="petBreed" className="block text-sm font-medium text-stone-dark mb-1">Rasa pupila 🧬</label>
                           <input
                             type="text"
+                            id="petBreed"
                             name="petBreed"
                             value={formData.petBreed}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="Labrador / Dachowiec / Perski"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Wiek pupila 🎂</label>
+                          <label htmlFor="petAge" className="block text-sm font-medium text-stone-dark mb-1">Wiek pupila 🎂</label>
                           <input
                             type="text"
+                            id="petAge"
                             name="petAge"
                             value={formData.petAge}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                             placeholder="2 lata"
                           />
                         </div>
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Specjalne instrukcje lub uwagi 📝</label>
+                        <label htmlFor="notes" className="block text-sm font-medium text-stone-dark mb-1">Specjalne instrukcje lub uwagi 📝</label>
                         <textarea
+                          id="notes"
                           name="notes"
                           value={formData.notes}
                           onChange={handleInputChange}
                           rows={4}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent"
                           placeholder="Powiedz nam co lubi Twój pupil, o czym powinniśmy pamiętać, czy ma jakieś szczególne potrzeby... 🐾"
                         ></textarea>
                       </div>
                       
-                      <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="bg-stone-light p-4 rounded-lg">
                         <h3 className="font-bold mb-2">Podsumowanie Twojej rezerwacji:</h3>
                         <p><span className="font-semibold">Usługa:</span> {services.find(s => s.id === selectedService)?.name || '(nie wybrano)'}</p>
                         <p>
@@ -487,18 +486,18 @@ export default function BookingPage() {
                     
                       <div className="flex justify-between mt-8">
                         <button
-                          type="button"
                           onClick={backToStep2}
-                          className="px-6 py-3 bg-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition-all flex items-center"
+                          className="px-6 py-2 border border-stone-medium text-stone-dark rounded-lg hover:bg-stone-light transition-colors"
+                          type="button"
                         >
-                          <span className="mr-2">←</span> Wróć
+                          Wstecz
                         </button>
                         
                         <button
                           type="submit"
-                          className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full text-white font-medium hover:shadow-lg transition-all ml-auto flex items-center"
+                          className="bg-gradient-to-r from-sky-medium to-sky-dark text-frost font-medium py-2 px-6 rounded-lg hover:shadow-lg transition-all shadow-md"
                         >
-                          Zarezerwuj <span className="ml-2">✓</span>
+                          Potwierdź Rezerwację 🐾
                         </button>
                       </div>
                     </form>

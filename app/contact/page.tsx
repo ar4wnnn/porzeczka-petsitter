@@ -58,8 +58,8 @@ export default function ContactPage() {
       <Navbar />
       
       <ColorfulSection 
-        backgroundColor="#F0F7FF" 
-        nextSectionColor="#FFF4EC"
+        backgroundColor="var(--frost)" 
+        nextSectionColor="var(--sky-light)"
         wavePattern="wave1"
         waveHeight={120}
         withFloatingShapes
@@ -72,10 +72,10 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Miau-Kontakt <span className="text-[var(--color-primary)]">z Nami 😸</span>
+              Miau-Kontakt <span className="text-sky-dark">z Nami 😸</span>
             </motion.h1>
             <motion.p 
-              className="text-lg text-gray-600 max-w-3xl mx-auto"
+              className="text-lg text-stone-medium max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -92,8 +92,8 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="bg-white rounded-xl shadow-md overflow-hidden"
             >
-              <div className="bg-gradient-to-r from-[#FF6B9E] to-[#B86EFF] px-6 py-4">
-                <h2 className="text-2xl font-bold text-white">Skontaktuj się z nami 📬 😺</h2>
+              <div className="bg-gradient-to-r from-sky-medium to-sky-dark px-6 py-4">
+                <h2 className="text-2xl font-bold text-frost">Skontaktuj się z nami 📬 😺</h2>
               </div>
               
               <div className="p-6">
@@ -110,51 +110,51 @@ export default function ContactPage() {
                   <div className="bg-white rounded-xl shadow-xl p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Imię i nazwisko *</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-stone-dark mb-1">Imię i nazwisko *</label>
                         <input 
                           type="text" 
                           id="name" 
                           name="name" 
                           value={formData.name} 
                           onChange={handleInputChange} 
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" 
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent" 
                           required 
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-stone-dark mb-1">Email *</label>
                         <input 
                           type="email" 
                           id="email" 
                           name="email" 
                           value={formData.email} 
                           onChange={handleInputChange} 
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" 
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent" 
                           required 
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-stone-dark mb-1">Telefon</label>
                         <input 
                           type="tel" 
                           id="phone" 
                           name="phone" 
                           value={formData.phone} 
                           onChange={handleInputChange} 
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" 
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent" 
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-1">Typ zapytania *</label>
+                        <label htmlFor="inquiryType" className="block text-sm font-medium text-stone-dark mb-1">Typ zapytania *</label>
                         <select 
                           id="inquiryType" 
                           name="inquiryType" 
                           value={formData.subject} 
                           onChange={handleInputChange} 
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" 
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent" 
                           required
                         >
                           <option value="">Wybierz typ zapytania 🤔</option>
@@ -167,14 +167,14 @@ export default function ContactPage() {
                       </div>
                       
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Twoja wiadomość *</label>
+                        <label htmlFor="message" className="block text-sm font-medium text-stone-dark mb-1">Twoja wiadomość *</label>
                         <textarea 
                           id="message" 
                           name="message" 
                           value={formData.message} 
                           onChange={handleInputChange} 
                           rows={5} 
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" 
+                          className="w-full px-4 py-2 border border-stone-light rounded-lg focus:ring-2 focus:ring-sky-medium focus:border-transparent" 
                           required
                         ></textarea>
                       </div>
@@ -182,7 +182,7 @@ export default function ContactPage() {
                       <div>
                         <button 
                           type="submit" 
-                          className="w-full bg-gradient-to-r from-[#FF6B9E] to-[#B86EFF] text-white font-medium py-3 px-6 rounded-lg hover:shadow-lg transition-all shadow-md"
+                          className="w-full bg-gradient-to-r from-sky-medium to-sky-dark text-frost font-medium py-3 px-6 rounded-lg hover:shadow-lg transition-all shadow-md"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'} 😸
@@ -206,42 +206,42 @@ export default function ContactPage() {
                 
                 <div className="space-y-4">
                   <div className="flex items-start space-x-4">
-                    <div className="bg-pink-100 p-3 rounded-full text-pink-500">
+                    <div className="bg-sky-light/50 p-3 rounded-full text-sky-dark">
                       <MapPinIcon className="h-6 w-6" />
                     </div>
                     <div>
                       <h3 className="font-medium">Adres 🏠</h3>
-                      <p className="text-gray-600 mt-1">ul. Kocia 15<br />00-000 Warszawa, Polska</p>
+                      <p className="text-stone-medium mt-1">ul. Kocia 15<br />00-000 Warszawa, Polska</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="bg-pink-100 p-3 rounded-full text-pink-500">
+                    <div className="bg-sky-light/50 p-3 rounded-full text-sky-dark">
                       <PhoneIcon className="h-6 w-6" />
                     </div>
                     <div>
                       <h3 className="font-medium">Telefon ☎️</h3>
-                      <p className="text-gray-600 mt-1">+48 123 456 789<br />+48 987 654 321</p>
+                      <p className="text-stone-medium mt-1">+48 123 456 789<br />+48 987 654 321</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="bg-pink-100 p-3 rounded-full text-pink-500">
+                    <div className="bg-sky-light/50 p-3 rounded-full text-sky-dark">
                       <EnvelopeIcon className="h-6 w-6" />
                     </div>
                     <div>
                       <h3 className="font-medium">Email 📧</h3>
-                      <p className="text-gray-600 mt-1">kontakt@porzeczka-petsitter.pl<br />rezerwacje@porzeczka-petsitter.pl</p>
+                      <p className="text-stone-medium mt-1">kontakt@porzeczka-petsitter.pl<br />rezerwacje@porzeczka-petsitter.pl</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="bg-pink-100 p-3 rounded-full text-pink-500">
+                    <div className="bg-sky-light/50 p-3 rounded-full text-sky-dark">
                       <ClockIcon className="h-6 w-6" />
                     </div>
                     <div>
                       <h3 className="font-medium">Godziny pracy ⏰</h3>
-                      <p className="text-gray-600 mt-1">
+                      <p className="text-stone-medium mt-1">
                         Poniedziałek - Piątek: 8:00 - 20:00<br />
                         Sobota - Niedziela: 9:00 - 18:00<br />
                         (dla kotków pracujemy 24/7 😽)
@@ -254,7 +254,7 @@ export default function ContactPage() {
               {/* Social Media */}
               <div className="bg-white rounded-xl shadow-md p-6">
                 <h2 className="text-2xl font-bold mb-4">Połącz Się z Nami 🌐 😺</h2>
-                <p className="text-gray-600 mb-6">Śledź nas w mediach społecznościowych, aby otrzymywać aktualizacje, porady dotyczące opieki nad zwierzętami i urocze zdjęcia! 📸 😻</p>
+                <p className="text-stone-medium mb-6">Śledź nas w mediach społecznościowych, aby otrzymywać aktualizacje, porady dotyczące opieki nad zwierzętami i urocze zdjęcia! 📸 😻</p>
                 
                 <div className="flex space-x-4">
                   <a href="#" className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors">
@@ -295,7 +295,7 @@ export default function ContactPage() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold">Z jakim wyprzedzeniem powinienem zarezerwować usługi? 📅 😺</h3>
-                <p className="text-gray-600 mt-2">Zalecamy rezerwację z co najmniej tygodniowym wyprzedzeniem dla standardowych usług. W okresie świątecznym preferowane jest 2-3 tygodniowe wyprzedzenie, aby zapewnić dostępność.</p>
+                <p className="text-stone-medium mt-2">Zalecamy rezerwację z co najmniej tygodniowym wyprzedzeniem dla standardowych usług. W okresie świątecznym preferowane jest 2-3 tygodniowe wyprzedzenie, aby zapewnić dostępność.</p>
               </motion.div>
               
               <motion.div 
@@ -306,7 +306,7 @@ export default function ContactPage() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold">Czy świadczycie usługi dla wszystkich rodzajów zwierząt? 🐾 😻</h3>
-                <p className="text-gray-600 mt-2">Tak, opiekujemy się psami, kotami, ptakami, małymi ssakami i gadami. Prosimy o podanie konkretnego rodzaju zwierzaka podczas rezerwacji, abyśmy mogli przydzielić najbardziej odpowiedniego opiekuna.</p>
+                <p className="text-stone-medium mt-2">Tak, opiekujemy się psami, kotami, ptakami, małymi ssakami i gadami. Prosimy o podanie konkretnego rodzaju zwierzaka podczas rezerwacji, abyśmy mogli przydzielić najbardziej odpowiedniego opiekuna.</p>
               </motion.div>
               
               <motion.div 
@@ -317,7 +317,7 @@ export default function ContactPage() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold">Jakie formy płatności akceptujecie? 💰 😹</h3>
-                <p className="text-gray-600 mt-2">Akceptujemy gotówkę, przelewy bankowe i wszystkie główne karty kredytowe/debetowe. Płatność jest zwykle wymagana przed rozpoczęciem usługi. Akceptujemy również płatność w kociej walucie (mruczankach) 😸</p>
+                <p className="text-stone-medium mt-2">Akceptujemy gotówkę, przelewy bankowe i wszystkie główne karty kredytowe/debetowe. Płatność jest zwykle wymagana przed rozpoczęciem usługi. Akceptujemy również płatność w kociej walucie (mruczankach) 😸</p>
               </motion.div>
               
               <motion.div 
@@ -328,7 +328,7 @@ export default function ContactPage() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold">Co się stanie, jeśli będę musiał anulować rezerwację? ❌ 😼</h3>
-                <p className="text-gray-600 mt-2">Wymagamy co najmniej 24-godzinnego wyprzedzenia w przypadku anulowania. Późne anulowanie może podlegać opłacie w wysokości 50% kosztu usługi. Nasze kotki będą bardzo rozczarowane! 🙀</p>
+                <p className="text-stone-medium mt-2">Wymagamy co najmniej 24-godzinnego wyprzedzenia w przypadku anulowania. Późne anulowanie może podlegać opłacie w wysokości 50% kosztu usługi. Nasze kotki będą bardzo rozczarowane! 🙀</p>
               </motion.div>
             </div>
           </div>

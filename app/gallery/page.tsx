@@ -144,6 +144,48 @@ const galleryImages: GalleryImage[] = [
     description: "Śmieszny chomik z wypełnionymi policzkami, kolekcjoner przysmaków.",
     width: 1,
     height: 1
+  },
+  {
+    id: 'holly',
+    src: "/images/klienci/Holly.jpeg",
+    alt: "Holly - Playful pup",
+    title: "Holly",
+    category: ["psy", "featured"],
+    description: "A playful pup who loves to run and fetch.",
+    featured: true,
+    width: 4,
+    height: 3
+  },
+  {
+    id: 'kofi',
+    src: "/images/klienci/Kofi.jpeg",
+    alt: "Kofi - Curious cat",
+    title: "Kofi",
+    category: ["koty", "featured"],
+    description: "A curious cat always exploring new places.",
+    featured: true,
+    width: 4,
+    height: 5
+  },
+  {
+    id: 'kreska-2',
+    src: "/images/klienci/Kreska 2.jpeg",
+    alt: "Kreska - Whippet charm",
+    title: "Kreska",
+    category: ["psy", "charty"],
+    description: "The charming whippet, always ready for a cuddle.",
+    width: 3,
+    height: 4
+  },
+  {
+    id: 'kreska-3',
+    src: "/images/klienci/Kreska 3.jpeg",
+    alt: "Kreska - Whippet grace",
+    title: "Kreska",
+    category: ["psy", "charty"],
+    description: "Graceful and gentle, Kreska loves to lounge.",
+    width: 3,
+    height: 4
   }
 ];
 
@@ -168,8 +210,8 @@ const emojiStyle = {
 
 // Add button style
 const buttonStyle = {
-  background: 'linear-gradient(45deg, #66B3FF, #3399FF)',
-  color: 'white',
+  background: 'linear-gradient(45deg, var(--sky-medium), var(--sky-dark))',
+  color: 'var(--frost)',
   padding: '0.75rem 1.5rem',
   borderRadius: '9999px',
   fontWeight: 700,
@@ -178,7 +220,7 @@ const buttonStyle = {
   display: 'inline-block',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
-  boxShadow: '0 4px 12px rgba(102, 179, 255, 0.4)',
+  boxShadow: '0 4px 12px rgba(56, 189, 248, 0.3)', // sky-medium with alpha
   border: 'none',
   backgroundSize: '200% auto',
   animation: 'shimmerButton 3s linear infinite',
@@ -280,7 +322,7 @@ export default function GalleryPage() {
       {/* Hero Header */}
       <motion.div 
         ref={headerRef}
-        className="relative h-[50vh] flex items-center justify-center bg-gradient-to-r from-[var(--color-primary-light)] to-[var(--color-secondary-light)]"
+        className="relative h-[50vh] flex items-center justify-center bg-gradient-to-r from-sky-light to-sky-medium"
         style={{
           opacity: headerOpacity,
           scale: headerScale,
@@ -316,7 +358,7 @@ export default function GalleryPage() {
         
         <div className="text-center z-10 px-4">
           <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl font-bold text-textcolor mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -324,7 +366,7 @@ export default function GalleryPage() {
             Galeria Naszych Pupili
           </motion.h1>
           <motion.p 
-            className="text-xl text-white/90 max-w-2xl mx-auto"
+            className="text-xl text-textcolor/90 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -345,8 +387,8 @@ export default function GalleryPage() {
               style={selectedFilter === option.value ? buttonStyle : undefined}
               className={`px-4 py-2 rounded-full transition-all ${
                   selectedFilter === option.value
-                  ? 'text-white'
-                  : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
+                  ? 'text-frost'
+                  : 'text-stone-dark bg-stone-light hover:bg-sky-light hover:text-stone-dark'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -382,9 +424,9 @@ export default function GalleryPage() {
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       priority={colIndex === 0}
                       />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                        <h3 className="text-white text-xl font-bold">{image.title}</h3>
-                      <p className="text-white/80 text-sm line-clamp-2">{image.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-dark/70 via-stone-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 className="text-frost text-xl font-bold">{image.title}</h3>
+                      <p className="text-frost/90 text-sm line-clamp-2">{image.description}</p>
                         </div>
                     </motion.div>
                   ))}
@@ -393,8 +435,8 @@ export default function GalleryPage() {
             </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-xl text-gray-700 mb-2">Nie znaleziono zdjęć w tej kategorii</p>
-            <p className="text-gray-500">Spróbuj wybrać inną kategorię lub zobacz wszystkie zwierzaki</p>
+            <p className="text-xl text-stone-dark mb-2">Nie znaleziono zdjęć w tej kategorii</p>
+            <p className="text-stone-medium">Spróbuj wybrać inną kategorię lub zobacz wszystkie zwierzaki</p>
             <button
               style={buttonStyle}
               className="mt-6 px-6 py-2 hover:shadow-lg"
@@ -410,13 +452,13 @@ export default function GalleryPage() {
       <AnimatePresence>
         {selectedImage && (
           <motion.div 
-            className="fixed inset-0 z-50 bg-black/90 p-4 flex flex-col"
+            className="fixed inset-0 z-50 bg-stone-dark/90 p-4 flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-white text-xl font-bold">{selectedImage.title}</h2>
+              <h2 className="text-frost text-xl font-bold">{selectedImage.title}</h2>
               <button
                 style={buttonStyle} 
                 className="hover:shadow-lg"
@@ -444,7 +486,7 @@ export default function GalleryPage() {
               </motion.div>
                 
                 <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-sm"
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-sky-light/30 hover:bg-sky-light/40 text-frost rounded-full p-3 backdrop-blur-sm"
                 onClick={() => navigateLightbox('prev')}
                 aria-label="Previous image"
                 >
@@ -454,7 +496,7 @@ export default function GalleryPage() {
                 </button>
               
               <button 
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-sm"
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-sky-light/30 hover:bg-sky-light/40 text-frost rounded-full p-3 backdrop-blur-sm"
                 onClick={() => navigateLightbox('next')}
                 aria-label="Next image"
               >
@@ -464,8 +506,8 @@ export default function GalleryPage() {
               </button>
             </div>
             
-            <div className="mt-4 bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-              <p className="text-white">{selectedImage.description}</p>
+            <div className="mt-4 bg-sky-dark/20 rounded-lg p-4 backdrop-blur-sm">
+              <p className="text-frost">{selectedImage.description}</p>
             </div>
           </motion.div>
         )}

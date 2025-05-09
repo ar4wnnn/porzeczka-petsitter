@@ -41,8 +41,8 @@ export default function GallerySection() {
   };
 
   const buttonStyle = {
-    background: 'linear-gradient(45deg, #FF6B9E, #FF4D8D)',
-    color: 'white',
+    background: 'linear-gradient(45deg, var(--sky-medium), var(--sky-dark))',
+    color: 'var(--frost)',
     padding: '1rem 2rem',
     borderRadius: '9999px',
     fontWeight: 700,
@@ -53,14 +53,14 @@ export default function GallerySection() {
     gap: '0.5rem',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(255, 107, 158, 0.4)',
+    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.3)',
     border: 'none',
     backgroundSize: '200% auto',
     animation: 'shimmerButton 3s linear infinite',
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-frost to-stone-light/30 relative overflow-hidden">
       {/* Floating decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -89,7 +89,7 @@ export default function GallerySection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <motion.span 
-            className="inline-block px-3 py-1 text-sm font-semibold bg-pink-100 text-pink-800 rounded-full mb-3"
+            className="inline-block px-3 py-1 text-sm font-semibold bg-sky-light/50 text-sky-dark rounded-full mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -99,7 +99,7 @@ export default function GallerySection() {
           </motion.span>
           
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl font-bold text-stone-dark mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -109,7 +109,7 @@ export default function GallerySection() {
           </motion.h2>
           
           <motion.p 
-            className="max-w-2xl mx-auto text-lg text-gray-600 mb-8"
+            className="max-w-2xl mx-auto text-lg text-stone-medium mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -143,9 +143,9 @@ export default function GallerySection() {
                 quality={90}
                 priority={true}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <h3 className="text-white text-xl font-bold">{image.title}</h3>
-                <p className="text-white/80 text-sm">{image.breed}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-dark/70 via-stone-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <h3 className="text-frost text-xl font-bold">{image.title}</h3>
+                <p className="text-frost/90 text-sm">{image.breed}</p>
               </div>
             </motion.div>
           ))}
@@ -173,7 +173,7 @@ export default function GallerySection() {
       <AnimatePresence>
         {selectedImage && (
           <motion.div 
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-stone-dark/90 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -193,7 +193,7 @@ export default function GallerySection() {
                 quality={100}
               />
               <button 
-                className="absolute top-2 right-2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors"
+                className="absolute top-2 right-2 text-frost bg-sky-dark/50 rounded-full p-2 hover:bg-sky-dark/80 transition-colors"
                 onClick={closeLightbox}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -74,10 +74,10 @@ export default function EnhancedServicesSection() {
   };
   
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-frost relative overflow-hidden">
       {/* Animowane emoji w tle */}
       <motion.div 
-        className="absolute text-9xl top-20 left-10 opacity-5 text-pink-300"
+        className="absolute text-9xl top-20 left-10 opacity-5 text-sky-light/50"
         animate={{ 
           y: [0, 30, 0],
           rotate: [0, 10, 0],
@@ -88,7 +88,7 @@ export default function EnhancedServicesSection() {
       </motion.div>
       
       <motion.div 
-        className="absolute text-9xl bottom-20 right-10 opacity-5 text-pink-300"
+        className="absolute text-9xl bottom-20 right-10 opacity-5 text-sky-light/50"
         animate={{ 
           y: [0, -30, 0],
           rotate: [0, -10, 0],
@@ -101,7 +101,7 @@ export default function EnhancedServicesSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.span
-            className="inline-block px-3 py-1 text-sm font-semibold bg-pink-100 text-pink-800 rounded-full mb-3"
+            className="inline-block px-3 py-1 text-sm font-semibold bg-sky-light/50 text-sky-dark rounded-full mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -117,11 +117,11 @@ export default function EnhancedServicesSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">Profesjonalna</span> opieka, 
+            <span className="bg-gradient-to-r from-sky-medium to-sky-dark bg-clip-text text-transparent">Profesjonalna</span> opieka, 
             <span className="relative">
               <span className="relative z-10"> mruuucznie</span>
               <motion.span 
-                className="absolute bottom-0 left-0 w-full h-3 bg-yellow-200 -z-0"
+                className="absolute bottom-0 left-0 w-full h-3 bg-sky-light -z-0"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -132,7 +132,7 @@ export default function EnhancedServicesSection() {
           </motion.h2>
           
           <motion.p
-            className="max-w-2xl mx-auto text-lg text-gray-600"
+            className="max-w-2xl mx-auto text-lg text-stone-medium"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -154,19 +154,19 @@ export default function EnhancedServicesSection() {
           {services.map((service) => (
             <motion.div
               key={service.id}
-              className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl p-6 border border-stone-light shadow-sm hover:shadow-xl transition-all duration-300"
               variants={itemVariants}
               whileHover="hover"
             >
-              <div className="w-12 h-12 bg-pink-100 rounded-lg text-pink-600 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-sky-light/50 rounded-lg text-sky-dark flex items-center justify-center mb-4">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{service.title}</h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
+              <h3 className="text-xl font-semibold mb-2 text-stone-dark">{service.title}</h3>
+              <p className="text-stone-medium mb-4">{service.description}</p>
               
               <Link href="/services" legacyBehavior>
                 <motion.a 
-                  className="text-pink-600 font-medium inline-flex items-center"
+                  className="text-sky-dark font-medium inline-flex items-center"
                   whileHover={{ x: 5 }}
                 >
                   Dowiedz się więcej
@@ -188,7 +188,7 @@ export default function EnhancedServicesSection() {
         >
           <Link href="/services" legacyBehavior>
             <motion.a 
-              className="inline-flex items-center px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white font-medium rounded-full shadow-md"
+              className="inline-flex items-center px-8 py-3 bg-sky-dark hover:bg-sky-500 text-frost font-medium rounded-full shadow-md"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

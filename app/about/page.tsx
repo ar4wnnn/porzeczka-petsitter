@@ -66,8 +66,8 @@ export default function AboutPage() {
       
       {/* About Section */}
       <ColorfulSection 
-        backgroundColor="#F0F7FF" 
-        nextSectionColor="#FFF4EC"
+        backgroundColor="var(--frost)" 
+        nextSectionColor="var(--stone-light)"
         wavePattern="wave1"
         waveHeight={120}
         withFloatingShapes
@@ -83,7 +83,7 @@ export default function AboutPage() {
               O <span className="text-[var(--color-primary)]">Porzeczce</span> 🍒
             </motion.h1>
             <motion.p 
-              className="text-lg text-gray-600 max-w-3xl mx-auto"
+              className="text-lg text-stone-medium max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -98,14 +98,14 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold mb-6">Nasza <span className="text-[var(--color-primary)]">Historia</span> 🐾</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-3xl font-bold mb-6">Nasza <span className="text-sky-dark">Historia</span> 🐾</h2>
+              <p className="text-stone-medium mb-4">
                 Porzeczka Pet Sitting powstała w 2015 roku z jedną prostą misją: zapewnienie kochającej, profesjonalnej opieki zwierzakom, gdy ich właściciele nie mogą być obecni. To, co zaczęło się jako jednoosobowa operacja, rozrosło się w zaufany zespół oddanych specjalistów od opieki nad zwierzętami, obsługujący obszar Warszawy. Można powiedzieć, że wyewoluowaliśmy szybciej niż kot uczący się otwierać lodówkę! 😸
               </p>
-              <p className="text-gray-600 mb-4">
+              <p className="text-stone-medium mb-4">
                 Pasja założycielki do zwierząt i zaangażowanie w wysoką jakość opieki ukształtowały każdy aspekt naszej działalności. Rozumiemy, że zwierzaki są członkami rodziny i traktujemy je z taką samą troską, szacunkiem i uwagą jak Ty. Nawet te, które myślą, że Twoja kanapa to ich osobisty drapak! 🙀
               </p>
-              <p className="text-gray-600">
+              <p className="text-stone-medium">
                 Dziś jesteśmy dumni, że jesteśmy jedną z najbardziej zaufanych usług petsittingu w Warszawie, z lojalną bazą klientów złożoną zarówno ze stałych klientów, jak i ich szczęśliwych zwierzaków. Nasze motto? "Wasze zwierzaki zasługują na wakacje równie dobre jak Wy!" 🐶🐱
               </p>
             </motion.div>
@@ -124,16 +124,16 @@ export default function AboutPage() {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-dark/60 to-transparent flex items-end">
                   <div className="p-6">
-                    <p className="text-white text-lg font-medium">Profesjonalna opieka nad zwierzętami od 2015 roku</p>
+                    <p className="text-frost text-lg font-medium">Profesjonalna opieka nad zwierzętami od 2015 roku</p>
                   </div>
                 </div>
               </div>
               
               <div className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg">
-                <p className="font-bold text-[var(--color-primary)]">600+ Szczęśliwych Zwierzaków</p>
-                <p className="text-sm text-gray-600">I ich jeszcze szczęśliwszych właścicieli! 🎉</p>
+                <p className="font-bold text-sky-dark">600+ Szczęśliwych Zwierzaków</p>
+                <p className="text-sm text-stone-medium">I ich jeszcze szczęśliwszych właścicieli! 🎉</p>
               </div>
             </motion.div>
           </div>
@@ -142,18 +142,18 @@ export default function AboutPage() {
       
       {/* Values Section */}
       <ColorfulSection 
-        backgroundColor="#FFF4EC" 
-        nextSectionColor="#F2EAFF"
+        backgroundColor="var(--stone-light)" 
+        nextSectionColor="var(--sky-light)"
         wavePattern="wave2"
         waveHeight={100}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Nasze <span className="text-[var(--color-primary)]">Wartości</span>
+              Nasze <span className="text-sky-dark">Wartości</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Zasady, które kierują naszą misją zapewnienia wyjątkowej opieki nad zwierzętami (i które sprawiają, że ogony merdają radośnie! 🐾)
+            <p className="text-lg text-stone-medium max-w-3xl mx-auto">
+              Zasady, które kierują naszą misją zapewnienia wyjątkowej opieki nad zwierzętami (i które sprawiają, że ogony merdają radośnie! ��)
             </p>
           </div>
           
@@ -169,7 +169,7 @@ export default function AboutPage() {
               >
                 <div className="text-3xl mb-4">{value.icon}</div>
                 <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <p className="text-stone-medium">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -178,17 +178,17 @@ export default function AboutPage() {
       
       {/* Team Section */}
       <ColorfulSection 
-        backgroundColor="#F2EAFF" 
-        nextSectionColor="#E9F9FF"
+        backgroundColor="var(--sky-light)" 
+        nextSectionColor="var(--frost)"
         wavePattern="wave3"
         waveHeight={100}
       >
         <div ref={teamSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Nasz <span className="text-[var(--color-primary)]">Zespół</span> 🐾
+              Nasz <span className="text-sky-dark">Zespół</span> 🐾
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-stone-medium max-w-3xl mx-auto">
               Poznaj troskliwych profesjonalistów, którzy zajmą się Twoimi ukochanymi zwierzakami (i nauczą je paru sztuczek, o których nawet nie marzyłeś!) 😺
             </p>
           </div>
@@ -213,15 +213,15 @@ export default function AboutPage() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold">{member.name}</h3>
-                  <p className="text-[var(--color-primary)] mb-3">{member.role}</p>
-                  <p className="text-gray-600 mb-4">{member.bio}</p>
+                  <p className="text-sky-dark mb-3">{member.role}</p>
+                  <p className="text-stone-medium mb-4">{member.bio}</p>
                   <div className="space-y-1">
                     {member.certifications.map((cert, i) => (
                       <div key={i} className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[var(--color-primary)]" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-sky-dark" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span className="text-sm text-gray-700">{cert}</span>
+                        <span className="text-sm text-stone-dark">{cert}</span>
                       </div>
                     ))}
                   </div>
@@ -234,8 +234,8 @@ export default function AboutPage() {
       
       {/* Find Us Section */}
       <ColorfulSection 
-        backgroundColor="#E9F9FF" 
-        nextSectionColor="#F0F7FF"
+        backgroundColor="var(--frost)" 
+        nextSectionColor="var(--sky-light)"
         wavePattern="curved"
         waveHeight={80}
       >
@@ -248,10 +248,10 @@ export default function AboutPage() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              Jak nas <span className="text-[var(--color-primary)]">Znaleźć</span> 🧭
+              Znajdź <span className="text-sky-dark">Nas</span> 🗺️
             </motion.h2>
             <motion.p 
-              className="text-lg text-gray-600 max-w-3xl mx-auto"
+              className="text-lg text-stone-medium max-w-3xl mx-auto mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
