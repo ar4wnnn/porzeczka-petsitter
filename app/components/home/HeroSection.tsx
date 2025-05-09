@@ -12,9 +12,16 @@ const styles: Record<string, CSSProperties> = {
     minHeight: '100vh',
     width: '100%',
     overflow: 'hidden',
-    background: 'linear-gradient(135deg, var(--sky-light) 0%, var(--frost) 50%, var(--sky-light) 100%)',
+    backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(\'/images/hero.png\')',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
     paddingTop: '6rem',
     paddingBottom: '3rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
     maxWidth: '1200px',
@@ -22,46 +29,40 @@ const styles: Record<string, CSSProperties> = {
     padding: '0 1rem',
     position: 'relative' as const,
     zIndex: 10,
+    textAlign: 'center',
   },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center',
+    alignItems: 'center',
     minHeight: 'calc(100vh - 9rem)',
+    width: '100%',
   },
   leftCol: {
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center',
-    gap: '1.5rem',
-  },
-  rightCol: {
-    display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative' as const,
+    gap: '1.5rem',
+    width: '100%',
+    maxWidth: '800px',
   },
   heading: {
-    fontSize: '3rem',
+    fontSize: '3.5rem',
     fontWeight: 800,
-    backgroundImage: 'linear-gradient(45deg, var(--sky-dark), var(--sky-medium), var(--sky-light), var(--stone-medium), var(--sky-light))',
-    backgroundSize: '300% auto',
-    animation: 'gradientText 4s linear infinite',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    color: 'var(--stone-dark)', // Fallback color
+    color: 'var(--frost)',
     marginBottom: '1rem',
     lineHeight: 1.2,
-    textShadow: '0 2px 10px rgba(56, 189, 248, 0.2)', // sky-medium shadow
+    textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
   },
   subheading: {
-    fontSize: '1.5rem',
+    fontSize: '1.75rem',
     fontWeight: 400,
-    color: 'var(--stone-dark)',
+    color: 'var(--frost)',
     marginBottom: '1.5rem',
     lineHeight: 1.6,
-    textShadow: '0 1px 3px rgba(156, 163, 175, 0.2)', // stone-medium shadow
+    textShadow: '0 1px 6px rgba(0, 0, 0, 0.7)',
   },
   buttonGroup: {
     display: 'flex',
@@ -79,7 +80,7 @@ const styles: Record<string, CSSProperties> = {
     display: 'inline-block',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.3)', // sky-medium shadow
+    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.3)',
     border: 'none',
   },
   secondaryButton: {
@@ -94,7 +95,7 @@ const styles: Record<string, CSSProperties> = {
     border: '2px solid var(--sky-dark)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(186, 230, 253, 0.2)', // sky-light shadow
+    boxShadow: '0 4px 15px rgba(186, 230, 253, 0.2)',
   },
   imageContainer: {
     width: '100%',
@@ -103,7 +104,7 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative' as const,
   },
   rainbowText: {
-    backgroundImage: 'linear-gradient(45deg, var(--sky-dark), var(--sky-medium), var(--sky-light), var(--stone-light), var(--sky-medium))',
+    backgroundImage: 'linear-gradient(45deg, var(--sky-medium), var(--sky-light), var(--frost), var(--sky-light))',
     backgroundSize: '300% auto',
     animation: 'rainbowText 3s linear infinite',
     WebkitBackgroundClip: 'text',
@@ -119,51 +120,6 @@ const styles: Record<string, CSSProperties> = {
   },
   lightText: {
     fontWeight: 300,
-  },
-  catEmoji1: {
-    position: 'absolute' as const,
-    top: '10%',
-    left: '2%',
-    fontSize: '80px',
-    zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
-    opacity: 0.6,
-  },
-  catEmoji2: {
-    position: 'absolute' as const,
-    bottom: '15%',
-    right: '2%',
-    fontSize: '100px',
-    zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
-    opacity: 0.6,
-  },
-  catEmoji3: {
-    position: 'absolute' as const,
-    top: '60%',
-    left: '0%',
-    fontSize: '70px',
-    zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))', // sky-light shadow
-    opacity: 0.6,
-  },
-  catEmoji4: {
-    position: 'absolute' as const,
-    top: '30%',
-    right: '0%',
-    fontSize: '90px',
-    zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.3))', // sky-medium shadow
-    opacity: 0.6,
-  },
-  catEmoji5: {
-    position: 'absolute' as const,
-    bottom: '30%',
-    left: '5%',
-    fontSize: '75px',
-    zIndex: 1,
-    filter: 'drop-shadow(0 0 10px rgba(209, 213, 219, 0.4))', // stone-light shadow
-    opacity: 0.6,
   },
   emojiSpan: {
     display: 'inline-block',
@@ -205,16 +161,16 @@ export default function HeroSection() {
   const buttonHoverAnimation = {
     primary: {
       scale: 1.1,
-      boxShadow: '0 8px 25px rgba(56, 189, 248, 0.5)', // sky-medium shadow
+      boxShadow: '0 8px 25px rgba(56, 189, 248, 0.5)',
       transition: {
         duration: 0.3
       }
     },
     secondary: {
       scale: 1.1, 
-      backgroundColor: 'var(--sky-light)', // Added background on hover
+      backgroundColor: 'var(--sky-light)',
       color: 'var(--sky-dark)',
-      boxShadow: '0 8px 25px rgba(186, 230, 253, 0.3)', // sky-light shadow
+      boxShadow: '0 8px 25px rgba(186, 230, 253, 0.3)',
       transition: {
         duration: 0.3
       }
@@ -223,135 +179,67 @@ export default function HeroSection() {
 
   return (
     <section style={styles.heroSection}>
-      {/* Background cat emoticons */}
-      <motion.div 
-        style={styles.catEmoji1} 
-        initial={{ scale: 0.8, opacity: 0.8 }}
-        animate={{ ...floatAnimation.up, scale: 1, opacity: 1 }}
-      >
-        😺
-      </motion.div>
-      <motion.div 
-        style={styles.catEmoji2} 
-        initial={{ scale: 0.8, opacity: 0.8 }}
-        animate={{ ...floatAnimation.down, scale: 1, opacity: 1 }}
-      >
-        😻
-      </motion.div>
-      <motion.div 
-        style={styles.catEmoji3} 
-        initial={{ scale: 0.8, opacity: 0.8 }}
-        animate={{ ...floatAnimation.left, scale: 1, opacity: 1 }}
-      >
-        🐱
-      </motion.div>
-      <motion.div 
-        style={styles.catEmoji4} 
-        initial={{ scale: 0.8, opacity: 0.8 }}
-        animate={{ ...floatAnimation.up, scale: 1, opacity: 1 }}
-      >
-        🐈
-      </motion.div>
-      <motion.div 
-        style={styles.catEmoji5} 
-        initial={{ scale: 0.8, opacity: 0.8 }}
-        animate={{ ...floatAnimation.down, scale: 1, opacity: 1 }}
-      >
-        🐾
-      </motion.div>
-
       <div style={styles.container}>
         <div style={styles.contentWrapper}>
-          <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-            <motion.div 
-              className="w-full md:w-1/2"
-              style={styles.leftCol} 
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
+          <motion.div
+            className="w-full"
+            style={styles.leftCol}
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+          >
+            <motion.h1
+              style={styles.heading}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <motion.h1 
-                style={styles.heading}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <span style={styles.boldText}>Twój pupil </span>
-                <span style={styles.rainbowText}>zasługuje na wakacje</span> 
-                <span style={styles.normalText}> kiedy Ciebie nie ma! </span>
-              </motion.h1>
-              <motion.p 
-                style={styles.subheading}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <span style={styles.boldText}>Wyobraź sobie, </span>
-                <span style={styles.normalText}>że Twój piesek </span>
-                <span style={styles.rainbowText}>bawi się jak szalony </span> 
-                <span style={styles.normalText}>zamiast tęsknić! </span>
-                <br />
-                <span style={styles.lightText}>Nasi </span>
-                <span style={styles.rainbowText}>super-bohaterowie petsitterzy </span>
-                <span style={styles.normalText}>w Poznaniu dostarczą </span>
-                <span style={styles.boldText}>tonę zabawy </span>
-                <span style={styles.normalText}>i przytulasów </span>
-                <span style={styles.lightText}>dla Twojego futrzaka! </span>
-              </motion.p>
-              <motion.div 
-                style={styles.buttonGroup}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <motion.div
-                  whileHover={buttonHoverAnimation.primary}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href="/services" style={styles.primaryButton}>
-                    Nasze usługi
-                  </Link>
-                </motion.div>
-                <motion.div
-                  whileHover={buttonHoverAnimation.secondary}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href="/contact" style={styles.secondaryButton}>
-                    Kontakt
-                  </Link>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-            <motion.div 
-              className="w-full md:w-1/2"
-              style={styles.rightCol} 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              <span style={styles.boldText}>Twój pupil </span>
+              <span style={styles.rainbowText}>zasługuje na wakacje</span>
+              <span style={styles.normalText}> kiedy Ciebie nie ma! </span>
+            </motion.h1>
+            <motion.p
+              style={styles.subheading}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <motion.div 
-                style={styles.imageContainer}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3 }}
+              <span style={styles.boldText}>Wyobraź sobie, </span>
+              <span style={styles.normalText}>że Twój piesek </span>
+              <span style={styles.rainbowText}>bawi się jak szalony </span>
+              <span style={styles.normalText}>zamiast tęsknić! </span>
+              <br />
+              <span style={styles.lightText}>Nasi </span>
+              <span style={styles.rainbowText}>super-bohaterowie petsitterzy </span>
+              <span style={styles.normalText}>w Poznaniu dostarczą </span>
+              <span style={styles.boldText}>tonę zabawy </span>
+              <span style={styles.normalText}>i przytulasów </span>
+              <span style={styles.lightText}>dla Twojego futrzaka! </span>
+            </motion.p>
+            <motion.div
+              style={styles.buttonGroup}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <motion.div
+                whileHover={buttonHoverAnimation.primary}
+                whileTap={{ scale: 0.95 }}
               >
-                <Image
-                  src="/images/herobanner.png"
-                  alt="Happy Dog"
-                  width={500}
-                  height={375}
-                  className="rounded-lg"
-                  style={{ 
-                    objectFit: 'cover', 
-                    width: '100%', 
-                    height: 'auto',
-                    filter: 'drop-shadow(0 10px 15px rgba(153, 102, 153, 0.3))'
-                  }}
-                  priority
-                />
+                <Link href="/services" style={styles.primaryButton}>
+                  Nasze usługi
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={buttonHoverAnimation.secondary}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link href="/contact" style={styles.secondaryButton}>
+                  Kontakt
+                </Link>
               </motion.div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
