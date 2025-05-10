@@ -12,10 +12,6 @@ const styles: Record<string, CSSProperties> = {
     minHeight: '100vh',
     width: '100%',
     overflow: 'hidden',
-    backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(\'/images/hero.png\')',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
     paddingTop: '6rem',
     paddingBottom: '3rem',
     display: 'flex',
@@ -23,12 +19,31 @@ const styles: Record<string, CSSProperties> = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  videoBackground: {
+    position: 'absolute' as const,
+    top: '50%',
+    left: '50%',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover' as const,
+    transform: 'translate(-50%, -50%)',
+    zIndex: 0,
+  },
+  videoOverlay: {
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1,
+  },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '0 1rem',
     position: 'relative' as const,
-    zIndex: 10,
+    zIndex: 2,
     textAlign: 'center',
   },
   contentWrapper: {
@@ -104,13 +119,14 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative' as const,
   },
   rainbowText: {
-    backgroundImage: 'linear-gradient(45deg, var(--sky-medium), var(--sky-light), var(--frost), var(--sky-light))',
-    backgroundSize: '300% auto',
-    animation: 'rainbowText 3s linear infinite',
+    backgroundImage: 'linear-gradient(to right, var(--sky-light), var(--frost), var(--sky-medium), var(--frost), var(--sky-light))',
+    backgroundSize: '400% auto',
+    animation: 'rainbowTextAnimation 4s linear infinite',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
     fontWeight: 900,
+    display: 'inline-block',
   },
   boldText: {
     fontWeight: 900,
@@ -179,6 +195,17 @@ export default function HeroSection() {
 
   return (
     <section style={styles.heroSection}>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={styles.videoBackground}
+        src="/images/herovid.mp4"
+      >
+        Your browser does not support the video tag.
+      </video>
+      <div style={styles.videoOverlay}></div>
       <div style={styles.container}>
         <div style={styles.contentWrapper}>
           <motion.div
@@ -244,9 +271,10 @@ export default function HeroSection() {
       </div>
 
       <style jsx global>{`
-        @keyframes gradientText {
+        @keyframes rainbowTextAnimation {
           0% { background-position: 0% center; }
-          100% { background-position: 200% center; }
+          50% { background-position: 100% center; }
+          100% { background-position: 0% center; }
         }
       `}</style>
     </section>
